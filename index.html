@@ -7,25 +7,22 @@
   <style>
     :root {
       --bg: #020617;
-      --bg-elevated: #020617;
-      --card: #020617;
-      --card-soft: #020617;
+      --card-bg: #020617;
+      --panel-bg: #020617;
       --accent: #2563eb;
-      --accent-soft: rgba(37, 99, 235, 0.12);
-      --accent-soft-strong: rgba(37, 99, 235, 0.25);
+      --accent-soft: rgba(37, 99, 235, 0.15);
       --accent-border: rgba(37, 99, 235, 0.6);
       --text: #e5e7eb;
       --text-soft: #9ca3af;
-      --border-subtle: rgba(148, 163, 184, 0.4);
+      --border-subtle: rgba(148, 163, 184, 0.5);
       --danger: #f97373;
-      --danger-soft: rgba(248, 113, 113, 0.18);
+      --danger-soft: rgba(248, 113, 113, 0.15);
       --success: #22c55e;
       --success-soft: rgba(34, 197, 94, 0.15);
-      --muted: #6b7280;
       --radius-lg: 18px;
       --radius-md: 12px;
-      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.7);
-      --shadow-subtle: 0 4px 18px rgba(15, 23, 42, 0.75);
+      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.8);
+      --shadow-subtle: 0 6px 16px rgba(15, 23, 42, 0.9);
     }
 
     * {
@@ -37,7 +34,7 @@
       padding: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
         Roboto, Helvetica, Arial, sans-serif;
-      background: radial-gradient(circle at top, #0f172a 0, #020617 48%, #000 100%);
+      background: #020617;
       color: var(--text);
       min-height: 100vh;
     }
@@ -45,16 +42,16 @@
     body {
       display: flex;
       justify-content: center;
-      padding: 24px;
+      padding: 16px;
     }
 
     .app {
       width: 100%;
-      max-width: 1200px;
-      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.17) 0, rgba(15, 23, 42, 0.95) 38%, #020617 70%);
-      border-radius: 24px;
-      padding: 22px 26px 26px;
-      border: 1px solid rgba(30, 64, 175, 0.6);
+      max-width: 1100px;
+      background: #020617;
+      border-radius: 22px;
+      padding: 18px 18px 20px;
+      border: 1px solid rgba(51, 65, 85, 0.9);
       box-shadow: var(--shadow-soft);
       position: relative;
       overflow: hidden;
@@ -63,31 +60,32 @@
     .app::before {
       content: "";
       position: absolute;
-      inset: -200px;
+      inset: 0;
       background:
-        radial-gradient(circle at 15% 0%, rgba(59, 130, 246, 0.18), transparent 60%),
-        radial-gradient(circle at 85% 0%, rgba(56, 189, 248, 0.1), transparent 55%);
-      opacity: 0.9;
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.14), transparent 55%),
+        radial-gradient(circle at top right, rgba(15, 23, 42, 0.7), transparent 70%);
       pointer-events: none;
+      opacity: 0.9;
       z-index: -1;
     }
 
     .app-header {
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      margin-bottom: 16px;
+      gap: 6px;
+      margin-bottom: 12px;
     }
 
     .title-row {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 10px;
       flex-wrap: wrap;
     }
 
     .app-title {
-      font-size: 24px;
+      font-size: 22px;
       letter-spacing: 0.03em;
       display: flex;
       align-items: center;
@@ -95,7 +93,7 @@
     }
 
     .app-title span {
-      background: linear-gradient(120deg, #bfdbfe, #60a5fa, #a5b4fc);
+      background: linear-gradient(120deg, #e5e7eb, #bfdbfe);
       -webkit-background-clip: text;
       color: transparent;
     }
@@ -104,15 +102,15 @@
       font-size: 11px;
       text-transform: uppercase;
       letter-spacing: .16em;
-      padding: 3px 9px;
+      padding: 3px 10px;
       border-radius: 999px;
-      border: 1px solid rgba(129, 140, 248, 0.6);
-      color: #c7d2fe;
-      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.45), rgba(15, 23, 42, 0.95));
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      color: #cbd5f5;
+      background: rgba(15, 23, 42, 0.95);
     }
 
     .subtitle {
-      font-size: 13px;
+      font-size: 12px;
       color: var(--text-soft);
       max-width: 780px;
     }
@@ -125,7 +123,7 @@
     .mode-info-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 6px;
       margin-top: 2px;
       font-size: 11px;
       color: var(--text-soft);
@@ -137,8 +135,8 @@
       gap: 4px;
       padding: 2px 8px;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.8));
+      border: 1px solid rgba(75, 85, 99, 0.9);
+      background: rgba(15, 23, 42, 0.95);
     }
 
     .mode-info-row span strong {
@@ -146,36 +144,29 @@
       font-weight: 600;
     }
 
-    .mode-info-row i {
-      font-style: normal;
-      opacity: 0.85;
-    }
-
     .hidden {
       display: none !important;
     }
 
+    /* Startseite – Moduswahl */
+
     .mode-select {
-      margin: 12px 0 10px;
+      margin-top: 10px;
       padding: 14px 14px 16px;
       border-radius: 18px;
-      border: 1px solid rgba(148, 163, 184, 0.4);
-      background: radial-gradient(circle at 0 0, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.92));
+      border: 1px solid var(--border-subtle);
+      background: #020617;
       box-shadow: var(--shadow-subtle);
     }
 
     .mode-select-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
       margin-bottom: 10px;
     }
 
     .mode-select-title {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 600;
-      letter-spacing: .08em;
+      letter-spacing: .1em;
       text-transform: uppercase;
       color: #dbeafe;
     }
@@ -183,46 +174,49 @@
     .mode-select-subtitle {
       font-size: 12px;
       color: var(--text-soft);
+      margin-top: 2px;
     }
 
     .mode-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 10px;
+      margin-top: 10px;
     }
 
     .mode-card {
       border-radius: 16px;
-      border: 1px solid rgba(37, 99, 235, 0.28);
+      border: 1px solid var(--border-subtle);
       padding: 10px 11px 12px;
-      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.96));
+      background: #020617;
       color: inherit;
       cursor: pointer;
       text-align: left;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      min-height: 86px;
+      min-height: 88px;
       position: relative;
       overflow: hidden;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease, background 0.2s ease;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease,
+        transform 0.12s ease, background 0.18s ease;
     }
 
     .mode-card::after {
       content: "";
       position: absolute;
-      inset: -40%;
-      background: radial-gradient(circle at 0 0, rgba(37, 99, 235, 0.2), transparent 60%);
+      inset: 0;
+      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.14), transparent 60%);
       opacity: 0;
-      transition: opacity 0.2s ease;
+      transition: opacity 0.18s ease;
       pointer-events: none;
     }
 
     .mode-card:hover {
-      border-color: rgba(96, 165, 250, 0.9);
-      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.8);
+      border-color: var(--accent-border);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.9);
       transform: translateY(-1px);
-      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.98));
+      background: #020617;
     }
 
     .mode-card:hover::after {
@@ -240,9 +234,6 @@
       font-size: 14px;
       margin: 0;
       color: #e5e7eb;
-      display: flex;
-      align-items: center;
-      gap: 6px;
     }
 
     .mode-tag {
@@ -251,8 +242,8 @@
       letter-spacing: 0.14em;
       padding: 2px 7px;
       border-radius: 999px;
-      border: 1px solid rgba(96, 165, 250, 0.7);
-      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(96, 165, 250, 0.8);
+      background: rgba(15, 23, 42, 0.96);
       color: #bfdbfe;
     }
 
@@ -265,21 +256,43 @@
     .mode-stat {
       font-size: 11px;
       color: rgba(191, 219, 254, 0.9);
-      display: flex;
-      align-items: center;
-      gap: 4px;
       margin-top: 6px;
     }
 
-    .mode-stat span {
-      opacity: 0.85;
+    /* Quiz-Hauptseite */
+
+    .quiz-header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-top: 6px;
+      margin-bottom: 10px;
+    }
+
+    .mode-pill-current {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--accent-border);
+      background: #020617;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #dbeafe;
+    }
+
+    .mode-pill-current small {
+      color: rgba(191, 219, 254, 0.9);
+      font-weight: 500;
     }
 
     .layout {
       display: grid;
       grid-template-columns: minmax(0, 260px) minmax(0, 1.5fr);
-      gap: 16px;
-      margin-top: 10px;
+      gap: 14px;
     }
 
     .info-column {
@@ -288,41 +301,10 @@
       gap: 10px;
     }
 
-    .mode-pill-current {
-      padding: 7px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(59, 130, 246, 0.6);
-      background: radial-gradient(circle at 0 0, rgba(37, 99, 235, 0.3), rgba(15, 23, 42, 0.98));
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      width: 100%;
-      justify-content: space-between;
-      color: #dbeafe;
-    }
-
-    .mode-pill-current span {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .mode-pill-current strong {
-      font-weight: 600;
-    }
-
-    .mode-pill-current small {
-      color: rgba(191, 219, 254, 0.85);
-      font-weight: 500;
-    }
-
     .info-card {
       border-radius: var(--radius-lg);
       border: 1px solid var(--border-subtle);
-      background: radial-gradient(circle at 0 0, rgba(15, 23, 42, 0.92), rgba(15, 23, 42, 0.96));
+      background: #020617;
       padding: 10px 11px 11px;
       font-size: 12px;
       box-shadow: var(--shadow-subtle);
@@ -348,8 +330,8 @@
       gap: 2px;
       padding: 6px 7px;
       border-radius: 10px;
-      border: 1px solid rgba(148, 163, 184, 0.5);
-      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.92), rgba(15, 23, 42, 0.98));
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: #020617;
     }
 
     .info-item-label {
@@ -363,28 +345,31 @@
       color: #e5e7eb;
     }
 
-    .hint-box {
-      margin-top: 8px;
+    .info-small {
       font-size: 11px;
       color: var(--text-soft);
-      padding: 7px 8px;
-      border-radius: 12px;
-      border: 1px dashed rgba(148, 163, 184, 0.7);
-      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.98));
-    }
-
-    .hint-box b {
-      color: #dbeafe;
+      margin-top: 4px;
     }
 
     .score-banner {
       margin-top: 4px;
       padding: 8px 9px;
       border-radius: 14px;
-      border: 1px solid rgba(37, 99, 235, 0.7);
-      background: radial-gradient(circle at 0 0, rgba(37, 99, 235, 0.25), rgba(15, 23, 42, 0.98));
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      background: #020617;
       font-size: 12px;
       color: #dbeafe;
+      box-shadow: var(--shadow-subtle);
+    }
+
+    .score-banner.positive {
+      border-color: rgba(34, 197, 94, 0.8);
+      box-shadow: 0 12px 28px rgba(22, 163, 74, 0.5);
+    }
+
+    .score-banner.negative {
+      border-color: rgba(248, 113, 113, 0.9);
+      box-shadow: 0 12px 28px rgba(248, 113, 113, 0.4);
     }
 
     .score-main {
@@ -418,8 +403,8 @@
 
     .question-card {
       border-radius: var(--radius-lg);
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      background: radial-gradient(circle at 0 0, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.98));
+      border: 1px solid var(--border-subtle);
+      background: #020617;
       padding: 12px 14px 13px;
       box-shadow: var(--shadow-subtle);
     }
@@ -452,21 +437,27 @@
 
     .question-context {
       font-size: 11px;
-      color: var(--text-soft);
+      color: #e5e7eb;
       border-radius: 10px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      background: radial-gradient(circle at 0 0, rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 1));
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: #020617;
       padding: 7px 8px;
       margin-bottom: 6px;
-      max-height: 210px;
+      max-height: 260px;
       overflow: auto;
-      white-space: pre-wrap;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+
+    .question-context pre {
+      margin: 0;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+        "Liberation Mono", "Courier New", monospace;
+      font-size: 11px;
+      white-space: pre;
     }
 
     .question-note {
       font-size: 11px;
-      color: var(--muted);
+      color: var(--text-soft);
       margin-bottom: 4px;
     }
 
@@ -484,16 +475,17 @@
       gap: 7px;
       padding: 7px 9px;
       border-radius: 10px;
-      border: 1px solid rgba(148, 163, 184, 0.7);
-      background: radial-gradient(circle at 0 0, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 1));
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: #020617;
       cursor: pointer;
       font-size: 13px;
-      transition: border-color 0.15s ease, background 0.15s ease, transform 0.06s ease;
+      transition: border-color 0.15s ease, background 0.15s ease,
+        transform 0.06s ease;
     }
 
     .option:hover {
-      border-color: rgba(96, 165, 250, 0.9);
-      background: radial-gradient(circle at 0 0, rgba(15, 23, 42, 0.92), rgba(15, 23, 42, 1));
+      border-color: var(--accent-border);
+      background: #020617;
       transform: translateY(-0.5px);
     }
 
@@ -510,7 +502,7 @@
       font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 0.14em;
-      color: var(--muted);
+      color: var(--text-soft);
       margin-top: 1px;
       flex-shrink: 0;
       width: 22px;
@@ -522,12 +514,12 @@
 
     .option.correct {
       border-color: rgba(34, 197, 94, 0.9);
-      background: radial-gradient(circle at 0 0, rgba(22, 163, 74, 0.25), rgba(15, 23, 42, 0.98));
+      background: var(--success-soft);
     }
 
     .option.incorrect {
       border-color: rgba(248, 113, 113, 0.95);
-      background: radial-gradient(circle at 0 0, rgba(248, 113, 113, 0.22), rgba(15, 23, 42, 0.98));
+      background: var(--danger-soft);
     }
 
     .option.unselected-correct {
@@ -538,8 +530,8 @@
       font-size: 11px;
       padding: 7px 9px;
       border-radius: 10px;
-      border: 1px solid rgba(148, 163, 184, 0.8);
-      background: radial-gradient(circle at 0 0, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 1));
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: #020617;
       color: var(--text-soft);
       margin-top: 4px;
     }
@@ -565,6 +557,7 @@
     .nav-row.second {
       justify-content: flex-end;
       margin-top: 3px;
+      gap: 6px;
     }
 
     button {
@@ -577,34 +570,39 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: radial-gradient(circle at 0 0, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 1));
+      background: #020617;
       color: #e5e7eb;
-      border: 1px solid rgba(148, 163, 184, 0.8);
-      transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease,
-        border-color 0.15s ease;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      transition: background 0.15s ease, transform 0.1s ease,
+        box-shadow 0.15s ease, border-color 0.15s ease;
     }
 
     button:hover {
-      background: radial-gradient(circle at 0 0, rgba(37, 99, 235, 0.25), rgba(15, 23, 42, 0.98));
-      border-color: rgba(96, 165, 250, 0.9);
-      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.9);
+      background: rgba(15, 23, 42, 0.95);
+      border-color: var(--accent-border);
+      box-shadow: 0 10px 22px rgba(15, 23, 42, 0.95);
       transform: translateY(-0.5px);
     }
 
     button:active {
       transform: translateY(0);
-      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.9);
+      box-shadow: 0 4px 10px rgba(15, 23, 42, 0.95);
     }
 
     button.primary {
-      background: linear-gradient(135deg, #2563eb, #4f46e5);
-      border-color: rgba(59, 130, 246, 0.95);
-      color: #eff6ff;
-      box-shadow: 0 14px 30px rgba(37, 99, 235, 0.7);
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      border-color: rgba(37, 99, 235, 0.9);
+      color: #f9fafb;
+      box-shadow: 0 12px 24px rgba(37, 99, 235, 0.7);
     }
 
     button.primary:hover {
-      background: linear-gradient(135deg, #1d4ed8, #4338ca);
+      background: linear-gradient(135deg, #1d4ed8, #1e40af);
+    }
+
+    button.small {
+      padding: 5px 10px;
+      font-size: 11px;
     }
 
     button:disabled {
@@ -612,22 +610,150 @@
       cursor: default;
       transform: none;
       box-shadow: none;
-      background: radial-gradient(circle at 0 0, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.98));
+      background: #020617;
     }
 
-    .app-footer {
-      margin-top: 14px;
-      font-size: 11px;
-      color: var(--text-soft);
+    /* Lösungs-Overlay */
+
+    .solution-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.96);
+      backdrop-filter: blur(4px);
+      z-index: 50;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 16px;
+      overflow-y: auto;
+    }
+
+    .solution-panel {
+      width: 100%;
+      max-width: 980px;
+      background: #020617;
+      border-radius: 20px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 1);
+      padding: 14px 16px 16px;
+    }
+
+    .solution-header {
       display: flex;
       justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
       gap: 8px;
-      flex-wrap: wrap;
     }
 
-    .app-footer b {
+    .solution-header h2 {
+      margin: 0;
+      font-size: 16px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #dbeafe;
+    }
+
+    .solution-summary {
+      font-size: 12px;
+      color: var(--text-soft);
+      margin-bottom: 8px;
+    }
+
+    .solution-summary b {
       color: #e5e7eb;
     }
+
+    .solution-list {
+      margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: calc(100vh - 140px);
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .solution-question {
+      border-radius: 14px;
+      border: 1px solid rgba(55, 65, 81, 0.9);
+      background: #020617;
+      padding: 8px 9px 9px;
+      font-size: 12px;
+    }
+
+    .solution-q-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 6px;
+      margin-bottom: 3px;
+      align-items: baseline;
+    }
+
+    .solution-q-title {
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .solution-q-topic {
+      font-size: 11px;
+      color: var(--text-soft);
+      text-align: right;
+    }
+
+    .solution-q-score {
+      font-size: 11px;
+      color: #e5e7eb;
+      margin-top: 2px;
+    }
+
+    .solution-q-score.positive {
+      color: var(--success);
+    }
+
+    .solution-q-score.negative {
+      color: var(--danger);
+    }
+
+    .solution-options {
+      margin-top: 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .solution-opt {
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      font-size: 12px;
+    }
+
+    .solution-opt-mark {
+      width: 18px;
+      text-align: center;
+      font-size: 11px;
+    }
+
+    .opt-correct {
+      color: var(--success);
+    }
+
+    .opt-wrong-selected {
+      color: var(--danger);
+    }
+
+    .opt-neutral {
+      color: var(--text-soft);
+    }
+
+    .solution-expl {
+      margin-top: 4px;
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    /* Responsiv */
 
     @media (max-width: 900px) {
       .layout {
@@ -640,17 +766,21 @@
 
     @media (max-width: 720px) {
       body {
-        padding: 12px;
+        padding: 10px;
       }
       .app {
-        padding: 16px 14px 18px;
-        border-radius: 20px;
+        padding: 14px 12px 16px;
+        border-radius: 18px;
       }
       .app-title {
-        font-size: 20px;
+        font-size: 19px;
       }
       .mode-grid {
         grid-template-columns: minmax(0, 1fr);
+      }
+      .quiz-header-bar {
+        flex-direction: column;
+        align-items: flex-start;
       }
     }
   </style>
@@ -665,24 +795,21 @@
         <div class="tag-pill">Öffentliches Recht · Privatrecht · Grundbuch</div>
       </div>
       <p class="subtitle">
-        Training für deine Prüfung: <b>Mehrfachauswahl wie im echten Test</b>
-        (nie „gar keine Antwort“ und nie „alle richtig“).
-        Jeder Frageblock gehört zu den Handouts (Öffentliches Recht, Privatrecht,
-        Gewährleistung/Schadenersatz/Produkthaftung, BauO, Grundbuch usw.).
+        Mehrfachauswahl wie in der Prüfung: <b>mindestens eine Antwort ist richtig</b>, aber nie alle.
+        Falsche Kreuze kosten Punkte.
       </p>
       <div class="mode-info-row">
-        <span><strong>Hinweis:</strong> <i>Es können eine oder mehrere Antworten richtig sein.</i></span>
-        <span><strong>Tipp:</strong> <i>Immer alle richtigen ankreuzen, keine extra falsche.</i></span>
+        <span><strong>Bewertung:</strong> ab 60&nbsp;% insgesamt positiv</span>
+        <span><strong>Frage:</strong> richtige Anteile bringen Punkte, falsche Abzüge</span>
       </div>
     </header>
 
+    <!-- STARTSEITE – MODUSWAHL -->
     <section id="mode-select" class="mode-select">
       <div class="mode-select-header">
-        <div>
-          <div class="mode-select-title">Spielmodus wählen</div>
-          <div class="mode-select-subtitle">
-            Starte entweder mit dem großen Gesamt-Quiz oder trainiere gezielt das Lesen von Grundbuchauszügen.
-          </div>
+        <div class="mode-select-title">Modus wählen</div>
+        <div class="mode-select-subtitle">
+          Entweder alle Themen gemischt oder nur Grundbuchauszüge trainieren.
         </div>
       </div>
       <div class="mode-grid">
@@ -692,40 +819,41 @@
             <span class="mode-tag">Modus A</span>
           </div>
           <p>
-            Alle Themen gemischt (Verfassungsrecht, Verwaltung, BauO, Privatrecht,
-            Verträge, Gewährleistung/SE/Produkthaftung, Sachenrecht, Grundbuch-Basics …).
+            Fragen zu Verfassungsrecht, Verwaltung, BauO, Privatrecht, Verträgen,
+            Gewährleistung/Schadenersatz/Produkthaftung, Sachenrecht und Grundbuch-Basics.
           </p>
-          <div class="mode-stat">
-            <span>≈ 60 Fragen · Niveau wie Prüfung</span>
-          </div>
+          <div class="mode-stat">ca. 60 Fragen · Niveau wie Prüfung</div>
         </button>
 
         <button class="mode-card" data-mode="grundbuch">
           <div class="mode-card-header">
-            <h3>Spezial-Modus: Grundbuchauszüge</h3>
+            <h3>Spezial: Grundbuchauszüge lesen</h3>
             <span class="mode-tag">Modus B</span>
           </div>
           <p>
-            Mehrere fiktive Grundbuchauszüge für Wien – mit Fragen zu A-, B-, C-Blatt,
-            Pfandrechten, Dienstbarkeiten, Plombe usw.
+            Mehrere längere, fiktive Grundbuchsauszüge im Stil echter Auszüge –
+            mit Fragen zu A-, B- und C-Blatt, Rang, Dienstbarkeiten, Hypotheken, Plombe.
           </p>
-          <div class="mode-stat">
-            <span>12 Lernfragen mit Fällen</span>
-          </div>
+          <div class="mode-stat">12 Lernfragen mit Fällen</div>
         </button>
       </div>
     </section>
 
+    <!-- QUIZ-SEITE -->
     <main id="quiz-main" class="hidden">
+      <div class="quiz-header-bar">
+        <div class="mode-pill-current">
+          <span>Aktiver Modus</span>
+          <small id="current-mode-label">–</small>
+        </div>
+        <div style="display:flex; gap:6px; flex-wrap:wrap;">
+          <button id="restart-btn" class="small">Neues Quiz in diesem Modus</button>
+          <button id="back-btn" class="small">Zur Moduswahl</button>
+        </div>
+      </div>
+
       <div class="layout">
         <section class="info-column">
-          <div class="mode-pill-current">
-            <span>
-              <strong>Aktiver Modus</strong>
-            </span>
-            <small id="current-mode-label">–</small>
-          </div>
-
           <div id="progress-info" class="info-card">
             <h3>Fortschritt</h3>
             <div class="info-grid">
@@ -738,28 +866,26 @@
                 <div class="info-item-value" id="info-total-questions">–</div>
               </div>
               <div class="info-item">
-                <div class="info-item-label">Schon geprüft</div>
+                <div class="info-item-label">Geprüft</div>
                 <div class="info-item-value" id="info-checked">–</div>
               </div>
               <div class="info-item">
-                <div class="info-item-label">Davon richtig</div>
-                <div class="info-item-value" id="info-correct">–</div>
+                <div class="info-item-label">Ø Punkte (geprüft)</div>
+                <div class="info-item-value" id="info-average">–</div>
               </div>
             </div>
-            <div class="hint-box">
-              <b>Merke:</b> Punkte gibt es nur, wenn du
-              <b>alle richtigen</b> und <b>keine falsche</b> Antwort ankreuzt –
-              ganz wie in der echten Prüfung.
+            <div class="info-small">
+              Pro Frage: richtige Anteile bringen Punkte, falsche Kreuze ziehen ab.
             </div>
           </div>
 
           <div id="score-banner" class="score-banner hidden">
             <div class="score-main">
-              <span class="score-percent" id="score-percent">0%</span>
+              <span class="score-percent" id="score-percent">0&nbsp;%</span>
               <span class="score-grade" id="score-grade">Note –</span>
             </div>
             <div class="score-details" id="score-details">
-              Noch keine Auswertung durchgeführt.
+              Noch keine Gesamtauswertung.
             </div>
           </div>
         </section>
@@ -769,7 +895,7 @@
 
           <div class="nav-row">
             <button id="prev-btn" type="button">◀ Zurück</button>
-            <button id="check-btn" type="button">Antwort prüfen</button>
+            <button id="check-btn" type="button" class="primary">Antwort prüfen</button>
             <button id="next-btn" type="button">Weiter ▶</button>
           </div>
           <div class="nav-row second">
@@ -781,1094 +907,953 @@
       </div>
     </main>
 
-    <footer class="app-footer">
-      <span>
-        <b>Lerntipp:</b> Wenn du eine Frage falsch hast, markiere dir das Thema im Handout
-        und lies den Abschnitt kurz nach – dann wiederhole den Modus.
-      </span>
-      <span>Du kannst die Fragen-Arrays im Code jederzeit erweitern oder anpassen.</span>
-    </footer>
+    <!-- LÖSUNGEN / GESAMTAUSWERTUNG -->
+    <div id="solution-overlay" class="solution-overlay hidden">
+      <div class="solution-panel">
+        <div class="solution-header">
+          <h2>Gesamtauswertung &amp; Lösungen</h2>
+          <button id="close-solution-btn" class="small">Schließen ✕</button>
+        </div>
+        <div id="solution-summary" class="solution-summary"></div>
+        <div id="solution-list" class="solution-list"></div>
+      </div>
+    </div>
   </div>
 
   <script>
-    // =========================
-    // FRAGENKATALOG – GESAMT
-    // =========================
+    // =========================================
+    // FRAGEN – GESAMT-MODUS (verkürzt hier)
+    // =========================================
 
     const ALL_QUESTIONS = [
-      // --- 1. Grundlagen: Öffentliches Recht / Privatrecht / Stufenbau ---
+      // --- Öffentliches / Privatrecht Grundlagen ---
       {
         id: 1,
         topic: "Rechtsgebiete – Grundlagen",
-        text: `Welche Aussagen zum Privatrecht sind zutreffend?`,
+        text: "Welche Aussagen zum Privatrecht sind zutreffend?",
         options: [
-          `Privatrecht regelt Rechtsbeziehungen, bei denen sich die Beteiligten gleichberechtigt gegenüberstehen.`,
-          `Für die Rechtsdurchsetzung im Privatrecht sind Zivilgerichte zuständig.`,
-          `Privatrecht regelt die Ausübung hoheitlicher Macht durch den Staat.`,
-          `Privatrecht regelt die Zuständigkeit und Tätigkeit von Bundes- und Landesbehörden.`
+          "Privatrecht regelt Rechtsbeziehungen, bei denen sich die Beteiligten gleichberechtigt gegenüberstehen.",
+          "Für die Rechtsdurchsetzung im Privatrecht sind Zivilgerichte zuständig.",
+          "Privatrecht regelt die Ausübung hoheitlicher Macht durch den Staat.",
+          "Privatrecht regelt die Zuständigkeit und Tätigkeit von Bundes- und Landesbehörden."
         ],
         correctIndices: [0, 1],
-        explanation: `Privatrecht (=Zivilrecht) betrifft gleichberechtigte Rechtsbeziehungen zwischen Privaten; zuständig sind die ordentlichen Zivilgerichte. Hoheitliche Machtausübung und Behördenzuständigkeit gehören zum öffentlichen Recht.`
+        explanation:
+          "Privatrecht (Zivilrecht) betrifft gleichberechtigte Beziehungen zwischen Privaten; zuständig sind ordentliche Gerichte. Hoheitsverwaltung und Behördenzuständigkeit gehören zum öffentlichen Recht."
       },
       {
         id: 2,
         topic: "Rechtsgebiete – Grundlagen",
-        text: `Welche Aussagen zum Öffentlichen Recht sind richtig?`,
+        text: "Welche Aussagen zum Öffentlichen Recht sind richtig?",
         options: [
-          `Öffentliches Recht regelt u.a. die Tätigkeit von mit Hoheitsgewalt ausgestatteten Rechtsträgern (z.B. Bund, Länder).`,
-          `Öffentliches Recht regelt Rechtsbeziehungen, bei denen sich die Beteiligten gleichberechtigt gegenüberstehen.`,
-          `Zum öffentlichen Recht zählen z.B. Verfassungsrecht und Verwaltungsrecht.`,
-          `Im öffentlichen Recht geht es niemals um hoheitliche Macht, sondern nur um Privatautonomie.`
+          "Öffentliches Recht regelt u.a. die Tätigkeit von mit Hoheitsgewalt ausgestatteten Rechtsträgern.",
+          "Öffentliches Recht regelt Rechtsbeziehungen, bei denen sich die Beteiligten gleichberechtigt gegenüberstehen.",
+          "Zum öffentlichen Recht zählen z.B. Verfassungsrecht und Verwaltungsrecht.",
+          "Im öffentlichen Recht geht es niemals um hoheitliche Macht."
         ],
         correctIndices: [0, 2],
-        explanation: `Öffentliches Recht betrifft die Ausübung hoheitlicher Macht und die Tätigkeit von Bund, Ländern, Gemeinden usw. Verfassungsrecht und Verwaltungsrecht sind typische Teilgebiete. Gleichberechtigte Beziehungen sind Kennzeichen des Privatrechts.`
+        explanation:
+          "Öffentliches Recht betrifft hoheitliche Tätigkeit (Bund, Länder, Gemeinden). Verfassungs- und Verwaltungsrecht sind zentrale Teilgebiete."
       },
       {
         id: 3,
         topic: "Rechtsquellen – Zwingendes / dispositives Recht",
-        text: `Welche Aussagen zu zwingendem und dispositivem Recht treffen zu?`,
+        text: "Welche Aussagen zu zwingendem und dispositivem Recht treffen zu?",
         options: [
-          `Absolut zwingendes Recht kann durch Parteienvereinbarung überhaupt nicht abgeändert werden.`,
-          `Relativ zwingendes Recht kann nur zugunsten eines bestimmten Vertragspartners abgeändert werden.`,
-          `Dispositives Recht kann durch vertragliche Vereinbarung geändert werden, solange keine zwingenden Normen verletzt werden.`,
-          `Dispositives Recht wird auch absolut zwingendes Recht genannt.`
+          "Absolut zwingendes Recht kann durch Parteienvereinbarung überhaupt nicht abgeändert werden.",
+          "Relativ zwingendes Recht kann nur zugunsten eines bestimmten Vertragspartners abgeändert werden.",
+          "Dispositives Recht kann durch vertragliche Vereinbarung geändert werden, solange keine zwingenden Normen verletzt werden.",
+          "Dispositives Recht wird auch absolut zwingendes Recht genannt."
         ],
         correctIndices: [0, 1, 2],
-        explanation: `Absolut zwingendes Recht (z.B. BauO) ist gar nicht veränderbar. Relativ zwingendes Recht darf nur zugunsten eines Vertragspartners abgeändert werden (z.B. Konsumentenschutz). Dispositives Recht ist „nachgiebig“ und kann vertraglich übergangen werden.`
+        explanation:
+          "Absolut zwingendes Recht ist gar nicht veränderbar, relativ zwingendes nur zugunsten einer Partei. Dispositives Recht ist „nachgiebig“ und kann vertraglich ersetzt werden."
       },
       {
         id: 4,
         topic: "Stufenbau der Rechtsordnung",
-        text: `Welche Aussagen zum Stufenbau der Rechtsordnung sind richtig?`,
+        text: "Welche Aussagen zum Stufenbau der Rechtsordnung sind richtig?",
         options: [
-          `Verordnungen sind Normen mit genereller Rechtskraft und müssen dem Gesetz entsprechen.`,
-          `Nationale Verordnungen und EU-Verordnungen sind im Stufenbau der Rechtsordnung immer gleichrangig.`,
-          `Das EU-Recht hat Anwendungsvorrang, steht aber nicht einfach „über“ der österreichischen Verfassung.`,
-          `Eine generelle rangniedrigere Norm kann nur zustande kommen, wenn dies in einer höherrangigen Norm vorgesehen ist und darf nicht im Widerspruch zu ihr stehen.`
+          "Verordnungen sind Normen mit genereller Rechtskraft und müssen dem Gesetz entsprechen.",
+          "Nationale Verordnungen und EU-Verordnungen sind immer gleichrangig.",
+          "Das EU-Recht hat Anwendungsvorrang, steht aber nicht einfach „über“ der österreichischen Verfassung.",
+          "Eine rangniedrigere Norm darf nur auf Grundlage einer höheren Norm erlassen werden und darf ihr nicht widersprechen."
         ],
         correctIndices: [0, 3],
-        explanation: `Verordnungen sind generelle Normen und müssen auf ein Gesetz gestützt sein. Rangniedrigere Normen dürfen nur aufgrund einer höheren Norm entstehen und dürfen ihr nicht widersprechen. Das Verhältnis EU-Recht/Verfassungsrecht ist komplexer; EU-Recht hat Anwendungsvorrang, steht aber nicht einfach „über“ den Verfassungsgrundsätzen.`
+        explanation:
+          "Verordnungen brauchen eine gesetzliche Grundlage. Rangniedrigere Normen müssen inhaltlich und formal auf eine höherrangige Norm gestützt sein und dürfen ihr nicht widersprechen."
       },
       {
         id: 5,
         topic: "Verfassungsprinzipien",
-        text: `Das demokratische Prinzip im engeren Sinn besagt unter anderem, dass…`,
+        text: "Das demokratische Prinzip im engeren Sinn besagt unter anderem, dass …",
         options: [
-          `alle Staatsbürger an der Staatswillensbildung beteiligt sind und damit Träger der Staatsgewalt (Souveränität) sind.`,
-          `Österreich in Bundesländer mit eigenen Kompetenzen und Mitbestimmungsrechten aufgeteilt ist.`,
-          `Österreich ein gewähltes Staatsoberhaupt hat und daher eine Republik ist.`,
-          `die Staatsbürger gegenüber dem Staat Grund- und Freiheitsrechte haben.`
+          "alle Staatsbürger an der Staatswillensbildung beteiligt sind und damit Träger der Staatsgewalt sind.",
+          "Österreich in Bundesländer mit eigenen Kompetenzen aufgeteilt ist.",
+          "Österreich ein gewähltes Staatsoberhaupt hat.",
+          "die Staatsbürger gegenüber dem Staat Grund- und Freiheitsrechte haben."
         ],
         correctIndices: [0],
-        explanation: `Kern des demokratischen Prinzips ist, dass alle Staatsbürger über Wahlen und Volksabstimmungen an der Staatswillensbildung teilnehmen und Träger der Staatsgewalt sind. Bundesstaatlichkeit, Republikanisches und Rechtsstaatliches Prinzip sind eigene Verfassungsgrundsätze.`
+        explanation:
+          "Kern des demokratischen Prinzips ist die Beteiligung der Staatsbürger an der Staatswillensbildung (Souveränität)."
       },
       {
         id: 6,
-        topic: "Verfassungsprinzipien / Gewaltenteilung",
-        text: `Welche Aussagen zum gewaltentrennenden Prinzip sind zutreffend?`,
+        topic: "Verfassungsprinzipien / Gewaltentrennung",
+        text: "Welche Aussagen zum gewaltentrennenden Prinzip sind zutreffend?",
         options: [
-          `Es regelt die Trennung von Gesetzgebung, Verwaltung und Gerichtsbarkeit, um Machtkonzentration zu verhindern.`,
-          `Es wird auch Föderalismus genannt.`,
-          `Es bedeutet, dass die Staatsfunktionen grundsätzlich von verschiedenen, voneinander unabhängigen Organen ausgeübt werden.`,
-          `Es beinhaltet in erster Linie die Grund- und Freiheitsrechte.`
+          "Es trennt Gesetzgebung, Verwaltung und Gerichtsbarkeit, um Machtkonzentration zu verhindern.",
+          "Es wird auch Föderalismus genannt.",
+          "Es bedeutet, dass die Staatsfunktionen von unterschiedlichen, weitgehend unabhängigen Organen ausgeübt werden.",
+          "Es umfasst hauptsächlich die Grund- und Freiheitsrechte."
         ],
         correctIndices: [0, 2],
-        explanation: `Das gewaltentrennende Prinzip trennt Gesetzgebung, Vollziehung/Verwaltung und Gerichtsbarkeit. Diese Funktionen werden von unterschiedlichen Organen wahrgenommen. Föderalismus betrifft den Bundesstaatsaufbau; Grund- und Freiheitsrechte gehören eher zum rechtsstaatlichen/liberalen Prinzip.`
+        explanation:
+          "Gewaltenteilung trennt die Funktionen Gesetzgebung, Vollziehung und Gerichtsbarkeit und ordnet sie verschiedenen Organen zu."
       },
       {
         id: 7,
         topic: "Bundesgesetzgebung",
-        text: `Welche Aussagen zur Bundesgesetzgebung in Österreich sind richtig?`,
+        text: "Welche Aussagen zur Bundesgesetzgebung sind richtig?",
         options: [
-          `Der Nationalrat beschließt Bundesgesetze; der Bundesrat wirkt u.a. bei manchen Gesetzen mit.`,
-          `Der Bundespräsident beurkundet (unterzeichnet) Bundesgesetze, bevor sie kundgemacht werden.`,
-          `Eine Gesetzgebungsperiode des Nationalrats dauert grundsätzlich 5 Jahre.`,
-          `Die Bundesregierung kann einfache Gesetze ohne Nationalrat beschließen, wenn sie einstimmig ist.`
+          "Der Nationalrat beschließt Bundesgesetze, der Bundesrat wirkt mit.",
+          "Der Bundespräsident beurkundet Bundesgesetze vor der Kundmachung.",
+          "Die Gesetzgebungsperiode des Nationalrats dauert grundsätzlich 5 Jahre.",
+          "Die Bundesregierung kann einfache Gesetze ohne Nationalrat beschließen."
         ],
         correctIndices: [0, 1, 2],
-        explanation: `Bundesgesetze werden vom Nationalrat beschlossen, der Bundesrat wirkt mit (insb. suspensives Veto). Der Bundespräsident beurkundet Gesetze. Die Gesetzgebungsperiode dauert in der Regel 5 Jahre. Die Bundesregierung kann Gesetze nicht ohne Parlament beschließen.`
+        explanation:
+          "Gesetze werden im Parlament beschlossen, vom Bundespräsidenten beurkundet und im BGBl. kundgemacht. Die Bundesregierung kann selbst keine Gesetze erlassen."
       },
       {
         id: 8,
-        topic: "Staatsorgane",
-        text: `Welche Aussagen zu den österreichischen Höchstgerichten sind korrekt?`,
+        topic: "Höchstgerichte",
+        text: "Welche Aussagen zu den österreichischen Höchstgerichten sind korrekt?",
         options: [
-          `Der Verfassungsgerichtshof überprüft u.a. Gesetze und Verordnungen auf ihre Verfassungsmäßigkeit.`,
-          `Der Verwaltungsgerichtshof kontrolliert die Rechtmäßigkeit von Entscheidungen der Verwaltungsgerichte.`,
-          `Der Oberste Gerichtshof ist höchstes Gericht in Zivil- und Strafsachen.`,
-          `Der EuGH kontrolliert die österreichische Bundesverfassung und hebt verfassungswidrige Gesetze auf.`
+          "Der Verfassungsgerichtshof prüft u.a. Gesetze und Verordnungen auf Verfassungsmäßigkeit.",
+          "Der Verwaltungsgerichtshof kontrolliert Entscheidungen der Verwaltungsgerichte.",
+          "Der Oberste Gerichtshof ist Höchstgericht in Zivil- und Strafsachen.",
+          "Der EuGH hebt österreichische Verfassungsbestimmungen auf, wenn sie ihm nicht gefallen."
         ],
         correctIndices: [0, 1, 2],
-        explanation: `VfGH: Verfassungsmäßigkeit von Gesetzen/Verordnungen, Grundrechtskontrolle usw. VwGH: Kontrolle von Entscheidungen der Verwaltungsgerichte. OGH: Höchstgericht in Zivil- und Strafsachen. Der EuGH ist für Auslegung und Anwendung des EU-Rechts zuständig, nicht für direkte Aufhebung österreichischer Verfassungsbestimmungen.`
+        explanation:
+          "VfGH, VwGH und OGH sind die drei österreichischen Höchstgerichte. Der EuGH entscheidet über EU-Rechtsfragen, aber nicht direkt über österreichische Verfassungsbestimmungen."
       },
       {
         id: 9,
-        topic: "Rechtsquellen – generelle und individuelle Normen",
-        text: `Welche Beispiele sind generelle Normen mit Außenwirkung?`,
-        options: [
-          `Eine Verordnung einer Bezirksverwaltungsbehörde.`,
-          `Ein Urteil eines Bezirksgerichts in einem Zivilverfahren.`,
-          `Ein Bescheid einer Baubehörde in einem konkreten Bauverfahren.`,
-          `Ein Bundesgesetz, das im BGBl. kundgemacht wurde.`
-        ],
-        correctIndices: [0, 3],
-        explanation: `Bundesgesetze und Verordnungen sind generelle Normen. Urteile und Bescheide sind individuelle Entscheidungen in Einzelfällen.`
-      },
-      {
-        id: 10,
         topic: "Justiz / ordentliche Gerichtsbarkeit",
-        text: `Welche Aussagen zur ordentlichen Gerichtsbarkeit treffen zu?`,
+        text: "Welche Aussagen zur ordentlichen Gerichtsbarkeit treffen zu?",
         options: [
-          `Ordentliche Gerichte sind zuständig für Zivil- und Strafsachen, soweit nicht Verwaltungsbehörden zuständig sind.`,
-          `Gerichtsverfahren sind grundsätzlich mündlich und öffentlich (mit gesetzlichen Ausnahmen).`,
-          `Es gibt eine fixe Geschäftsaufteilung bei Gerichten, welche bestimmt, welcher Richter zuständig ist.`,
-          `Ordentliche Gerichte vollziehen ausschließlich Verwaltungsrecht.`
+          "Ordentliche Gerichte sind für Zivil- und Strafsachen zuständig, soweit nicht Verwaltungsbehörden zuständig sind.",
+          "Gerichtsverfahren sind grundsätzlich mündlich und öffentlich.",
+          "Es gibt eine Geschäftsverteilung, die regelt, welcher Richter für welche Fälle zuständig ist.",
+          "Ordentliche Gerichte vollziehen ausschließlich Verwaltungsrecht."
         ],
         correctIndices: [0, 1, 2],
-        explanation: `Ordentliche Gerichte (BG, LG, OLG, OGH) sind für Zivil- und Strafsachen zuständig. Verfahren sind grundsätzlich mündlich und öffentlich. Die Geschäftsverteilung regelt, welcher Spruchkörper zuständig ist. Verwaltungsrecht wird von Verwaltungsbehörden und Verwaltungsgerichten vollzogen.`
+        explanation:
+          "Ordentliche Gerichte (BG, LG, OLG, OGH) verhandeln Zivil- und Strafsachen. Die Zuständigkeit ist durch Geschäftsverteilung geregelt."
       },
 
-      // --- 2. Verwaltung / Verwaltungsverfahren / Verwaltungsstrafrecht ---
+      // --- Verwaltung / Verwaltungsverfahren / Verwaltungsstrafrecht ---
+      {
+        id: 10,
+        topic: "Verwaltung – Begriff",
+        text: "Welche Aussagen zur Verwaltung sind richtig?",
+        options: [
+          "Verwaltung ist alle staatliche Vollziehung, die nicht Gesetzgebung oder Gerichtsbarkeit ist.",
+          "Verwaltung wird von Verwaltungsbehörden ausgeübt.",
+          "Verwaltung kann hoheitlich oder privatrechtlich erfolgen.",
+          "Verwaltung ist ein anderer Begriff für Gerichtsbarkeit."
+        ],
+        correctIndices: [0, 1, 2],
+        explanation:
+          "Zur Verwaltung gehören hoheitliche Akte (Bescheide, Verordnungen) und privatrechtliches Handeln (z.B. Verträge der öffentlichen Hand)."
+      },
       {
         id: 11,
-        topic: "Verwaltung – Begriff",
-        text: `Welche Aussagen zur Verwaltung im Sinn der Gewaltentrennung sind richtig?`,
+        topic: "Hoheitsverwaltung – Handlungsformen",
+        text: "Welche Handlungsformen gehören zur Hoheitsverwaltung?",
         options: [
-          `Verwaltung ist alle staatliche Vollziehungstätigkeit, die nicht Gesetzgebung oder Gerichtsbarkeit ist.`,
-          `Verwaltung ist die Summe allen staatlichen Handelns von unabhängigen Richtern.`,
-          `Verwaltung ist die Summe der Vollziehungstätigkeiten, die von Verwaltungsbehörden ausgeübt werden.`,
-          `Verwaltungstätigkeit kann sowohl hoheitlich als auch privatwirtschaftlich erfolgen.`
+          "Verordnungen.",
+          "Bescheide.",
+          "Urteile.",
+          "Privatwirtschaftliche Verträge der Gemeinde."
         ],
-        correctIndices: [0, 2, 3],
-        explanation: `Verwaltung umfasst die Vollziehung durch Verwaltungsbehörden (hoheitlich und privatwirtschaftlich). Gesetzgebung und Gerichtsbarkeit sind eigene Gewalten.`
+        correctIndices: [0, 1],
+        explanation:
+          "Verordnungen und Bescheide sind typische hoheitliche Akte der Verwaltung. Urteile stammen von Gerichten, Verträge sind privatwirtschaftliches Handeln."
       },
       {
         id: 12,
-        topic: "Hoheitsverwaltung – Handlungsformen",
-        text: `Welche Handlungsformen gehören zur Hoheitsverwaltung?`,
+        topic: "Bescheid",
+        text: "Welche Wesensmerkmale eines Bescheids sind zutreffend?",
         options: [
-          `Verordnung einer Verwaltungsbehörde.`,
-          `Bescheid einer Verwaltungsbehörde.`,
-          `Urteil eines Zivilgerichts.`,
-          `Verwaltungsvertrag (z.B. zwischen Behörde und Privatem).`
+          "Er richtet sich an einen bestimmten individuellen Adressatenkreis.",
+          "Er ist ein hoheitlicher Akt einer Verwaltungsbehörde.",
+          "Er wird durch Zustellung oder Verkündung rechtswirksam.",
+          "Er ist eine generelle Norm mit unbestimmtem Adressatenkreis."
         ],
-        correctIndices: [0, 1],
-        explanation: `Hoheitsakte der Verwaltung sind vor allem Verordnungen (generell) und Bescheide (individuell). Urteile stammen von Gerichten. Verträge sind privatrechtliches Handeln (Privatwirtschaftsverwaltung).`
+        correctIndices: [0, 1, 2],
+        explanation:
+          "Bescheide sind individuelle Verwaltungsakte. Generelle Normen mit unbestimmtem Adressatenkreis sind Gesetze oder Verordnungen."
       },
       {
         id: 13,
-        topic: "Bescheid",
-        text: `Welche Wesensmerkmale eines Bescheides sind zutreffend?`,
+        topic: "Parteistellung",
+        text: "Mit der Parteistellung im Verwaltungsverfahren sind welche Rechte verbunden?",
         options: [
-          `Er richtet sich an einen bestimmten individuellen Adressatenkreis.`,
-          `Er ist ein hoheitlicher Akt einer Verwaltungsbehörde.`,
-          `Er entfaltet seine Rechtswirksamkeit grundsätzlich durch Zustellung bzw. Verkündung.`,
-          `Er ist immer eine generelle Norm mit unbestimmtem Adressatenkreis.`
+          "Recht auf Akteneinsicht.",
+          "Recht, Rechtsmittel zu erheben.",
+          "Rechtsanspruch auf Entscheidung der Behörde innerhalb angemessener Frist.",
+          "Nur mündliche Verkündung, aber keine Zustellung des Bescheids."
         ],
         correctIndices: [0, 1, 2],
-        explanation: `Bescheide sind individuelle, hoheitliche Entscheidungen in Einzelfällen. Sie werden wirksam durch ordnungsgemäße Zustellung/Verkündung. Generelle Normen mit unbestimmtem Adressatenkreis sind Gesetze/Verordnungen.`
+        explanation:
+          "Parteistellung sichert u.a. Akteneinsicht, Parteiengehör, Rechtsmittelrecht und Anspruch auf Entscheidung."
       },
       {
         id: 14,
-        topic: "Parteistellung",
-        text: `Mit der Parteistellung im Verwaltungsverfahren sind welche Rechte verbunden?`,
+        topic: "Verwaltungsverfahrensrecht – Rechtsquellen",
+        text: "Welche Rechtsquellen gehören insbesondere zum Verwaltungsverfahrensrecht?",
         options: [
-          `Recht auf Akteneinsicht.`,
-          `Recht, ordentliche und außerordentliche Rechtsmittel zu erheben.`,
-          `Rechtsanspruch auf Geltendmachung der Entscheidungspflicht der Behörde.`,
-          `Nur mündliche Verkündung, aber keine Zustellung des Bescheids.`
+          "Allgemeines Verwaltungsverfahrensgesetz (AVG).",
+          "Zustellgesetz (ZustG).",
+          "Verwaltungsstrafgesetz (VStG).",
+          "Strafprozessordnung (StPO)."
         ],
         correctIndices: [0, 1, 2],
-        explanation: `Parteistellung umfasst u.a. Akteneinsicht, Parteiengehör, Rechtsmittelrecht sowie die Möglichkeit, die Entscheidungspflicht geltend zu machen. Bloße Verkündung ohne Zustellung wäre nicht ausreichend.`
+        explanation:
+          "AVG, ZustG und VStG regeln das Verwaltungsverfahren; StPO betrifft das gerichtliche Strafverfahren."
       },
       {
         id: 15,
-        topic: "Verwaltungsverfahrensrecht – Rechtsquellen",
-        text: `Welche Rechtsquellen gehören insbesondere zum Verwaltungsverfahrensrecht?`,
+        topic: "Zustellung",
+        text: "Welche Aussagen zur Zustellung behördlicher Schriftstücke treffen zu?",
         options: [
-          `Allgemeines Verwaltungsverfahrensgesetz (AVG).`,
-          `Zustellgesetz (ZustG).`,
-          `Verwaltungsstrafgesetz (VStG).`,
-          `Strafprozessordnung (StPO).`
+          "RSa bedeutet, dass nur der Empfänger selbst übernehmen darf.",
+          "RSb erlaubt die Übergabe auch an andere Empfangsberechtigte im Haushalt.",
+          "Bei Hinterlegung gilt das Schriftstück mit dem ersten Tag der Abholfrist als zugestellt.",
+          "Die Rechtsmittelfrist ist gewahrt, wenn das Schriftstück am ersten Tag nach Fristablauf zur Post gegeben wird."
         ],
         correctIndices: [0, 1, 2],
-        explanation: `AVG, ZustG und VStG regeln das Verwaltungsverfahren und Verwaltungsstrafverfahren. Die Strafprozessordnung gilt für das gerichtliche Strafverfahren, nicht für Verwaltungsverfahren.`
+        explanation:
+          "RSa: nur Empfänger; RSb: Haushaltsangehörige; Hinterlegung: Zustellung mit 1. Tag der Abholfrist. Für Fristen zählt die Aufgabe am letzten Tag."
       },
       {
         id: 16,
-        topic: "Zustellung",
-        text: `Welche Aussagen zur Zustellung von behördlichen Schriftstücken treffen zu?`,
+        topic: "Beschwerde / Beschwerdevorentscheidung",
+        text: "Welche Aussagen zur Bescheidbeschwerde sind richtig?",
         options: [
-          `RSa bedeutet, dass das Schriftstück nur dem Empfänger selbst zugestellt werden darf.`,
-          `RSb erlaubt die Übergabe auch an andere Empfangsberechtigte im Haushalt.`,
-          `Zustellung durch Hinterlegung gilt mit dem ersten Tag der Abholfrist als zugestellt (nach vorherigem Zustellversuch).`,
-          `Die Rechtsmittelfrist ist gewahrt, wenn das Schriftstück am ersten Tag nach Fristablauf zur Post gegeben wird.`
+          "Sie ist grundsätzlich binnen vier Wochen ab Zustellung einzubringen.",
+          "Sie ist bei der bescheiderlassenden Behörde einzubringen.",
+          "Die Behörde kann eine Beschwerdevorentscheidung erlassen.",
+          "Gegen eine Beschwerdevorentscheidung gibt es keine weitere Möglichkeit."
         ],
         correctIndices: [0, 1, 2],
-        explanation: `RSa = nur an den Empfänger; RSb = auch an Mitbewohner. Bei Hinterlegung gilt das Schriftstück mit dem ersten Tag der Abholfrist als zugestellt. Für Fristen ist die Aufgabe bei der Post spätestens am letzten Tag der Frist entscheidend.`
+        explanation:
+          "Die Beschwerde wird bei der Ausgangsbehörde eingebracht. Diese kann eine Beschwerdevorentscheidung treffen; dagegen ist ein Vorlageantrag an das Verwaltungsgericht möglich."
       },
       {
         id: 17,
-        topic: "Rechtsmittel – Beschwerde / Beschwerdevorentscheidung",
-        text: `Welche Aussagen zur Beschwerde gegen einen Bescheid sind richtig?`,
+        topic: "Verwaltungsstrafrecht – Rechtsquellen",
+        text: "Welche Aussagen zu den Rechtsquellen des Verwaltungsstrafrechts sind korrekt?",
         options: [
-          `Die Beschwerde ist grundsätzlich binnen vier Wochen ab Zustellung des Bescheids einzubringen.`,
-          `Die Beschwerde ist bei der bescheiderlassenden Behörde einzubringen.`,
-          `Die Behörde kann eine Beschwerdevorentscheidung erlassen und den Bescheid aufheben, abändern oder die Beschwerde abweisen.`,
-          `Gegen eine Beschwerdevorentscheidung gibt es keine weitere Möglichkeit, das Verwaltungsgericht anzurufen.`
+          "Verwaltungsstrafbestimmungen und Strafausmaß stehen im Strafgesetzbuch (StGB).",
+          "Verwaltungsstrafbestimmungen und Strafausmaß finden sich in den jeweiligen Materiengesetzen (z.B. BauO).",
+          "Das Verwaltungsstrafgesetz regelt den Ablauf des Verwaltungsstrafverfahrens.",
+          "Der Ablauf des Verwaltungsstrafverfahrens ist ausschließlich in der Strafprozessordnung geregelt."
         ],
-        correctIndices: [0, 1, 2],
-        explanation: `Die Bescheidbeschwerde ist binnen vier Wochen bei der Ausgangsbehörde einzubringen. Diese kann eine Beschwerdevorentscheidung treffen. Gegen diese ist ein Vorlageantrag an das Verwaltungsgericht möglich.`
+        correctIndices: [1, 2],
+        explanation:
+          "Die einzelnen Tatbestände stehen in Materiengesetzen; das VStG regelt das Verwaltungsstrafverfahren."
       },
       {
         id: 18,
-        topic: "Außerordentliche Rechtsmittel",
-        text: `Welche außerordentlichen Rechtsmittel im Verwaltungsverfahren gibt es u.a.?`,
+        topic: "Fahrlässigkeit",
+        text: "Welche Aussage zur Fahrlässigkeit ist NICHT zutreffend?",
         options: [
-          `Wiederaufnahme des Verfahrens.`,
-          `Wiedereinsetzung in den vorigen Stand.`,
-          `Geltendmachung der Entscheidungspflicht (Säumnisbeschwerde).`,
-          `Berufung an den Gemeinderat.`
+          "Fahrlässig handelt, wer die gebotene Sorgfalt außer Acht lässt.",
+          "Fahrlässig handelt, wer geistig und körperlich fähig wäre, die Sorgfalt einzuhalten.",
+          "Fahrlässigkeit liegt auch bei Unzurechnungsfähigkeit vor.",
+          "Maßstab ist u.a., was einem Täter zugemutet werden kann."
         ],
-        correctIndices: [0, 1, 2],
-        explanation: `Außerordentliche Rechtsmittel sind z.B. Wiederaufnahme (neue Tatsachen/Beweismittel), Wiedereinsetzung (unverschuldete Fristversäumnis) und Säumnisbeschwerde/Entscheidungspflicht. Eine Berufung an den Gemeinderat ist kein solches Rechtsmittel.`
+        correctIndices: [2],
+        explanation:
+          "Unzurechnungsfähige sind strafrechtlich grundsätzlich nicht verantwortlich; Fahrlässigkeit setzt Zurechnungsfähigkeit voraus."
       },
+
+      // --- Raumordnung / BauO / Gewerbe ---
       {
         id: 19,
-        topic: "Verwaltungsstrafrecht",
-        text: `Welche Aussagen zu den Rechtsquellen des Verwaltungsstrafrechts sind korrekt?`,
+        topic: "Raumordnung – Flächenwidmungsplan",
+        text: "Welche Aussagen zum Flächenwidmungsplan sind richtig?",
         options: [
-          `Verwaltungsstrafbestimmungen und Strafausmaß stehen im Strafgesetzbuch (StGB).`,
-          `Verwaltungsstrafbestimmungen und Strafausmaß finden sich in den jeweiligen Materiengesetzen (z.B. BauO, GewerbeO).`,
-          `Das Verwaltungsstrafgesetz (VStG) regelt den Ablauf des Verwaltungsstrafverfahrens.`,
-          `Der Ablauf des Verwaltungsstrafverfahrens ist ausschließlich in der Strafprozessordnung geregelt.`
+          "Er ist grundsätzlich eine Verordnung der Gemeinde und teilt das Gemeindegebiet in Widmungskategorien ein.",
+          "Er wird als Bescheid von der Baubehörde an jeden Grundeigentümer zugestellt.",
+          "Er unterliegt der Aufsicht der jeweiligen Landesregierung.",
+          "Er ist Grundlage für Baubewilligungen, da in der Regel Baulandwidmung erforderlich ist."
         ],
-        correctIndices: [1, 2],
-        explanation: `Die einzelnen Tatbestände und Strafdrohungen stehen in den Materiengesetzen (z.B. BauO). Das VStG regelt das Verfahren. Das StGB und die StPO betreffen das gerichtliche Strafrecht.`
+        correctIndices: [0, 2, 3],
+        explanation:
+          "Flächenwidmungspläne sind Verordnungen der Gemeinde, stehen unter Landesaufsicht und sind zentrale Grundlage für Baubewilligungen."
       },
       {
         id: 20,
-        topic: "Fahrlässigkeit / Verwaltungsstrafrecht",
-        text: `Welche Aussage zur Fahrlässigkeit ist NICHT zutreffend?`,
+        topic: "Gewerberecht – Gewerbeberechtigung",
+        text: "Wann ist eine Gewerbeberechtigung nach der GewO erforderlich?",
         options: [
-          `Fahrlässig handelt, wer die Sorgfalt außer Acht lässt, zu der er nach den Umständen verpflichtet ist.`,
-          `Fahrlässig handelt, wer geistig und körperlich zur Sorgfaltswahrung fähig ist, diese aber trotzdem verletzt.`,
-          `Fahrlässigkeit liegt auch vor, wenn jemand trotz Unzurechnungsfähigkeit handelt.`,
-          `Die zu erwartende Sorgfalt richtet sich auch danach, was einem Täter zugemutet werden kann.`
+          "Bei Ausübung eines freien Gewerbes.",
+          "Bei Ausübung eines reglementierten Gewerbes.",
+          "Nie, wenn keine Betriebsanlagengenehmigung notwendig ist.",
+          "Nicht, wenn die Tätigkeit ausdrücklich von der GewO ausgenommen ist."
         ],
-        correctIndices: [2],
-        explanation: `Unzurechnungsfähige Personen sind strafrechtlich grundsätzlich nicht verantwortlich. Fahrlässigkeit setzt Zurechnungsfähigkeit voraus.`
+        correctIndices: [0, 1, 3],
+        explanation:
+          "Sowohl freie als auch reglementierte Gewerbe sind anzeigepflichtig bzw. bewilligungspflichtig. Ausgenommene Tätigkeiten fallen nicht unter die GewO."
       },
 
-      // --- 3. Bau- und Raumordnungsrecht / Gewerberecht ---
+      // --- Privatrecht / Verträge / AGB / Sicherheiten ---
       {
         id: 21,
-        topic: "Raumordnung / Flächenwidmungsplan",
-        text: `Welche Aussagen zum Flächenwidmungsplan sind richtig?`,
+        topic: "Privatrechtsquellen",
+        text: "Welche Aussagen zu den Privatrechtsquellen sind richtig?",
         options: [
-          `Er ist grundsätzlich eine Verordnung der Gemeinde und teilt das Gemeindegebiet in Bauland, Grünland usw. ein.`,
-          `Er wird als Bescheid von der Baubehörde erlassen.`,
-          `Er unterliegt der Aufsicht der jeweiligen Landesregierung.`,
-          `Er ist für Baubewilligungen relevant, weil die Liegenschaft in der Regel als Bauland gewidmet sein muss.`
+          "Das ABGB ist das Basisgesetz des österreichischen Privatrechts.",
+          "Sonderprivatrechtsgesetze gehen als speziellere Normen dem ABGB vor.",
+          "Sonderprivatrechtsgesetze dürfen keine abweichenden Regelungen enthalten.",
+          "Das ABGB gilt subsidiär, wenn kein spezielleres Privatrechtsgesetz eingreift."
         ],
-        correctIndices: [0, 2, 3],
-        explanation: `Der Flächenwidmungsplan ist eine Verordnung (Gemeinde), steht unter Aufsicht des Landes und ist zentrale Grundlage für Baubewilligungen (Baulandwidmung).`
+        correctIndices: [0, 1, 3],
+        explanation:
+          "Spezialgesetze (Mietrecht, KSchG usw.) gehen vor; das ABGB ergänzt subsidiär."
       },
       {
         id: 22,
-        topic: "Raumordnungs-/Bauverfahren – Kumulationsprinzip",
-        text: `Welche Aussagen zum Kumulationsprinzip treffen zu?`,
+        topic: "Geschäftsfähigkeit",
+        text: "Geschäftsfähigkeit: Welche Aussagen zu einer 16-jährigen Person sind richtig (vereinfacht)?",
         options: [
-          `Alle für ein Projekt relevanten Gesetze werden in einem einzigen Verfahren samt einem „konzentrierten“ Bescheid erledigt.`,
-          `Kumulationsprinzip bedeutet, dass ggf. mehrere Bewilligungen nach verschiedenen Gesetzen erforderlich sind.`,
-          `Konzentrationsprinzip ist ein anderer Begriff für Kumulationsprinzip.`,
-          `Bei kumulativer Zuständigkeit können parallel mehrere Bewilligungsverfahren laufen.`
+          "Sie kann über eigenes Einkommen verfügen, soweit Lebensbedürfnisse nicht gefährdet werden.",
+          "Sie ist voll geschäftsfähig.",
+          "Sie darf alterstypische Geschäfte abschließen und Schenkungen ohne Bedingungen annehmen.",
+          "Sie kann überhaupt keine wirksamen Rechtsgeschäfte abschließen."
         ],
-        correctIndices: [1, 4 - 1], // indexes 1 & 3
-        explanation: `Beim Kumulationsprinzip sind für ein Projekt oft mehrere gesonderte Bewilligungen (z.B. Bau-, Gewerbe-, Naturschutzrecht) nötig. Das Konzentrationsprinzip fasst demgegenüber mehrere Materien in einem Verfahren/Bescheid zusammen.`
+        correctIndices: [0, 2],
+        explanation:
+          "Jugendliche sind beschränkt geschäftsfähig: bestimmte Geschäfte sind möglich, aber nicht alle."
       },
       {
         id: 23,
-        topic: "Wiener Bauordnung – Zuständigkeit",
-        text: `Welche Aussagen zur Baubehörde in Wien sind richtig?`,
+        topic: "Vertragsabschluss",
+        text: "Welche Voraussetzungen sind für einen gültigen Vertrag im Regelfall erforderlich?",
         options: [
-          `In Wien ist grundsätzlich die MA 37 (Baupolizei) Baubehörde.`,
-          `Über Berufungen gegen Bescheide der MA 37 entscheidet das Landesverwaltungsgericht Wien.`,
-          `Für Bauangelegenheiten ist in ganz Österreich immer das Landesverwaltungsgericht erster Instanz zuständig.`,
-          `Für Bauangelegenheiten sind grundsätzlich Gemeinden/Magistrate zuständig.`
+          "Übereinstimmende Willenserklärungen (Anbot und Annahme).",
+          "Geschäftsfähigkeit der Parteien.",
+          "Immer Schriftlichkeit – sonst ist der Vertrag unwirksam.",
+          "Kein Verstoß gegen zwingendes Recht oder gute Sitten."
         ],
         correctIndices: [0, 1, 3],
-        explanation: `Baubehörde ist in Wien die MA 37. Rechtsmittelinstanz ist das Landesverwaltungsgericht. In erster Instanz sind Gemeinden/Magistrate tätig, nicht die Verwaltungsgerichte.`
+        explanation:
+          "Essentiell sind Anbot/Annahme, Geschäftsfähigkeit und zulässiger Vertragsinhalt. Schriftlichkeit ist nur ausnahmsweise zwingend."
       },
       {
         id: 24,
-        topic: "Wiener Bauordnung – vereinfachtes Bauverfahren",
-        text: `Wann kommt das vereinfachte Bauverfahren nach Wiener Bauordnung zur Anwendung?`,
+        topic: "AGB",
+        text: "Welche Aussagen zu Allgemeinen Geschäftsbedingungen (AGB) treffen zu?",
         options: [
-          `Bei Gebäuden mit höchstens drei oberirdischen Geschoßen und einem umbauten Raum von nicht mehr als 4.000 m³.`,
-          `Bei jedem Bauvorhaben im Grünland.`,
-          `Immer bei Einfamilienhäusern, unabhängig von Größe und Geschoßanzahl.`,
-          `Bei Bauvorhaben mit mehr als 10.000 m³ umbautem Raum.`
+          "AGB gelten, wenn auf sie hingewiesen und sie akzeptiert werden.",
+          "AGB werden für immer wieder gleichartig abgeschlossene Verträge erstellt.",
+          "Unklare Klauseln werden zum Nachteil des Verwenders ausgelegt (Transparenzgebot).",
+          "AGB sind gegenüber Konsumenten immer unzulässig."
         ],
-        correctIndices: [0],
-        explanation: `Die Wiener Bauordnung sieht ein vereinfachtes Verfahren für relativ kleine Bauwerke (bis 3 Geschoße und 4.000 m³) vor.`
+        correctIndices: [0, 1, 2],
+        explanation:
+          "AGB sind zulässig, müssen aber transparent sein und wirksam einbezogen werden."
       },
       {
         id: 25,
-        topic: "Wiener Bauordnung – subjektive Nachbarrechte",
-        text: `Was regelt § 70 der Wiener Bauordnung (stark verkürzt)?`,
+        topic: "Kostenvoranschlag – Verbraucher",
+        text: "Welche Aussagen zum Kostenvoranschlag an Verbraucher (ohne besondere Vereinbarung) sind korrekt?",
         options: [
-          `Subjektive Nachbarrechte im Bauverfahren.`,
-          `Die Strafsätze für Verwaltungsübertretungen nach der Bauordnung.`,
-          `Die Zuständigkeit der MA 37.`,
-          `Die Pflichten des Bauwerbers gegenüber dem Bauarbeiter.`
+          "Er ist kostenlos.",
+          "Der genannte Preis gilt als verbindlich.",
+          "Die Erstellung ist kostenpflichtig.",
+          "Der genannte Preis ist unverbindlich."
         ],
-        correctIndices: [0],
-        explanation: `§ 70 Wr. BauO regelt im Kern die subjektiven Nachbarrechte im Bauverfahren (z.B. Möglichkeiten von Nachbarn, Einwendungen zu erheben).`
+        correctIndices: [0, 1],
+        explanation:
+          "Nach KSchG ist der KV im Zweifel kostenlos und verbindlich, sofern nichts anderes vereinbart wurde."
       },
       {
         id: 26,
-        topic: "Wiener Bauordnung – Strafdrohung",
-        text: `Welche Aussagen zu Verwaltungsstrafen nach der Wiener Bauordnung treffen zu? (vereinfacht)`,
+        topic: "Sicherheiten – Eigentumsvorbehalt",
+        text: "Welche Aussagen zum Eigentumsvorbehalt sind richtig?",
         options: [
-          `Es gibt Geldstrafen, die in bestimmten Fällen bis über 20.000 EUR reichen können.`,
-          `Zusätzlich kann in besonderen Fällen auch eine kurze Ersatzfreiheitsstrafe vorgesehen sein.`,
-          `Die Bauordnung kennt nur Verwarnungen, aber keine Geldstrafen.`,
-          `Die Höhe von Verwaltungsstrafen ist bundesweit im StGB geregelt.`
+          "Vereinbarung, dass der Käufer erst mit vollständiger Zahlung Eigentümer wird.",
+          "Ohne Eigentumsvorbehalt wird der Käufer mit Übergabe Eigentümer.",
+          "Bei Insolvenz des Käufers kann der Verkäufer die Sache aussondern, wenn ein Eigentumsvorbehalt besteht.",
+          "Eigentumsvorbehalt gilt automatisch bei jedem Kauf, auch ohne Vereinbarung."
         ],
-        correctIndices: [0, 1],
-        explanation: `Die Bauordnung sieht durchaus hohe Geldstrafen und in Ausnahmefällen Ersatzfreiheitsstrafen vor. Die Strafdrohungen stehen im jeweiligen Landesgesetz, nicht im StGB.`
+        correctIndices: [0, 1, 2],
+        explanation:
+          "Der Eigentumsvorbehalt muss ausdrücklich vereinbart werden; er sichert den Verkäufer bei Nichtzahlung/Insolvenz."
       },
       {
         id: 27,
-        topic: "Gewerberecht – Gewerbeberechtigung",
-        text: `Wann ist für eine selbständige Tätigkeit grundsätzlich eine Gewerbeberechtigung nach der Gewerbeordnung erforderlich?`,
+        topic: "Sicherheiten – Bankgarantie",
+        text: "Welche Aussagen zur Bankgarantie treffen zu?",
         options: [
-          `Bei der Ausübung eines freien Gewerbes.`,
-          `Bei der Ausübung eines reglementierten Gewerbes.`,
-          `Nie, wenn keine Betriebsanlagengenehmigung erforderlich ist.`,
-          `Nicht, wenn die Tätigkeit ausdrücklich von der Gewerbeordnung ausgenommen ist.`
+          "Sie ist ein abstraktes Zahlungsversprechen einer Bank zugunsten eines Dritten.",
+          "Sie wird u.a. zur Sicherung eines Haftrücklasses verwendet.",
+          "Sie ist streng akzessorisch vom Bestand des Grundgeschäfts abhängig.",
+          "Sie ist grundsätzlich vom Grundgeschäft rechtlich unabhängig."
         ],
         correctIndices: [0, 1, 3],
-        explanation: `Sowohl freie als auch reglementierte Gewerbe sind gewerberechtlich melde- oder bewilligungspflichtig. Ausgenommene Tätigkeiten unterliegen nicht der GewO. Eine Betriebsanlagengenehmigung ist eine eigene Frage.`
+        explanation:
+          "Bankgarantie ist ein abstraktes Sicherungsinstrument; der Begünstigte kann Zahlung verlangen, wenn die vereinbarten Bedingungen eintreten."
       },
-
-      // --- 4. Privatrecht – Quellen / Grundbegriffe / Verträge / AGB / KV / Sicherheiten ---
       {
         id: 28,
-        topic: "Privatrechtsquellen",
-        text: `Welche Aussagen zu den Privatrechtsquellen sind richtig?`,
+        topic: "Konventionalstrafe",
+        text: "Welche Aussagen zur Konventionalstrafe (= Pönale) sind korrekt?",
         options: [
-          `Das ABGB ist das grundlegende Gesetz des österreichischen Privatrechts.`,
-          `Sonderprivatrechtsgesetze (z.B. Mietrecht, Konsumentenschutzrecht) gehen als speziellere Normen dem ABGB teilweise vor.`,
-          `Sonderprivatrechtsgesetze dürfen keine anderen Regelungen enthalten als das ABGB.`,
-          `Das ABGB gilt subsidiär, wenn kein spezielleres Privatrechtsgesetz eingreift.`
+          "Sie ist ein pauschalierter Schadenersatz für den Fall der Schlechterfüllung oder Nichterfüllung.",
+          "Sie ist grundsätzlich verschuldensabhängig.",
+          "Das Gericht kann eine überhöhte Konventionalstrafe mäßigen.",
+          "Sie kann vertraglich nicht vereinbart werden."
         ],
-        correctIndices: [0, 1, 3],
-        explanation: `Das ABGB ist das „Grundgesetz“ des Privatrechts. Spezielle Gesetze (Mietrechtsgesetz, KSchG etc.) gehen als lex specialis vor; das ABGB gilt subsidiär. Dass Sondergesetze „nichts anderes regeln dürfen“ ist falsch.`
+        correctIndices: [0, 1, 2],
+        explanation:
+          "Die Konventionalstrafe wird vertraglich vereinbart, ist verschuldensabhängig und unterliegt dem richterlichen Mäßigungsrecht."
       },
       {
         id: 29,
-        topic: "Sachenrecht – Grundsätze",
-        text: `Welche Grundsätze des Sachenrechts sind zutreffend?`,
+        topic: "Lieferverzug / Annahmeverzug",
+        text: "Welche Aussagen sind richtig (vereinfacht)?",
         options: [
-          `Publizität (Rechte sollen nach außen erkennbar sein).`,
-          `Typenzwang (nur gesetzlich vorgesehene Sachenrechte).`,
-          `Spezialität (Sachenrecht bezieht sich auf bestimmte, individualisierte Sachen).`,
-          `Beliebigkeitsprinzip (beliebige neue Sachenrechte können vertraglich geschaffen werden).`
+          "Beim absoluten Fixgeschäft zerfällt der Vertrag bei Nichterfüllung zum vereinbarten Termin.",
+          "Beim Termingeschäft kann nach Nachfristsetzung vom Vertrag zurückgetreten werden.",
+          "Im Annahmeverzug trägt der Gläubiger die Gefahr des zufälligen Unterganges.",
+          "Bei Verzug bestehen nie Schadenersatzansprüche."
         ],
         correctIndices: [0, 1, 2],
-        explanation: `Sachenrechte sind absolut; sie unterliegen Publizität, Typenzwang und Spezialität. Ein „Beliebigkeitsprinzip“ gibt es nicht.`
+        explanation:
+          "Fixgeschäft: Vertrag fällt bei Nichterfüllung automatisch; Termingeschäft: Nachfrist + Rücktritt; im Annahmeverzug geht die Gefahr auf den Gläubiger über."
       },
+
+      // --- Gewährleistung / Schadenersatz / Produkthaftung ---
       {
         id: 30,
-        topic: "Geschäftsfähigkeit",
-        text: `Geschäftsfähigkeit: Welche Aussagen zu einer 16-jährigen Person sind richtig (vereinfacht)?`,
+        topic: "Gewährleistung – Grundlagen",
+        text: "Welche Aussagen zur Gewährleistung sind richtig (vereinfacht)?",
         options: [
-          `Sie kann über ihr eigenes Einkommen rechtsgeschäftlich verfügen, solange dadurch die eigenen Lebensbedürfnisse nicht gefährdet werden.`,
-          `Sie ist voll geschäftsfähig, weil sie auch wahlberechtigt ist.`,
-          `Sie darf alterstypische Geschäfte abschließen und Schenkungen ohne Bedingungen annehmen (wenn sie nur berechtigen).`,
-          `Sie kann überhaupt keine Rechtsgeschäfte wirksam abschließen.`
+          "Der Mangel muss bei Übergabe vorhanden sein.",
+          "Gewährleistung ist verschuldensunabhängig.",
+          "Regelmäßige Frist: 2 Jahre bewegliche, 3 Jahre unbewegliche Sachen.",
+          "Zwischen Unternehmer und Verbraucher kann Gewährleistung völlig ausgeschlossen werden."
         ],
-        correctIndices: [0, 2],
-        explanation: `Jugendliche sind beschränkt geschäftsfähig: Sie können über eigenes Einkommen verfügen, solange sie ihre Lebensbedürfnisse nicht gefährden, und bestimmte alterstypische Geschäfte eingehen. Voll geschäftsfähig sind sie noch nicht.`
+        correctIndices: [0, 1, 2],
+        explanation:
+          "Gewährleistung knüpft an den Zeitpunkt der Übergabe an, ist verschuldensunabhängig und im Verbrauchergeschäft zwingend."
       },
       {
         id: 31,
-        topic: "Vertragsabschluss – Voraussetzungen",
-        text: `Welche Voraussetzungen sind für einen gültigen Vertrag (im Normalfall) erforderlich?`,
+        topic: "Gewährleistung – Beweislastumkehr",
+        text: "Welche Aussagen zur Beweislastumkehr im Verbrauchergeschäft sind zutreffend?",
         options: [
-          `Übereinstimmende Willenserklärungen (Anbot und Annahme).`,
-          `Geschäftsfähigkeit der Vertragspartner.`,
-          `Schriftlichkeit – sonst ist ein Vertrag niemals wirksam.`,
-          `Kein Verstoß gegen zwingendes Recht oder die guten Sitten.`
+          "Tritt ein Mangel innerhalb von 6 Monaten auf, wird vermutet, dass er bei Übergabe vorhanden war.",
+          "In den ersten 6 Monaten muss der Unternehmer beweisen, dass die Sache mangelfrei war.",
+          "In den ersten 6 Monaten trägt immer der Verbraucher die volle Beweislast.",
+          "Bei typischen Verschleißteilen kann die Vermutung ausgeschlossen sein."
         ],
         correctIndices: [0, 1, 3],
-        explanation: `Wesentlich sind übereinstimmende Willenserklärungen, ausreichende Geschäftsfähigkeit und die Zulässigkeit des Inhalts. Schriftlichkeit ist nur bei bestimmten Geschäften (z.B. Liegenschaftskauf) zwingend.`
+        explanation:
+          "Die Vermutung wirkt zugunsten des Verbrauchers; der Unternehmer muss ggf. das Gegenteil beweisen."
       },
       {
         id: 32,
-        topic: "AGB – Allgemeine Geschäftsbedingungen",
-        text: `Welche Aussagen zu Allgemeinen Geschäftsbedingungen (AGB) treffen zu?`,
+        topic: "Gewährleistung – Rechtsbehelfe",
+        text: "Welche Gewährleistungsbehelfe stehen dem Käufer zu?",
         options: [
-          `AGB gelten, wenn ein Vertragspartner auf sie verweist und der andere sie akzeptiert (ausdrücklich oder schlüssig).`,
-          `AGB werden für immer wieder gleichartig abgeschlossene Verträge zusammengefasst.`,
-          `Es gilt ein Transparenzgebot: unklare Regelungen gehen zum Nachteil des Verwenders.`,
-          `AGB sind gegenüber Konsumenten generell unzulässig.`
+          "Verbesserung (Reparatur).",
+          "Austausch.",
+          "Preisminderung.",
+          "Wandlung."
         ],
-        correctIndices: [0, 1, 2],
-        explanation: `AGB sind grundsätzlich zulässig, müssen aber wirksam einbezogen werden und transparent sein. Unklare oder gröblich benachteiligende Klauseln können unwirksam sein.`
+        correctIndices: [0, 1, 2, 3],
+        explanation:
+          "Primär Verbesserung oder Austausch; sekundär Preisminderung oder Wandlung."
       },
       {
         id: 33,
-        topic: "Kostenvoranschlag – Verbraucher",
-        text: `Welche Aussagen zu Kostenvoranschlägen an Verbraucher (KSchG) sind korrekt (ohne besondere Vereinbarung)?`,
+        topic: "Schadenersatz – Voraussetzungen",
+        text: "Welche Voraussetzungen müssen für Schadenersatzansprüche typischerweise vorliegen?",
         options: [
-          `Der Kostenvoranschlag ist für den Verbraucher kostenlos.`,
-          `Der genannte Preis ist verbindlich (darf grundsätzlich nicht überschritten werden).`,
-          `Die Erstellung des Kostenvoranschlags ist kostenpflichtig.`,
-          `Der genannte Preis ist unverbindlich.`
+          "Schaden.",
+          "Rechtswidrigkeit.",
+          "Verschulden (außer bei Gefährdungshaftung).",
+          "Zufall ohne Rechtswidrigkeit."
         ],
-        correctIndices: [0, 1],
-        explanation: `Beim Verbraucher gilt der KV ohne besondere Vereinbarung als kostenlos und verbindlich. Nur wenn vorher ausdrücklich anderes vereinbart wurde, kann er kostenpflichtig oder unverbindlich sein.`
+        correctIndices: [0, 1, 2],
+        explanation:
+          "Klassisch: Schaden, Rechtswidrigkeit, Kausalität, Verschulden."
       },
       {
         id: 34,
-        topic: "Kostenvoranschlag – Unternehmergeschäft",
-        text: `Wie unterscheidet sich der Kostenvoranschlag unter Unternehmern (ABGB) typischerweise vom Verbrauchergeschäft?`,
+        topic: "Erfüllungsgehilfenhaftung",
+        text: "Welche Regelung beschreibt § 1313a ABGB?",
         options: [
-          `Er ist grundsätzlich kostenpflichtig und unverbindlich.`,
-          `Eine Überschreitung bis zu 15 % gilt als zulässig (mit Hinweispflicht).`,
-          `Bei Überschreitung von mehr als 15 % besteht ein Rücktrittsrecht des Bestellers.`,
-          `Er ist immer kostenlos und verbindlich.`
+          "Erfüllungsgehilfenhaftung.",
+          "Amtshaftung.",
+          "Produkthaftung.",
+          "Organhaftung."
         ],
-        correctIndices: [0, 1, 2],
-        explanation: `Unter Unternehmern kann der KV kostenpflichtig und unverbindlich sein; Überschreitungen bis 15 % sind zulässig, darüber besteht ein Rücktrittsrecht (Vorarbeiten sind zu ersetzen).`
+        correctIndices: [0],
+        explanation:
+          "Der Schuldner haftet für Verschulden seiner Erfüllungsgehilfen wie für eigenes."
       },
       {
         id: 35,
-        topic: "Sicherheiten – Eigentumsvorbehalt",
-        text: `Welche Aussagen zum Eigentumsvorbehalt sind richtig?`,
+        topic: "Produkthaftung",
+        text: "Welche Aussagen zur Produkthaftung sind korrekt (vereinfacht)?",
         options: [
-          `Er ist die Vereinbarung, dass der Käufer trotz Übergabe erst mit vollständiger Zahlung des Kaufpreises Eigentum erwirbt.`,
-          `Ohne Eigentumsvorbehalt erwirbt der Käufer mit Übergabe Eigentum, auch wenn der Kaufpreis noch nicht bezahlt ist.`,
-          `Im Insolvenzfall des Käufers hat der Verkäufer bei wirksamem Eigentumsvorbehalt grundsätzlich ein Aussonderungsrecht.`,
-          `Der Eigentumsvorbehalt gilt automatisch bei jedem Warenverkauf, auch ohne Vereinbarung.`
+          "Sie ist verschuldensunabhängig.",
+          "Die absolute Frist beträgt 10 Jahre ab Inverkehrbringen.",
+          "Sie ersetzt alle Gewährleistungsrechte.",
+          "Sie betrifft v.a. Personen- und bestimmte Sachschäden."
         ],
-        correctIndices: [0, 1, 2],
-        explanation: `Der Eigentumsvorbehalt muss vereinbart werden; er sichert dem Verkäufer besondere Rechte bei Zahlungsverzug oder Insolvenz des Käufers (z.B. Aussonderungsrecht).`
+        correctIndices: [0, 1, 3],
+        explanation:
+          "Produkthaftung ergänzt die Gewährleistung; absolute Verjährung nach 10 Jahren."
       },
       {
         id: 36,
-        topic: "Sicherheiten – Bankgarantie",
-        text: `Welche Aussagen zur Bankgarantie treffen zu?`,
+        topic: "Verjährung",
+        text: "Welche Aussagen zur Verjährung treffen zu?",
         options: [
-          `Eine Bank gibt ein abstraktes Versprechen, bei Eintritt bestimmter Bedingungen an einen Dritten zu zahlen.`,
-          `Sie wird u.a. zur Sicherung eines Haftrücklasses bei Bauverträgen verwendet.`,
-          `Die Bankgarantie ist immer von der Gültigkeit des Grundgeschäfts abhängig (akzessorisch).`,
-          `Die Bankgarantie ist vom Grundgeschäft grundsätzlich unabhängig (abstrakt).`
+          "Verjährung macht den Anspruch gerichtlich nicht mehr durchsetzbar, er kann aber freiwillig erfüllt werden.",
+          "Der Anspruch erlischt automatisch und kann auch freiwillig nicht mehr erfüllt werden.",
+          "Viele Forderungen des täglichen Lebens verjähren nach 3 Jahren.",
+          "Eine bloße Mahnung hemmt die Verjährung nicht dauerhaft."
         ],
-        correctIndices: [0, 1, 3],
-        explanation: `Die Bankgarantie ist ein abstraktes Zahlungsversprechen (unabhängig vom Grundgeschäft) und wird z.B. als Sicherstellung für Haftrücklässe genutzt.`
+        correctIndices: [0, 2, 3],
+        explanation:
+          "Verjährung ist eine Einrede. Typische Forderungen verjähren in 3 Jahren; Mahnungen allein unterbrechen die Frist nicht."
       },
+
+      // --- Sachenrecht / Grundbuch-Basics ---
       {
         id: 37,
-        topic: "Sicherheiten – Konventionalstrafe",
-        text: `Welche Aussagen zur Konventionalstrafe (= Pönale) sind korrekt?`,
+        topic: "Sachenrecht – Grundsätze",
+        text: "Welche Grundsätze des Sachenrechts sind zutreffend?",
         options: [
-          `Sie ist ein pauschalierter Schadenersatz für den Fall nicht gehöriger Erfüllung.`,
-          `Sie ist grundsätzlich verschuldensabhängig (bei schuldhaftem Verstoß).`,
-          `Das Gericht kann eine überhöhte Konventionalstrafe mäßigen.`,
-          `Sie ist niemals vertraglich vereinbar, sondern nur gesetzlich vorgesehen.`
+          "Publizität.",
+          "Spezialität.",
+          "Typenzwang.",
+          "Beliebigkeitsprinzip."
         ],
         correctIndices: [0, 1, 2],
-        explanation: `Die Konventionalstrafe ist vertraglich vereinbar und dient als pauschalierter Schadenersatz. Sie unterliegt dem richterlichen Mäßigungsrecht und ist grundsätzlich verschuldensabhängig.`
+        explanation:
+          "Sachenrechte sind streng typisiert, beziehen sich auf bestimmte Sachen und sollen nach außen erkennbar sein."
       },
       {
         id: 38,
-        topic: "Zurückbehaltungsrecht",
-        text: `Welche Aussagen zum Zurückbehaltungsrecht (§ 471 ABGB) sind zutreffend?`,
+        topic: "Pfandrecht – Grundsätze",
+        text: "Welche Grundsätze des Pfandrechts sind richtig?",
         options: [
-          `Wer durch eine Sache einen Schaden erlitten oder Aufwand hatte, kann sie bis zur Sicherstellung seines Anspruchs zurückbehalten.`,
-          `Die Sache ist unbedingt sofort zurückzugeben, eine Sicherstellung ist unzulässig.`,
-          `Die Herausgabe kann Zug um Zug gegen Ersatz des Schaden/Aufwands verlangt werden.`,
-          `Für unternehmensbezogene Geschäfte gibt es Sonderregeln im UGB.`
+          "Akzessorietät: Pfandrecht hängt vom Bestand der gesicherten Forderung ab.",
+          "Spezialität: Pfandrechte können nur an bestimmten, individualisierten Sachen begründet werden.",
+          "Priorität: Rang nach Zeitpunkt der Eintragung.",
+          "Publizität spielt keine Rolle."
         ],
-        correctIndices: [0, 2, 3],
-        explanation: `Das Zurückbehaltungsrecht erlaubt es, die Sache bis zur Sicherstellung der Forderung zurückzubehalten. Herausgabe erfolgt Zug um Zug gegen Ersatz oder Sicherheitsleistung.`
+        correctIndices: [0, 1, 2],
+        explanation:
+          "Akzessorietät, Spezialität, Priorität und Publizität sind zentrale Pfandrechtsgrundsätze."
       },
       {
         id: 39,
-        topic: "Lieferverzug",
-        text: `Welche Aussagen zum Lieferverzug treffen zu?`,
+        topic: "Servitut",
+        text: "Welche Aussagen zu Servituten (Dienstbarkeiten) sind richtig?",
         options: [
-          `Lieferverzug liegt vor, wenn die Leistung nicht rechtzeitig erbracht wird oder der Gläubiger eine verspätete/vertragswidrige Leistung nicht annimmt.`,
-          `Beim Fixgeschäft zerfällt der Vertrag bei Nichterfüllung automatisch zum vereinbarten Zeitpunkt (absolutes Fixgeschäft).`,
-          `Beim Termingeschäft kann nach Setzung und Ablauf einer angemessenen Nachfrist vom Vertrag zurückgetreten werden.`,
-          `Bei Verzug bestehen nie Schadenersatzansprüche.`
+          "Sie sind beschränkte dingliche Nutzungsrechte an fremden Sachen.",
+          "Der Belastete muss i.d.R. dulden oder unterlassen.",
+          "Sie können ersessen werden.",
+          "Sie verjähren automatisch nach 5 Jahren Nichtausübung."
         ],
         correctIndices: [0, 1, 2],
-        explanation: `Beim Fixgeschäft entfällt die Leistungspflicht bei Nichterfüllung zum fixen Termin; beim Termingeschäft ist eine Nachfrist und Rücktritt möglich. Schadenersatz kann bei Verschulden zustehen.`
+        explanation:
+          "Servituten sind beschränkte Nutzungsrechte; Ersitzung ist möglich, die Verjährungsfristen sind sehr lang."
       },
       {
         id: 40,
-        topic: "Annahmeverzug",
-        text: `Wer trägt im Annahmeverzug die Gefahr des zufälligen Untergangs der Leistung (vereinfacht)?`,
+        topic: "Baurecht",
+        text: "Welche Aussagen zum Baurecht (Baurechtsgesetz) sind richtig?",
         options: [
-          `Der Schuldner (Leistungspflichtige).`,
-          `Der Gläubiger (der die Leistung nicht annimmt).`,
-          `Der Zustelldienst.`,
-          `Der Inhaber des Lagers, in dem die Ware eingelagert wird.`
-        ],
-        correctIndices: [1],
-        explanation: `Im Annahmeverzug geht die Gefahr des zufälligen Untergangs grundsätzlich auf den Gläubiger über.`
-      },
-
-      // --- 5. Gewährleistung / Schadenersatz / Produkthaftung / Verjährung ---
-      {
-        id: 41,
-        topic: "Gewährleistung – Grundlagen",
-        text: `Welche Aussagen zur gesetzlichen Gewährleistung sind richtig (vereinfacht)?`,
-        options: [
-          `Gewährleistung setzt voraus, dass der Mangel bereits bei Übergabe vorhanden war.`,
-          `Gewährleistung ist verschuldensunabhängig.`,
-          `Die Gewährleistungsfrist beträgt bei beweglichen Sachen regelmäßig 2 Jahre, bei unbeweglichen 3 Jahre.`,
-          `Gewährleistungsansprüche können zwischen Unternehmer und Verbraucher vertraglich komplett ausgeschlossen werden.`
+          "Es ist ein selbständiges, veräußerliches und vererbliches Recht an einer fremden Liegenschaft.",
+          "Es wird durch Eintragung im Grundbuch begründet.",
+          "Es gilt als unbewegliche Sache.",
+          "Es darf nur von der öffentlichen Hand vergeben werden."
         ],
         correctIndices: [0, 1, 2],
-        explanation: `Der Mangel muss bei Übergabe vorliegen; die Gewährleistung ist verschuldensunabhängig. Fristen: idR 2 Jahre (beweglich) und 3 Jahre (unbeweglich). Im Verbrauchergeschäft ist ein Ausschluss unzulässig.`
+        explanation:
+          "Baurechte werden grundbücherlich eingetragen und sind wie Liegenschaften zu behandeln; auch Private können Baurechte vereinbaren."
+      },
+      {
+        id: 41,
+        topic: "Grundbuch – Aufbau",
+        text: "Welche Bestandteile gehören typischerweise zum Grundbuch (vereinfacht)?",
+        options: [
+          "Hauptbuch mit A-, B- und C-Blatt.",
+          "Urkundensammlung.",
+          "Kataster (Grundstücksverzeichnis).",
+          "Flächenwidmungsplan."
+        ],
+        correctIndices: [0, 1, 2],
+        explanation:
+          "Flächenwidmungspläne gehören zur Raumordnung, nicht zum Grundbuch."
       },
       {
         id: 42,
-        topic: "Gewährleistung – Beweislastumkehr",
-        text: `Welche Aussagen zur Beweislastumkehr im Gewährleistungsrecht (Verbrauchergeschäft) sind zutreffend?`,
+        topic: "Grundbuch – Blätter",
+        text: "Welche Zuordnungen sind korrekt?",
         options: [
-          `Tritt ein Mangel innerhalb von sechs Monaten ab Übergabe auf, wird vermutet, dass der Mangel schon bei Übergabe vorhanden war.`,
-          `In den ersten sechs Monaten muss der Verkäufer die Mangelfreiheit beweisen, wenn er die Vermutung widerlegen will.`,
-          `In den ersten sechs Monaten trägt immer der Käufer die volle Beweislast für die Mangelhaftigkeit.`,
-          `Die Vermutung gilt nicht bei typischen Verschleißerscheinungen.`
+          "A-Blatt: Gutsbestand / Widmung / Grundstücksdaten.",
+          "B-Blatt: Eigentumsverhältnisse.",
+          "C-Blatt: Lasten (Hypotheken, Dienstbarkeiten, Reallasten).",
+          "B-Blatt: Pfandrechte."
         ],
-        correctIndices: [0, 1, 3],
-        explanation: `Bis 6 Monate nach Übergabe gilt eine gesetzliche Vermutung zugunsten des Käufers; der Unternehmer muss ggf. beweisen, dass der Mangel nicht bei Übergabe vorhanden war. Verschleißteile können ausgenommen sein.`
+        correctIndices: [0, 1, 2],
+        explanation:
+          "Pfandrechte stehen im C-Blatt, nicht im B-Blatt."
       },
       {
         id: 43,
-        topic: "Gewährleistung – primäre Rechtsbehelfe",
-        text: `Welche primären Gewährleistungsbehelfe stehen dem Käufer zu (vereinfacht)?`,
+        topic: "Grundbuch – Plombe",
+        text: "Welche Aussagen zur Plombe sind zutreffend?",
         options: [
-          `Verbesserung (Reparatur).`,
-          `Austausch.`,
-          `Wandlung (Vertragsaufhebung).`,
-          `Preisminderung.`
+          "Sie zeigt ein anhängiges Grundbuchsgesuch an.",
+          "Während der Plombe kann sich der Rechtszustand durch Eintragung ändern.",
+          "Nach Einverleibung wird aus der TZ der Plombe die „letzte TZ“.",
+          "Sie bedeutet, dass das Grundbuch nicht mehr einsichtig ist."
         ],
-        correctIndices: [0, 1, 2, 3],
-        explanation: `Grundsätzlich sind Verbesserung oder Austausch vorrangig. Schlagen sie fehl oder sind unzumutbar, kommen Preisminderung oder Wandlung in Betracht.`
+        correctIndices: [0, 1, 2],
+        explanation:
+          "Die Plombe ist ein Warnhinweis auf laufende Eintragungen; Einsicht bleibt möglich."
       },
       {
         id: 44,
-        topic: "Gewährleistung vs. Garantie",
-        text: `Welche Aussagen zum Verhältnis von Gewährleistung und Garantie sind richtig?`,
+        topic: "Justizberufe",
+        text: "Welche Aussagen zu Berufen in der Justiz sind richtig?",
         options: [
-          `Gewährleistung ist gesetzlich zwingend geregelt (kann gegenüber Verbrauchern nicht ausgeschlossen werden).`,
-          `Garantie ist eine freiwillige, zusätzliche Zusage des Herstellers oder Verkäufers.`,
-          `Die Garantiefrist ist gesetzlich immer 1 Jahr.`,
-          `Die Garantie ändert nichts an den gesetzlichen Gewährleistungsrechten.`
-        ],
-        correctIndices: [0, 1, 3],
-        explanation: `Garantie ist freiwillig und zusätzlich, kann aber die Gewährleistungsrechte nicht verkürzen. Die Dauer der Garantie ist vertraglich, nicht gesetzlich zwingend festgelegt.`
-      },
-      {
-        id: 45,
-        topic: "Schadenersatz – Voraussetzungen",
-        text: `Welche Voraussetzungen müssen für einen Schadenersatzanspruch typischerweise kumulativ vorliegen?`,
-        options: [
-          `Schaden.`,
-          `Rechtswidrigkeit.`,
-          `Verschulden des Schädigers (sofern kein Gefährdungshaftungstatbestand).`,
-          `Zufälliges Ereignis ohne Rechtswidrigkeit.`
+          "Richter sind unabhängig und nur dem Gesetz unterworfen.",
+          "Staatsanwälte vertreten im Strafverfahren die Anklage.",
+          "Rechtsanwälte vertreten und beraten Parteien.",
+          "Notare vollziehen Strafurteile."
         ],
         correctIndices: [0, 1, 2],
-        explanation: `Klassische Voraussetzungen: Schaden, Rechtswidrigkeit, Kausalität und Verschulden. Ein bloß zufälliges Ereignis ohne Rechtswidrigkeit und Verschulden begründet grundsätzlich keinen Schadenersatzanspruch.`
-      },
-      {
-        id: 46,
-        topic: "Haftung für Erfüllungsgehilfen – § 1313a ABGB",
-        text: `Welche Regelung des Schadenersatzrechts beschreibt § 1313a ABGB?`,
-        options: [
-          `Erfüllungsgehilfenhaftung (Haftung für Personen, deren man sich zur Vertragserfüllung bedient).`,
-          `Organhaftung für Organe juristischer Personen.`,
-          `Amtshaftung des Staates für rechtswidriges Verhalten seiner Organe.`,
-          `Produkthaftung für fehlerhafte Produkte.`
-        ],
-        correctIndices: [0],
-        explanation: `§ 1313a ABGB enthält die Erfüllungsgehilfenhaftung: Der Schuldner haftet für das Verschulden der Personen, deren er sich zur Erfüllung bedient, wie für sein eigenes.`
-      },
-      {
-        id: 47,
-        topic: "Produkthaftung",
-        text: `Welche Aussagen zur Produkthaftung (PHG – stark vereinfacht) sind korrekt?`,
-        options: [
-          `Sie ist eine verschuldensunabhängige Haftung des Herstellers für fehlerhafte Produkte.`,
-          `Die absolute Verjährungsfrist beträgt 10 Jahre ab Inverkehrbringen des Produkts.`,
-          `Die Produkthaftung ersetzt immer sämtliche Gewährleistungsansprüche.`,
-          `Sie zielt insbesondere auf Personen- und bestimmte Sachschäden ab.`
-        ],
-        correctIndices: [0, 1, 3],
-        explanation: `Produkthaftung ist verschuldensunabhängig; die Ansprüche verjähren absolut nach 10 Jahren. Sie ergänzt die Gewährleistung, ersetzt sie aber nicht.`
-      },
-      {
-        id: 48,
-        topic: "Verjährung – allgemeine Fristen",
-        text: `Welche Aussagen zur zivilrechtlichen Verjährung sind richtig (vereinfacht)?`,
-        options: [
-          `Verjährung bedeutet, dass der Anspruch bestehen bleibt, aber gerichtlich nicht mehr durchgesetzt werden kann.`,
-          `Durch Verjährung erlischt der Anspruch immer automatisch und endgültig.`,
-          `Die regelmäßige Verjährungsfrist für Forderungen des täglichen Lebens beträgt 3 Jahre.`,
-          `Durch eine bloß außergerichtliche Mahnung kann die Verjährung grundsätzlich nicht dauerhaft verhindert, aber z.B. durch gerichtliche Geltendmachung unterbrochen werden.`
-        ],
-        correctIndices: [0, 3, 2],
-        explanation: `Verjährung macht den Anspruch „undurchsetzbar“, er kann aber z.B. freiwillig erfüllt werden. Viele Forderungen verjähren nach 3 Jahren. Eine bloße Mahnung hemmt die Verjährung nicht; Klage oder Anerkenntnis können sie unterbrechen/hemmen.`
-      },
-
-      // --- 6. Sachenrecht / Eigentum / Ersitzung / Pfandrecht / Servitut / Grundbuch-Basics ---
-      {
-        id: 49,
-        topic: "Eigentumserwerb",
-        text: `Welche Aussagen zu Arten des Eigentumserwerbs sind korrekt?`,
-        options: [
-          `Der derivative Eigentumserwerb erfolgt durch Übertragung vom bisherigen Eigentümer (Titel und Modus).`,
-          `Der originäre Eigentumserwerb erfolgt unabhängig vom Recht des Vormannes (z.B. Ersitzung).`,
-          `Gutgläubiger Eigentumserwerb von einem Nichteigentümer ist an strenge Voraussetzungen geknüpft.`,
-          `Originärer Eigentumserwerb ist bei Liegenschaften nicht möglich.`
-        ],
-        correctIndices: [0, 1, 2],
-        explanation: `Derivative Erwerb: vom Vormann (z.B. Kauf + Übergabe/Verbücherung). Originärer Erwerb: unabhängig vom Vormann (Ersitzung, Fund etc.). Gutgläubiger Erwerb an beweglichen Sachen ist möglich; an Liegenschaften idR nur durch Ersitzung.`
-      },
-      {
-        id: 50,
-        topic: "Ersitzung",
-        text: `Welche Voraussetzungen/Fristen für die Ersitzung gelten (stark vereinfacht)?`,
-        options: [
-          `Rechtmäßiger, redlicher und echter Besitz.`,
-          `Ersitzungsfrist für bewegliche Sachen: in der Regel 3 Jahre.`,
-          `Ersitzungsfrist für unbewegliche Sachen: in der Regel 30 Jahre.`,
-          `Auch geliehene Sachen können ohne weiteres ersessen werden, wenn man sie lange genug behält.`
-        ],
-        correctIndices: [0, 1, 2],
-        explanation: `Ersitzung setzt qualifizierten Besitz voraus. Fristen: idR 3 Jahre (bewegliche), 30 Jahre (unbewegliche). Geliehene Sachen sind nicht redlich/echt; Ersitzung scheidet dann aus.`
-      },
-      {
-        id: 51,
-        topic: "Pfandrecht – Grundsätze",
-        text: `Welche Grundsätze des Pfandrechts sind richtig?`,
-        options: [
-          `Akzessorietät: Das Pfandrecht hängt vom Bestand der gesicherten Forderung ab und erlischt mit deren Tilgung.`,
-          `Spezialität: Pfandrechte können nur an bestimmten, individualisierten Sachen begründet werden – nicht am gesamten Vermögen.`,
-          `Priorität: Der Rang richtet sich nach dem Zeitpunkt der Bestellung/Eintragung; ältere Pfandrechte gehen jüngeren vor.`,
-          `Publizität ist beim Pfandrecht bedeutungslos.`
-        ],
-        correctIndices: [0, 1, 2],
-        explanation: `Pfandrecht folgt Akzessorietät, Spezialität, Priorität und Publizität. Pfandrechte sollen für Dritte erkennbar sein (Übergabe, Grundbuch).`
-      },
-      {
-        id: 52,
-        topic: "Pfandrecht – Arten",
-        text: `Welche Aussagen zu Arten des Pfandrechts sind zutreffend?`,
-        options: [
-          `Faustpfand (Handpfand) ist ein Pfandrecht an einer beweglichen Sache.`,
-          `Eine Hypothek ist ein Pfandrecht an einer Liegenschaft (im Grundbuch eingetragen).`,
-          `Pfandrechte können nur an körperlichen Sachen, nicht an Forderungen bestellt werden.`,
-          `Auch Forderungen oder Gesellschaftsanteile können verpfändet werden.`
-        ],
-        correctIndices: [0, 1, 3],
-        explanation: `Faustpfand = bewegliche Sache in der Hand des Gläubigers; Hypothek = Pfandrecht an Liegenschaften. Auch unkörperliche Rechte (Forderungen, Anteile) können verpfändet werden.`
-      },
-      {
-        id: 53,
-        topic: "Servitut (Dienstbarkeit)",
-        text: `Welche Aussagen zu Servituten (Dienstbarkeiten) sind richtig (vereinfacht)?`,
-        options: [
-          `Eine Servitut ist ein beschränkt dingliches Nutzungsrecht an einer fremden Sache.`,
-          `Der Belastete muss typischerweise ein Dulden oder Unterlassen hinnehmen, aber keine aktive Leistung erbringen.`,
-          `Servituten können auch durch Ersitzung entstehen.`,
-          `Servituten verjähren bereits nach 5 Jahren Nichtausübung.`
-        ],
-        correctIndices: [0, 1, 2],
-        explanation: `Servituten sind dingliche Nutzungsrechte; der Verpflichtete muss i.d.R. dulden/unterlassen. Ersitzung ist möglich; Verjährungsfristen sind wesentlich länger als 5 Jahre (z.B. 30 Jahre).`
-      },
-      {
-        id: 54,
-        topic: "Baurecht",
-        text: `Welche Aussagen zum Baurecht (i.S. Baurechtsgesetz) sind richtig (vereinfacht)?`,
-        options: [
-          `Baurecht ist ein selbständiges, veräußerliches und vererbliches dingliches Recht an einer fremden Liegenschaft.`,
-          `Es wird durch Eintragung im Grundbuch (eigenes Baurechtseinlageblatt) begründet.`,
-          `Baurecht gilt als unbewegliche Sache.`,
-          `Es darf nur von der öffentlichen Hand eingeräumt werden.`
-        ],
-        correctIndices: [0, 1, 2],
-        explanation: `Baurecht wird grundbücherlich eingetragen und gilt als unbewegliche Sache. Es kann auch zwischen Privaten vereinbart werden, nicht nur durch die öffentliche Hand.`
-      },
-      {
-        id: 55,
-        topic: "Grundbuch – Aufbau",
-        text: `Welche Bestandteile gehören typischerweise zum Grundbuch (vereinfachte Darstellung)?`,
-        options: [
-          `Hauptbuch mit A-, B- und C-Blatt.`,
-          `Urkundensammlung.`,
-          `Kataster (Grundstücksverzeichnis).`,
-          `Flächenwidmungsplan.`
-        ],
-        correctIndices: [0, 1, 2],
-        explanation: `Zum Grundbuch gehören u.a. Hauptbuch, Urkundensammlung und das Grundstücksverzeichnis (Kataster). Der Flächenwidmungsplan ist raumordnungsrechtlich, aber kein Teil des Grundbuchs.`
-      },
-      {
-        id: 56,
-        topic: "Grundbuch – A-, B-, C-Blatt",
-        text: `Welche Zuordnungen zu den Blättern des Grundbuchs sind richtig (vereinfacht)?`,
-        options: [
-          `A-Blatt: Gutsbestand/Benützungsart (z.B. Grundstücksnummer, Widmung).`,
-          `B-Blatt: Eigentumsverhältnisse (Eigentümer, Miteigentum, Wohnungseigentum).`,
-          `C-Blatt: Lasten wie Hypotheken, Dienstbarkeiten, Reallasten.`,
-          `Im B-Blatt werden nur Pfandrechte eingetragen.`
-        ],
-        correctIndices: [0, 1, 2],
-        explanation: `A-Blatt: Gutsbestand; B-Blatt: Eigentümer; C-Blatt: Lasten. Pfandrechte (Hypotheken) stehen im C-Blatt, nicht im B-Blatt.`
-      },
-      {
-        id: 57,
-        topic: "Grundbuch – Plombe",
-        text: `Welche Aussagen zur „Plombe“ im Grundbuch sind zutreffend?`,
-        options: [
-          `Sie zeigt an, dass ein Grundbuchsgesuch (z.B. Einverleibung) anhängig ist.`,
-          `Während aufrechter Plombe kann auf den angezeigten Grundbuchsstand nur eingeschränkt vertraut werden.`,
-          `Aus der TZ der Plombe wird später (bei Eintrag) die „letzte TZ“.`,
-          `Die Plombe bedeutet, dass der Grundbuchsauszug geheim ist und nur von Gerichten eingesehen werden darf.`
-        ],
-        correctIndices: [0, 1, 2],
-        explanation: `Die Plombe ist ein Hinweis auf ein laufendes Eintragungsbegehren; der Stand kann sich durch die beabsichtigte Eintragung ändern. Mit Eintragung wird aus der Plomben-TZ eine „letzte TZ“.`
-      },
-      {
-        id: 58,
-        topic: "Grundbuch – Sachenrechte",
-        text: `Welche dinglichen Rechte werden typischerweise im Grundbuch einverleibt (vereinfacht)?`,
-        options: [
-          `Servituten (z.B. Geh- und Fahrrecht).`,
-          `Reallasten.`,
-          `Baurecht.`,
-          `Ein bloßer Mietvertrag über eine Wohnung.`
-        ],
-        correctIndices: [0, 1, 2],
-        explanation: `Servituten, Reallasten, Baurechte und Hypotheken sind typische grundbücherliche Rechte. Mietverträge werden i.d.R. nicht verbüchert (Ausnahmen bei bestimmten Dienstbarkeiten/Wohnrechten).`
-      },
-      {
-        id: 59,
-        topic: "Grundbuch – Eintragungsprinzip",
-        text: `Welche Aussagen zum Eintragungsprinzip im Grundbuch sind richtig?`,
-        options: [
-          `Rechte an Liegenschaften entstehen grundsätzlich erst mit Einverleibung ins Grundbuch (außer z.B. Ersitzung, Enteignung).`,
-          `Privat vereinbarte Eigentumsübertragung ohne Verbücherung bleibt gegenüber Dritten grundsätzlich wirkungslos.`,
-          `Die Rangordnung richtet sich nach der Eintragungs- bzw. Anmerkungsreihenfolge.`,
-          `Das Eintragungsprinzip spielt für Liegenschaftsrechte keine Rolle.`
-        ],
-        correctIndices: [0, 1, 2],
-        explanation: `Für Liegenschaftsrechte gilt das Eintragungsprinzip: Dingliche Rechte entstehen regelmäßig durch Einverleibung; Dritte können auf das Grundbuch vertrauen.`
-      },
-      {
-        id: 60,
-        topic: "Justizberufe / Überblick",
-        text: `Welche Aussagen zu Berufen in der österreichischen Justiz sind richtig (kurzer Überblick)?`,
-        options: [
-          `Richterinnen und Richter sind unabhängig und nur dem Gesetz unterworfen.`,
-          `Staatsanwälte vertreten im Strafverfahren die Anklage.`,
-          `Rechtsanwältinnen/Rechtsanwälte vertreten und beraten Parteien in Zivil- und Strafverfahren.`,
-          `Notare vollziehen ausschließlich Strafurteile.`
-        ],
-        correctIndices: [0, 1, 2],
-        explanation: `Richter sind unabhängig; Staatsanwälte vertreten die Anklage; Rechtsanwälte vertreten Parteien; Notare übernehmen u.a. Beurkundungen, Verlassenschaften, Gesellschaftsgründungen – sie vollziehen keine Strafurteile.`
+        explanation:
+          "Notare sind u.a. für Beurkundungen, Verlassenschaften und Gesellschaftsgründungen zuständig, nicht für Strafvollzug."
       }
     ];
 
-    // =========================
-    // GRUNDBUCH-MODUS – FÄLLE
-    // =========================
+    // =======================================================
+    // GRUNDBUCH-MODUS – längere Beispielsauszüge
+    // =======================================================
 
     const GRUNDBUCH_QUESTIONS = [
       {
         id: "G1",
-        topic: "Grundbuchfall 1 – Eigentum & Hypothek",
-        contextHtml: `<pre>Grundbuch: 01001 Wien-Innere Stadt
-Einlagezahl (EZ): 1234
-Grundstück: 567/1 Baufläche (Gebäude)
-Adresse: 1010 Wien, Musterstraße 1
+        topic: "Grundbuchsauszug 1 – Mehrparteienhaus",
+        contextHtml: `<pre>GRUNDBUCH 01305 Meidling                            EINLAGEZAHL 1422
+BEZIRKSGERICHT Fünfhaus                            SEITE 1
+****************************************************************
+Letzte TZ 1146/1996           PLOMBE 1406/1996        Wohnungseigentum
+****************************************************************
+*******************************  A1 ****************************
+GST-NR   GBA (NUTZUNG)    FLÄCHE   GST-ADRESSE
+127/105  Baufl. (begrünt)    91   Bräuergasse 10
+612      Baufl.             130   Löhnerg. 17
+GESAMTFLÄCHE               221 m²
 
-A-Blatt:
-  Grundstücksadresse: Musterstraße 1
-  Benützungsart: Baufläche (Wohn- und Geschäftshaus)
+*******************************  A2 ****************************
+1 a 439/1963  Sicherheitszone Gendarmerieflugplatz Meidling
+3 a 324/1979  Reallast des Gehens und Fahrens über Gst 59/4
+              für Gst 612
 
-B-Blatt:
-  B-LNR 1: Max Mustermann, 1/1 Eigentümer
+*******************************  B *****************************
+1 ANTEIL: 104/172
+   Tupék Gottlieb Wilhelm
+   GEB: 1924-05-05    ADR: Anton-Benyag-Straße 9/4, 1010 Wien
+   s 581/1954 Wohnungseigentum an W 1
+   g 406/1996 Einantwortungsurkunde 1996-04-17 Eigentumsrecht
 
-C-Blatt:
-  C-LNR 1: Höchstbetragshypothek EUR 300.000,-- zugunsten ABC-Bank AG
-  C-LNR 2: Dienstbarkeit des Geh- und Fahrrechts zugunsten EZ 987</pre>`,
-        text: `Welche Aussagen zu diesem Grundbuchsauszug sind richtig?`,
+2 ANTEIL: 68/172
+   Kerbl Maria
+   GEB: 1945-02-05    ADR: Schloßstr. 8, Bruck/Mur 5631
+   s 581/1954 Wohnungseigentum an W 2
+   b 766/1971 Schenkungsvertrag 1970-07-27 Eigentumsrecht
+   c 347/1981 Belastungs- und Veräußerungsverbot
+   d 1145/1996 Änderung der Adresse
+   e 1146/1996 Geburtsdatum</pre>`,
+        text: "Welche Aussagen zu diesem Auszug (B-Blatt und A-Blatt) sind richtig?",
         options: [
-          `Eigentümer der Liegenschaft ist Max Mustermann (B-Blatt).`,
-          `Die Hypothek zugunsten der ABC-Bank AG ist im B-Blatt eingetragen.`,
-          `Das Geh- und Fahrrecht ist eine Dienstbarkeit und im C-Blatt vermerkt.`,
-          `Im A-Blatt findet man u.a. Benützungsart und Grundstücksnummer.`
+          "Im A1-Blatt sind Grundstücksnummer, Nutzung und Adresse ersichtlich.",
+          "Im A2-Blatt sind z.B. öffentliche Lasten und Dienstbarkeiten eingetragen.",
+          "Im B-Blatt sieht man die Eigentümer und ihre Anteile.",
+          "Im B-Blatt werden ausschließlich Pfandrechte eingetragen."
         ],
-        correctIndices: [0, 2, 3],
-        explanation: `Eigentümer stehen im B-Blatt. Lasten (Hypothek, Dienstbarkeit) stehen im C-Blatt. Gutsbestand (Adresse, Benützungsart) ist im A-Blatt.`
+        correctIndices: [0, 1, 2],
+        explanation:
+          "A1: Gutsbestand und Adresse; A2: z.B. Reallasten. B-Blatt enthält Eigentümer und Anteile; Pfandrechte stehen im C-Blatt."
       },
       {
         id: "G2",
-        topic: "Grundbuchfall 1 – Belastungen",
-        contextHtml: `<pre>Grundbuch: 01001 Wien-Innere Stadt
-Einlagezahl (EZ): 1234
-Grundstück: 567/1 Baufläche (Gebäude)
-Adresse: 1010 Wien, Musterstraße 1
-
-A-Blatt:
-  Grundstücksadresse: Musterstraße 1
-  Benützungsart: Baufläche (Wohn- und Geschäftshaus)
-
-B-Blatt:
-  B-LNR 1: Max Mustermann, 1/1 Eigentümer
-
-C-Blatt:
-  C-LNR 1: Höchstbetragshypothek EUR 300.000,-- zugunsten ABC-Bank AG
-  C-LNR 2: Dienstbarkeit des Geh- und Fahrrechts zugunsten EZ 987</pre>`,
-        text: `Welche Aussagen zur Hypothek und zur Dienstbarkeit sind zutreffend?`,
+        topic: "Grundbuchsauszug 1 – Wohnungseigentum",
+        contextHtml: `<pre>(Auszug wie bei G1 – B-Blatt mit ANTEIL 104/172 und 68/172, Wohnungseigentum an W1 und W2)</pre>`,
+        text: "Welche Aussagen zum Wohnungseigentum in diesem Auszug sind zutreffend?",
         options: [
-          `Die Hypothek ist ein Pfandrecht an der Liegenschaft und dient der Sicherung einer Forderung der Bank.`,
-          `Die Dienstbarkeit erlaubt einem anderen Grundstück (EZ 987) die Benützung (Geh- und Fahrrecht).`,
-          `Die Hypothek kann nur durch Löschung im Grundbuch (Einverleibung der Löschung) beendet werden, nicht durch Tilgung der gesicherten Forderung.`,
-          `Dienstbarkeiten sind beschränkte dingliche Nutzungsrechte an einer fremden Sache.`
+          "Die Anteile (z.B. 104/172) sind ideelle Miteigentumsanteile an der Liegenschaft.",
+          "Mit dem ideellen Anteil ist jeweils Wohnungseigentum an einer bestimmten Wohnung (W1, W2) verbunden.",
+          "Wohnungseigentum wird nicht im Grundbuch, sondern nur im Mietvertrag ausgewiesen.",
+          "Ohne Eintragung im Grundbuch könnte Wohnungseigentum nicht wirksam begründet werden."
         ],
         correctIndices: [0, 1, 3],
-        explanation: `Hypothek = Pfandrecht; Dienstbarkeit = beschränktes Nutzungsrecht zugunsten eines anderen Grundstücks. Die Tilgung der Forderung ist Voraussetzung für die Löschung, rechtlich beendet wird das Pfandrecht aber durch Verbücherung der Löschung.`
+        explanation:
+          "Wohnungseigentum setzt die Eintragung von Miteigentumsanteilen und Zuordnung zu bestimmten Objekten im Grundbuch voraus."
       },
       {
         id: "G3",
-        topic: "Grundbuchfall 2 – Wohnungseigentum",
-        contextHtml: `<pre>Grundbuch: 01234 Wien-Donaustadt
-Einlagezahl (EZ): 456
-Grundstück: 321/2 Baufläche (Gebäude)
-Adresse: 1220 Wien, Beispielgasse 10
+        topic: "Grundbuchsauszug 2 – Pfandrechte / C-Blatt",
+        contextHtml: `<pre>*******************************  C ****************************
+1 a 863/1952 Schuldschein 1952-07-25                  1.566.700,--
+   PFANDRECHT
+   für Wohnhaus-Wiederaufbaufonds
+b 1507/1990 Löschungsverpflichtung zugunsten
+   Österreichische Credit-Institut Aktiengesellschaft
 
-Aufschrift: "Wohnungseigentum"
+4 auf Anteil B-LNR 1
+  a 875/1974 112/1976 Urteil 1973-11-10
+     PFANDRECHT
+     9 % zZ, Kosten 3.846,60, 1.819,10 für
+     Immobilienverwertungsgesellschaft mbH
 
-A-Blatt:
-  Gutsbestand: Grundstück Nr. 321/2, Baufläche
-  Benützungsart: Wohnhaus
+5 auf Anteil B-LNR 2
+  a 347/1981
+     BELASTUNGS- UND VERÄUSSERUNGSVERBOT für Eva Seifert
+  b 1507/1990 VORRANG von LNR 12 vor 5
 
-B-Blatt:
-  B-LNR 1: Wohnungseigentum Top 1: Anna Beispiel, ideeller Anteil 120/1000
-  B-LNR 2: Wohnungseigentum Top 2: Bernhard Beispiel, ideeller Anteil 180/1000
-  B-LNR 3: Wohnungseigentum Top 3: Carla Beispiel, ideeller Anteil 700/1000
+12 auf Anteil B-LNR 2
+  a 1507/1990 Schuldschein und Pfandurkunde 1990-07-18
+     PFANDRECHT 8,25 % zZ, höchstens 18 % VZ, NGS 81.000,-- 
+     für Österreichische Credit-Institut Aktiengesellschaft
+  c 1507/1990 VORRANG von LNR 12 vor 5
 
-C-Blatt:
-  C-LNR 1: Hypothek EUR 200.000,-- zugunsten XYZ-Bank AG, haftet auf den Anteilen B-LNR 1 und 2</pre>`,
-        text: `Welche Aussagen sind richtig?`,
+HINWEIS: Eintragungen ohne Währungsbezeichnung sind Beträge in ATS.</pre>`,
+        text: "Welche Aussagen zu diesem C-Blatt sind richtig?",
         options: [
-          `Es handelt sich um eine Wohnungseigentumsanlage (erkennbar an der Aufschrift).`,
-          `Alle Wohnungseigentümer sind auch Miteigentümer an der gesamten Liegenschaft.`,
-          `Die Hypothek der XYZ-Bank AG belastet nur die Anteile von Top 1 und 2.`,
-          `Carla Beispiel ist Mieterin und daher nicht im Grundbuch aufscheinfähig.`
+          "Im C-Blatt sind Pfandrechte und sonstige Lasten (z.B. Belastungs- und Veräußerungsverbote) eingetragen.",
+          "Die Eintragung „PFANDRECHT“ kennzeichnet eine Hypothek an der Liegenschaft bzw. an bestimmten Anteilen.",
+          "Belastungs- und Veräußerungsverbote beschränken die Verfügungsmacht eines Eigentümers.",
+          "Pfandrechte werden ausschließlich im B-Blatt eingetragen."
         ],
         correctIndices: [0, 1, 2],
-        explanation: `Wohnungseigentum setzt Miteigentum an der Liegenschaft voraus. Hypotheken können einzelnen Anteilen zugeordnet sein. Carla Beispiel ist Wohnungseigentümerin, nicht bloß Mieterin.`
+        explanation:
+          "Lasten wie Pfandrechte und Verbote stehen im C-Blatt. Sie können einzelne Anteile (B-LNR) betreffen."
       },
       {
         id: "G4",
-        topic: "Grundbuchfall 2 – Rang und Belastungen",
-        contextHtml: `<pre>Grundbuch: 01234 Wien-Donaustadt
-Einlagezahl (EZ): 456
-...
-C-Blatt:
-  C-LNR 1: Hypothek EUR 200.000,-- zugunsten XYZ-Bank AG, haftet auf den Anteilen B-LNR 1 und 2
-  (weitere Eintragungen derzeit nicht)</pre>`,
-        text: `Welche Aussagen zum Rang der Hypothek sind zutreffend (vereinfacht)?`,
+        topic: "Grundbuchsauszug 2 – Rangfolge",
+        contextHtml: `<pre>(Fortsetzung C-Blatt wie bei G3 mit Einträgen 1, 4, 5 und 12 sowie dem Vermerk „VORRANG von LNR 12 vor 5“)</pre>`,
+        text: "Welche Aussagen zur Rangfolge der Pfandrechte sind zutreffend (vereinfacht)?",
         options: [
-          `Solange keine weiteren Pfandrechte eingetragen sind, hat die XYZ-Bank den ersten Rang.`,
-          `Wird später eine weitere Hypothek eingetragen, kommt diese im Rang hinter die bestehende Hypothek.`,
-          `Der Rang richtet sich nach dem Zeitpunkt der Einverleibung (bzw. TZ).`,
-          `Der Rang spielt bei Pfandrechten keine Rolle.`
+          "Grundsätzlich bestimmt die Zeit der Eintragung (TZ) den Rang der Pfandrechte.",
+          "Durch einen Vorrangvermerk kann ein später eingetragenes Pfandrecht im Rang vor einem älteren stehen.",
+          "Im Verwertungsfall wird nach der Rangordnung aus dem Erlös bezahlt.",
+          "Rang spielt bei Hypotheken keine Rolle."
         ],
         correctIndices: [0, 1, 2],
-        explanation: `Pfandrecht folgt dem Prioritätsprinzip: ältere Eintragung geht jüngeren im Rang vor.`
+        explanation:
+          "Prioritätsprinzip: ältere Eintragung geht jüngeren vor. Ein im Grundbuch vermerkter Vorrang kann die Reihenfolge ändern."
       },
       {
         id: "G5",
-        topic: "Grundbuchfall 3 – Plombe",
-        contextHtml: `<pre>Grundbuch: 01015 Wien-Favoriten
-Einlagezahl (EZ): 987
-Grundstück: 45/1 Baufläche
-Adresse: 1100 Wien, Neubaugasse 5
+        topic: "Grundbuchsauszug 3 – Liegenschaft mit Dienstbarkeit",
+        contextHtml: `<pre>GRUNDBUCH 03201 Umgebung             EINLAGEZAHL 77
+****************************************************************
+A1
+GST-NR   GBA (NUTZUNG)    FLÄCHE   GST-ADRESSE
+12/3     Landw. Nutzfl.   4.520    Feldweg 2
 
-A-Blatt:
-  Gutsbestand: Grundstück 45/1
-  Benützungsart: Baufläche (Mehrfamilienhaus)
+A2
+1 a 210/1980  Dienstbarkeit des Gehens und Fahrens
+              zugunsten EZ 76 (Zufahrtsrecht zum Hof)
 
-B-Blatt:
-  B-LNR 1: Peter Muster, 1/1 Eigentümer
+B
+1 ANTEIL: 1/1
+   Franz Feld, Landwirt
+   ADR: Feldweg 2, 2300 Beispielstadt
 
-C-Blatt:
-  (derzeit keine Eintragungen)
-
-Aktueller Auszug:
-  TZ 1123/2025: PLOMBE (Antrag auf Einverleibung eines Kaufvertrags zugunsten Maria Neu)</pre>`,
-        text: `Welche Aussagen zu dieser Plombe sind richtig?`,
+C
+1 a 210/1980  Dienstbarkeit des Gehens und Fahrens
+              für EZ 76 über Gst 12/3</pre>`,
+        text: "Welche Aussagen zu diesem Auszug sind richtig?",
         options: [
-          `Die Plombe zeigt an, dass ein Grundbuchsgesuch (hier: Kaufvertrag zugunsten Maria Neu) in Bearbeitung ist.`,
-          `Bis zur Entscheidung über das Gesuch kann sich der Eigentümerstand ändern.`,
-          `Bis zur Löschung/Erledigung der Plombe kann auf den derzeitigen Eigentümerstand nur eingeschränkt vertraut werden.`,
-          `Die Plombe bedeutet, dass keine Einsicht in das Grundbuch mehr möglich ist.`
+          "EZ 77 ist die dienende Liegenschaft – sie muss das Geh- und Fahrrecht dulden.",
+          "EZ 76 ist die herrschende Liegenschaft – sie darf das Geh- und Fahrrecht ausüben.",
+          "Die Dienstbarkeit ist nur im A2-Blatt eingetragen, daher wirkt sie nicht gegenüber Dritten.",
+          "Die Dienstbarkeit ist im A2- und im C-Blatt ersichtlich."
         ],
-        correctIndices: [0, 1, 2],
-        explanation: `Die Plombe zeigt ein laufendes Eintragungsgesuch; der Eigentümerstand könnte sich nach Einverleibung ändern. Die Einsicht in das Grundbuch bleibt möglich.`
+        correctIndices: [0, 1, 3],
+        explanation:
+          "Die dienende Liegenschaft trägt die Belastung, die herrschende nutzt das Recht. Dienstbarkeiten erscheinen im A2- und C-Blatt."
       },
       {
         id: "G6",
-        topic: "Grundbuchfall 3 – Eigentümerwechsel",
-        contextHtml: `<pre>Grundbuch: 01015 Wien-Favoriten
-EZ 987, Neubaugasse 5
-
-B-Blatt (nach Einverleibung):
-  B-LNR 1: Peter Muster, 1/1 Eigentümer (gelöscht)
-  B-LNR 2: Maria Neu, 1/1 Eigentümerin (eingetragen aufgrund Kaufvertrag, TZ 1123/2025)</pre>`,
-        text: `Welche Aussagen zur Einverleibung des Eigentums sind korrekt?`,
+        topic: "Grundbuchsauszug 3 – Verkauf",
+        contextHtml: `<pre>(Auszug wie G5 – EZ 77 mit Dienstbarkeit zugunsten EZ 76)</pre>`,
+        text: "Was gilt beim Verkauf der Liegenschaft EZ 77 an einen Dritten?",
         options: [
-          `Maria Neu wurde erst durch die Einverleibung im B-Blatt zur Eigentümerin.`,
-          `Der Kaufvertrag allein ohne Eintragung hätte für Dritte keine dingliche Wirkung.`,
-          `Peter Muster ist nach der Einverleibung nicht mehr Eigentümer im Grundbuch.`,
-          `Der Kaufpreis muss nicht bezahlt werden, damit Eigentum übergeht.`
+          "Die Dienstbarkeit bleibt bestehen, weil sie ein dingliches Recht ist.",
+          "Der neue Eigentümer muss das Geh- und Fahrrecht weiterhin dulden.",
+          "Die Dienstbarkeit erlischt automatisch mit dem Verkauf.",
+          "Der neue Eigentümer kann die Dienstbarkeit ohne Zustimmung der herrschenden Liegenschaft löschen lassen."
         ],
-        correctIndices: [0, 1, 2],
-        explanation: `Bei Liegenschaften entsteht Eigentum in der Regel mit Einverleibung im Grundbuch (Eintragungsprinzip). Der bloße Vertrag wirkt nur schuldrechtlich.`
+        correctIndices: [0, 1],
+        explanation:
+          "Dingliche Rechte wirken gegenüber Rechtsnachfolgern. Löschung erfordert einvernehmlichen Antrag und Verbücherung."
       },
       {
         id: "G7",
-        topic: "Grundbuchfall 4 – Dienstbarkeit",
-        contextHtml: `<pre>Grundbuch: 03101 Wiener Umland
-Einlagezahl (EZ): 222
-Grundstück: 12/3 Landfläche
-Adresse: 2300 Beispielstadt, Feldweg 2
+        topic: "Grundbuchsauszug 4 – Plombe & Eigentumserwerb",
+        contextHtml: `<pre>GRUNDBUCH 01015 Favoriten           EINLAGEZAHL 987
+****************************************************************
+A1
+GST-NR   GBA (NUTZUNG)   FLÄCHE   GST-ADRESSE
+45/1     Baufl.          380      Neubaugasse 5
 
-A-Blatt:
-  Gutsbestand: Grundstück 12/3, Land- und Forstwirtschaft
+B (Auszug alt)
+1 ANTEIL: 1/1   Peter Muster
 
-B-Blatt:
-  B-LNR 1: Franz Feld, 1/1 Eigentümer
+C
+(keine Eintragungen)
 
-C-Blatt:
-  C-LNR 1: Dienstbarkeit des Geh- und Fahrrechts zugunsten EZ 221</pre>`,
-        text: `Welche Aussagen zu dieser Dienstbarkeit sind zutreffend?`,
+Aktuelle TESTDATEN:
+Letzte TZ 1123/2025
+PLOMBE 1123/2025  (Ansuchen auf Einverleibung Kaufvertrag zugunsten Maria Neu)</pre>`,
+        text: "Welche Aussagen zu dieser Plombe sind richtig?",
         options: [
-          `EZ 222 ist die dienende Liegenschaft (muss das Recht dulden).`,
-          `EZ 221 ist die herrschende Liegenschaft (darf das Geh- und Fahrrecht ausüben).`,
-          `Die Dienstbarkeit bedeutet, dass der Eigentümer von EZ 221 auch Eigentümer von EZ 222 ist.`,
-          `Die Dienstbarkeit ist im C-Blatt einzutragen.`
+          "Die Plombe zeigt ein laufendes Ansuchen auf Einverleibung eines Kaufvertrages an.",
+          "Bis zur Entscheidung über das Ansuchen kann sich der Eigentümerstand ändern.",
+          "Während der Plombe ist das Grundbuch für Dritte nicht einsichtig.",
+          "Auf den aktuellen Eigentümerstand kann nur eingeschränkt vertraut werden."
         ],
         correctIndices: [0, 1, 3],
-        explanation: `Die belastete Liegenschaft ist dienend, die begünstigte herrschend. Die Dienstbarkeit wird im C-Blatt verbüchert. Eigentümeridentität ist nicht erforderlich.`
+        explanation:
+          "Die Plombe warnt vor einer möglichen Änderung. Einsicht bleibt möglich, aber der Rechtszustand ist „in Bewegung“."
       },
       {
         id: "G8",
-        topic: "Grundbuchfall 4 – Auswirkungen der Veräußerung",
-        contextHtml: `<pre>Grundbuch: 03101 Wiener Umland
-EZ 222, C-LNR 1: Dienstbarkeit des Geh- und Fahrrechts zugunsten EZ 221</pre>`,
-        text: `Was passiert bei einem Verkauf der dienenden Liegenschaft EZ 222?`,
+        topic: "Grundbuchsauszug 4 – nach der Einverleibung",
+        contextHtml: `<pre>B (nach Einverleibung)
+1 ANTEIL: 1/1   Peter Muster    (gelöscht)
+2 ANTEIL: 1/1   Maria Neu       (Kaufvertrag TZ 1123/2025)</pre>`,
+        text: "Welche Aussagen zum Eigentumserwerb sind korrekt?",
         options: [
-          `Die Dienstbarkeit bleibt grundsätzlich bestehen, weil sie ein dingliches Recht ist.`,
-          `Der neue Eigentümer muss das Geh- und Fahrrecht weiterhin dulden.`,
-          `Mit dem Verkauf erlischt die Dienstbarkeit automatisch.`,
-          `Der neue Eigentümer kann die Dienstbarkeit nach Belieben löschen lassen.`
+          "Maria Neu wurde erst durch Einverleibung im B-Blatt Eigentümerin.",
+          "Der Kaufvertrag allein ohne Verbücherung hätte keine dingliche Wirkung gegenüber Dritten.",
+          "Peter Muster ist nun nicht mehr als Eigentümer im Grundbuch eingetragen.",
+          "Für Eigentumserwerb an Liegenschaften reicht die Unterfertigung des Kaufvertrages aus."
         ],
-        correctIndices: [0, 1],
-        explanation: `Dienstbarkeiten sind dingliche Rechte und gehen mit der Liegenschaft über. Der neue Eigentümer tritt in die Belastung ein; eine Löschung erfordert Einigung und Verbücherung.`
+        correctIndices: [0, 1, 3 - 1], // 0,1,2
+        explanation:
+          "Bei Liegenschaften entsteht Eigentum grundsätzlich mit Einverleibung im Grundbuch (Eintragungsprinzip). Der bloße Vertrag wirkt schuldrechtlich."
       },
       {
         id: "G9",
-        topic: "Grundbuchfall 5 – Reallast",
-        contextHtml: `<pre>Grundbuch: 04567 Land
-EZ 333, Bauernhof
+        topic: "Grundbuchsauszug 5 – Reallast",
+        contextHtml: `<pre>GRUNDBUCH 04567 Land               EINLAGEZAHL 333
+****************************************************************
+A1
+GST-NR   GBA (NUTZUNG)   FLÄCHE   GST-ADRESSE
+3/1      Hofstelle       980      Hofgasse 1
 
-C-Blatt:
-  C-LNR 1: Reallast – Wohn- und Versorgungsrecht zugunsten Frau Altbauerin
-            (lebenslängliches Wohnrecht und Versorgung aus dem Hof)</pre>`,
-        text: `Welche Aussagen zur Reallast sind richtig (vereinfacht)?`,
+B
+1 ANTEIL: 1/1   Bauernhof GmbH
+
+C
+1 a 510/1995 Reallast: lebenslängliches Wohn- und Versorgungsrecht
+           zugunsten Frau Altbauerin, geb. 1940
+           (Wohnrecht im Erdgeschoß und Naturalunterhalt)</pre>`,
+        text: "Welche Aussagen zur Reallast sind richtig?",
         options: [
-          `Die Reallast ist eine dingliche Belastung der Liegenschaft zugunsten einer bestimmten Person.`,
-          `Sie kann z.B. ein Wohn- und Versorgungsrecht sichern.`,
-          `Sie wirkt auch gegenüber Rechtsnachfolgern des Eigentümers.`,
-          `Sie ist ein rein schuldrechtlicher Anspruch, der nicht im Grundbuch aufscheinen kann.`
+          "Sie ist eine dingliche Belastung der Liegenschaft zugunsten einer bestimmten Person.",
+          "Sie kann z.B. ein Wohn- und Versorgungsrecht sichern.",
+          "Sie wirkt auch gegenüber Rechtsnachfolgern der Eigentümerin.",
+          "Sie ist nur ein schuldrechtlicher Anspruch und wird nicht im Grundbuch eingetragen."
         ],
         correctIndices: [0, 1, 2],
-        explanation: `Reallasten sind dingliche Belastungen (z.B. Wohn-/Versorgungsrechte), die im Grundbuch eingetragen werden und gegenüber Rechtsnachfolgern wirken.`
+        explanation:
+          "Reallasten sind dingliche Rechte im C-Blatt, die auch gegenüber späteren Eigentümern wirken."
       },
       {
         id: "G10",
-        topic: "Grundbuchfall 6 – Mehrere Pfandrechte",
-        contextHtml: `<pre>Grundbuch: 01001 Wien-Innere Stadt
-EZ 999, Zinshaus
-
-C-Blatt:
-  C-LNR 1: Hypothek EUR 500.000,-- zugunsten Erste Bank, TZ 100/2020
-  C-LNR 2: Hypothek EUR 200.000,-- zugunsten Zweite Bank, TZ 300/2023</pre>`,
-        text: `Welche Aussagen zu diesen Pfandrechten sind zutreffend?`,
+        topic: "Grundbuchsauszug 6 – mehrere Pfandrechte",
+        contextHtml: `<pre>GRUNDBUCH 01001 Innere Stadt       EINLAGEZAHL 999
+****************************************************************
+C
+1 a 100/2020 Hypothek EUR 500.000,-- zugunsten Erste Bank
+2 a 300/2023 Hypothek EUR 200.000,-- zugunsten Zweite Bank</pre>`,
+        text: "Welche Aussagen zu Rang und Verwertung sind zutreffend?",
         options: [
-          `Die Hypothek der Ersten Bank hat aufgrund der älteren TZ den besseren Rang.`,
-          `Im Verwertungsfall wird die Erste Bank aus dem Versteigerungserlös vor der Zweiten Bank befriedigt.`,
-          `Die zweite Hypothek ist automatisch unwirksam, weil schon eine Hypothek besteht.`,
-          `Die Rangfolge richtet sich nach der Reihenfolge der Eintragung.`
+          "Die Hypothek der Ersten Bank hat aufgrund der älteren TZ den besseren Rang.",
+          "Im Verwertungsfall wird die Erste Bank vor der Zweiten Bank befriedigt.",
+          "Die zweite Hypothek ist automatisch unwirksam, weil schon eine Hypothek besteht.",
+          "Der Rang richtet sich nach der Reihenfolge der Eintragungen."
         ],
         correctIndices: [0, 1, 3],
-        explanation: `Mehrere Pfandrechte können nebeneinander bestehen. Im Verwertungsfall wird nach Rang (TZ) befriedigt – zuerst das ältere Pfandrecht.`
+        explanation:
+          "Mehrere Hypotheken sind möglich; die Befriedigung erfolgt nach Rang (Prioritätsprinzip)."
       },
       {
         id: "G11",
-        topic: "Grundbuchfall 7 – Löschung einer Hypothek",
-        contextHtml: `<pre>Grundbuch: 01001 Wien-Innere Stadt
-EZ 999, Zinshaus
+        topic: "Grundbuchsauszug 7 – Löschung einer Hypothek",
+        contextHtml: `<pre>C (alt)
+1 a 100/2010 Hypothek EUR 200.000,-- zugunsten Sparkasse
 
-C-Blatt (alt):
-  C-LNR 1: Hypothek EUR 500.000,-- zugunsten Erste Bank
-
-C-Blatt (neu):
-  C-LNR 1: gelöscht (Löschungsvermerk aufgrund Löschungsquittung der Bank)</pre>`,
-        text: `Welche Aussagen zur Löschung einer Hypothek sind korrekt (vereinfacht)?`,
+C (neu)
+1 a 100/2010 Hypothek ...  (gelöscht)
+  b 850/2025 Löschungsbewilligung der Sparkasse</pre>`,
+        text: "Welche Aussagen zur Löschung der Hypothek sind korrekt?",
         options: [
-          `Für die Löschung ist in der Regel eine Löschungsbewilligung (Quittung) des Pfandgläubigers erforderlich.`,
-          `Die Löschung wird als Eintragung (Löschung) im C-Blatt verbüchert.`,
-          `Mit Tilgung der gesicherten Forderung erlischt das Pfandrecht automatisch im Grundbuch, ohne dass eine Löschung nötig ist.`,
-          `Die Löschung beseitigt das Pfandrecht im Grundbuch.`
+          "Für die Löschung ist eine Löschungsbewilligung des Pfandgläubigers erforderlich.",
+          "Die Löschung wird im Grundbuch als eigene Eintragung vermerkt.",
+          "Mit Tilgung der Forderung erlischt das Pfandrecht automatisch, auch ohne Löschung.",
+          "Erst mit Verbücherung der Löschung ist die Hypothek grundbücherlich beseitigt."
         ],
         correctIndices: [0, 1, 3],
-        explanation: `Auch wenn die Forderung getilgt ist, muss die Löschung im Grundbuch beantragt und verbüchert werden. Erst die Löschung entfernt das Pfandrecht grundbücherlich.`
+        explanation:
+          "Tilgung der Forderung ist Voraussetzung, aber rechtlich maßgeblich ist die Löschung im Grundbuch."
       },
       {
         id: "G12",
-        topic: "Grundbuchfall 8 – Anmerkung Rangordnung",
-        contextHtml: `<pre>Grundbuch: 02002 Wien-Leopoldstadt
-EZ 777, Neubauprojekt
+        topic: "Grundbuchsauszug 8 – Rangordnung",
+        contextHtml: `<pre>GRUNDBUCH 02002 Leopoldstadt       EINLAGEZAHL 777
+****************************************************************
+B
+1 ANTEIL: 1/1    Bauträger GmbH
 
-B-Blatt:
-  B-LNR 1: Bauträger GmbH, 1/1 Eigentümer
-
-C-Blatt:
-  C-LNR 1: Anmerkung der Rangordnung für die beabsichtigte Veräußerung (Treuhänderrangordnung)</pre>`,
-        text: `Welche Aussagen zur Anmerkung einer Rangordnung (z.B. nach BTVG) sind zutreffend (vereinfacht)?`,
+C
+1 a 200/2024 Anmerkung der Rangordnung für die beabsichtigte Veräußerung
+             (Bauträgervertrag – Wohnungseigentumsbegründung)</pre>`,
+        text: "Welche Aussagen zur Anmerkung der Rangordnung sind richtig (vereinfacht)?",
         options: [
-          `Die Rangordnung sichert den zukünftigen Erwerbern von Wohnungseigentum einen bestimmten Rang für die Einverleibung.`,
-          `Sie ist besonders beim Erwerb von Bauträgerwohnungen wichtig.`,
-          `Ohne Rangordnung kann niemals Wohnungseigentum begründet werden.`,
-          `Die Rangordnung wird im C-Blatt angemerkt.`
+          "Sie sichert künftigen Erwerbern einen bestimmten Rang für ihre Eigentumseinverleibung.",
+          "Sie ist v.a. beim Erwerb von Bauträgerwohnungen wichtig.",
+          "Ohne Rangordnung kann Wohnungseigentum rechtlich überhaupt nicht begründet werden.",
+          "Die Rangordnung wird im C-Blatt angemerkt."
         ],
         correctIndices: [0, 1, 3],
-        explanation: `Die Rangordnung dient der Sicherung des Rangs für spätere Einverleibungen (z.B. Wohnungseigentumserwerb). Sie wird im C-Blatt angemerkt; Wohnungseigentum kann auch ohne Rangordnung begründet werden, aber mit weniger Sicherung.`
+        explanation:
+          "Rangordnungen sichern den Rang zukünftiger Einverleibungen, sind aber keine zwingende Voraussetzung für Wohnungseigentum."
       }
     ];
 
@@ -1876,12 +1861,13 @@ C-Blatt:
     // QUIZ-LOGIK – Mehrfachantworten & Modi
     // =======================================
 
-    let currentMode = null; // "all" oder "grundbuch"
+    let currentMode = null;           // "all" oder "grundbuch"
     let currentQuestions = [];
-    let questionOrder = [];
+    let questionOrder = [];           // Reihenfolge der Fragen
+    let optionOrder = [];             // pro Frage: Permutation der Antwort-Indizes
     let currentOrderIndex = 0;
-    let userAnswers = []; // Array von Arrays mit ausgewählten Indizes
-    let questionChecked = []; // bool pro Frage
+    let userAnswers = [];             // pro Frage: gewählte Original-Indizes
+    let questionChecked = [];         // pro Frage: bereits „Antwort prüfen“ gedrückt?
     let quizFinished = false;
 
     const MODE_LABELS = {
@@ -1899,23 +1885,55 @@ C-Blatt:
       const nextBtn = document.getElementById("next-btn");
       const checkBtn = document.getElementById("check-btn");
       const evalBtn = document.getElementById("eval-btn");
+      const backBtn = document.getElementById("back-btn");
+      const restartBtn = document.getElementById("restart-btn");
+      const closeSolutionBtn = document.getElementById("close-solution-btn");
 
       modeButtons.forEach((btn) => {
         btn.addEventListener("click", () => {
           const mode = btn.getAttribute("data-mode");
-          startQuiz(mode);
+          currentMode = mode;
           modeLabel.textContent = MODE_LABELS[mode] || "–";
           modeSelectSection.classList.add("hidden");
           quizMain.classList.remove("hidden");
+          startQuiz(mode);
         });
       });
 
       prevBtn.addEventListener("click", showPrevQuestion);
       nextBtn.addEventListener("click", showNextQuestion);
       checkBtn.addEventListener("click", checkCurrentQuestion);
-      evalBtn.addEventListener("click", evaluateQuiz);
+      evalBtn.addEventListener("click", () => {
+        evaluateQuiz();
+        openSolutionOverlay();
+      });
 
-      // Optional: Tastaturnavigation (Pfeiltasten, Enter)
+      backBtn.addEventListener("click", () => {
+        // Zur Startseite zurück
+        currentMode = null;
+        currentQuestions = [];
+        questionOrder = [];
+        optionOrder = [];
+        userAnswers = [];
+        questionChecked = [];
+        currentOrderIndex = 0;
+        quizFinished = false;
+        document.getElementById("score-banner").classList.add("hidden");
+        document.getElementById("solution-overlay").classList.add("hidden");
+        quizMain.classList.add("hidden");
+        modeSelectSection.classList.remove("hidden");
+      });
+
+      restartBtn.addEventListener("click", () => {
+        if (!currentMode) return;
+        startQuiz(currentMode);
+      });
+
+      closeSolutionBtn.addEventListener("click", () => {
+        document.getElementById("solution-overlay").classList.add("hidden");
+      });
+
+      // Tastatursteuerung
       document.addEventListener("keydown", (e) => {
         if (!currentQuestions.length) return;
         if (e.key === "ArrowRight") {
@@ -1923,7 +1941,6 @@ C-Blatt:
         } else if (e.key === "ArrowLeft") {
           showPrevQuestion();
         } else if (e.key === "Enter") {
-          // Enter prüft die aktuelle Frage
           e.preventDefault();
           checkCurrentQuestion();
         }
@@ -1931,11 +1948,20 @@ C-Blatt:
     });
 
     function startQuiz(mode) {
-      currentMode = mode;
       currentQuestions =
         mode === "grundbuch" ? GRUNDBUCH_QUESTIONS : ALL_QUESTIONS;
+
+      // Frage-Reihenfolge mischen
       questionOrder = currentQuestions.map((_, idx) => idx);
       shuffle(questionOrder);
+
+      // Antwort-Reihenfolge pro Frage mischen
+      optionOrder = currentQuestions.map((q) => {
+        const arr = q.options.map((_, idx) => idx);
+        shuffle(arr);
+        return arr;
+      });
+
       currentOrderIndex = 0;
       userAnswers = currentQuestions.map(() => []);
       questionChecked = currentQuestions.map(() => false);
@@ -1943,6 +1969,8 @@ C-Blatt:
 
       const scoreBanner = document.getElementById("score-banner");
       scoreBanner.classList.add("hidden");
+      scoreBanner.classList.remove("positive", "negative");
+      document.getElementById("solution-overlay").classList.add("hidden");
 
       renderCurrentQuestion();
       updateProgressInfo();
@@ -1961,18 +1989,19 @@ C-Blatt:
       const total = currentQuestions.length;
       const qIndex = questionOrder[currentOrderIndex];
       const q = currentQuestions[qIndex];
+      const order = optionOrder[qIndex];
 
-      const optionHtml = q.options
-        .map((opt, idx) => {
-          const selected = (userAnswers[qIndex] || []).includes(idx)
-            ? "checked"
-            : "";
-          const letter = String.fromCharCode(97 + idx); // a, b, c, ...
+      const optionHtml = order
+        .map((origIdx, dispIdx) => {
+          const optText = q.options[origIdx];
+          const selected =
+            (userAnswers[qIndex] || []).includes(origIdx) ? "checked" : "";
+          const letter = String.fromCharCode(97 + dispIdx); // a,b,c,...
           return `
             <label class="option">
-              <input type="checkbox" name="q-${qIndex}" value="${idx}" ${selected}>
+              <input type="checkbox" data-orig-index="${origIdx}" ${selected}>
               <span class="option-letter">${letter})</span>
-              <span class="option-text">${opt}</span>
+              <span class="option-text">${optText}</span>
             </label>
           `;
         })
@@ -1984,7 +2013,7 @@ C-Blatt:
 
       const explanationHtml = `
         <div class="explanation hidden" id="explanation">
-          <strong>Lösung &amp; kurze Begründung:</strong><br>
+          <strong>Lösung:</strong><br>
           ${q.explanation}
         </div>
       `;
@@ -2000,7 +2029,7 @@ C-Blatt:
           <div class="question-text">${q.text}</div>
           ${contextHtml}
           <div class="question-note">
-            Mehrfachauswahl möglich – es können <b>eine oder mehrere</b> Antworten richtig sein.
+            Mehrfachauswahl möglich – mindestens eine Antwort ist richtig.
           </div>
           <div class="options">
             ${optionHtml}
@@ -2010,13 +2039,20 @@ C-Blatt:
         </div>
       `;
 
-      // Wenn die Frage schon geprüft wurde, Darstellung wieder anwenden
+      // Wenn die Frage bereits geprüft wurde, Darstellung wiederherstellen
       if (questionChecked[qIndex]) {
         const card = document.getElementById("question-card");
         const selected = userAnswers[qIndex] || [];
-        applyEvaluationStyles(card, currentQuestions[qIndex], selected);
+        applyEvaluationStyles(card, q, selected, qIndex);
         const explEl = document.getElementById("explanation");
         if (explEl) explEl.classList.remove("hidden");
+
+        const msgEl = document.getElementById("message");
+        if (msgEl) {
+          const qScore = computeQuestionScorePercent(q, selected);
+          const rounded = Math.round(qScore);
+          msgEl.textContent = buildQuestionMessage(rounded);
+        }
       }
 
       updateProgressInfo();
@@ -2046,13 +2082,16 @@ C-Blatt:
       if (!card) return;
 
       const checkboxes = card.querySelectorAll('input[type="checkbox"]');
-      const selectedIndices = [];
-      checkboxes.forEach((cb, idx) => {
-        if (cb.checked) selectedIndices.push(idx);
+      const selectedOriginalIndices = [];
+      checkboxes.forEach((cb) => {
+        if (cb.checked) {
+          const orig = parseInt(cb.getAttribute("data-orig-index"), 10);
+          selectedOriginalIndices.push(orig);
+        }
       });
 
       const messageEl = document.getElementById("message");
-      if (!selectedIndices.length) {
+      if (!selectedOriginalIndices.length) {
         if (messageEl) {
           messageEl.textContent =
             "Bitte wähle mindestens eine Antwort aus, bevor du prüfst.";
@@ -2062,11 +2101,16 @@ C-Blatt:
         messageEl.textContent = "";
       }
 
-      selectedIndices.sort((a, b) => a - b);
-      userAnswers[qIndex] = selectedIndices;
+      userAnswers[qIndex] = selectedOriginalIndices;
       questionChecked[qIndex] = true;
 
-      applyEvaluationStyles(card, q, selectedIndices);
+      applyEvaluationStyles(card, q, selectedOriginalIndices, qIndex);
+
+      const qScore = computeQuestionScorePercent(q, selectedOriginalIndices);
+      const rounded = Math.round(qScore);
+      if (messageEl) {
+        messageEl.textContent = buildQuestionMessage(rounded);
+      }
 
       const explEl = document.getElementById("explanation");
       if (explEl) explEl.classList.remove("hidden");
@@ -2074,16 +2118,26 @@ C-Blatt:
       updateProgressInfo();
     }
 
-    function applyEvaluationStyles(card, question, selectedIndices) {
+    function buildQuestionMessage(percent) {
+      if (percent === 100) return "Frage-Punkte: 100 % – voll korrekt.";
+      if (percent >= 60)
+        return `Frage-Punkte: ${percent} % – positiv, aber nicht alles richtig.`;
+      if (percent > 0)
+        return `Frage-Punkte: ${percent} % – teilweise richtig, aber noch negativ (< 60 %).`;
+      return "Frage-Punkte: 0 % – keine Punkte, siehe Erklärung.";
+    }
+
+    function applyEvaluationStyles(card, question, selectedOriginalIndices, qIndex) {
       const optionsEls = card.querySelectorAll(".option");
-      const selectedSet = new Set(selectedIndices);
+      const selectedSet = new Set(selectedOriginalIndices);
       const correctSet = new Set(question.correctIndices);
+      const order = optionOrder[qIndex];
 
-      optionsEls.forEach((optEl, idx) => {
+      optionsEls.forEach((optEl, dispIdx) => {
         optEl.classList.remove("correct", "incorrect", "unselected-correct");
-
-        const isSelected = selectedSet.has(idx);
-        const isCorrect = correctSet.has(idx);
+        const origIdx = order[dispIdx];
+        const isSelected = selectedSet.has(origIdx);
+        const isCorrect = correctSet.has(origIdx);
 
         if (isCorrect && isSelected) {
           optEl.classList.add("correct");
@@ -2095,15 +2149,42 @@ C-Blatt:
       });
     }
 
-    function isAnswerCorrect(question, selectedIndices) {
-      if (!selectedIndices || !selectedIndices.length) return false;
-      const correct = question.correctIndices || [];
-      if (selectedIndices.length !== correct.length) return false;
-      const selSet = new Set(selectedIndices);
-      for (const idx of correct) {
-        if (!selSet.has(idx)) return false;
+    function computeQuestionScorePercent(question, selectedOriginalIndices) {
+      if (!selectedOriginalIndices || !selectedOriginalIndices.length) {
+        return 0;
       }
-      return true;
+      const totalOptions = question.options.length;
+      const correctSet = new Set(question.correctIndices);
+      const totalCorrect = correctSet.size;
+      if (totalCorrect === 0) return 0;
+
+      const allIdx = [];
+      for (let i = 0; i < totalOptions; i++) allIdx.push(i);
+      const incorrectIndices = allIdx.filter((i) => !correctSet.has(i));
+      const totalIncorrect = incorrectIndices.length;
+
+      const selSet = new Set(selectedOriginalIndices);
+      let correctSelected = 0;
+      let incorrectSelected = 0;
+
+      selSet.forEach((idx) => {
+        if (correctSet.has(idx)) {
+          correctSelected++;
+        } else if (incorrectIndices.includes(idx)) {
+          incorrectSelected++;
+        }
+      });
+
+      const pos = correctSelected / totalCorrect;
+      let neg = 0;
+      if (totalIncorrect > 0) {
+        neg = incorrectSelected / totalIncorrect;
+      }
+
+      let score = (pos - neg) * 100;
+      if (score < 0) score = 0;
+      if (score > 100) score = 100;
+      return score;
     }
 
     function updateProgressInfo() {
@@ -2111,69 +2192,175 @@ C-Blatt:
       const infoCurrent = document.getElementById("info-current-question");
       const infoTotal = document.getElementById("info-total-questions");
       const infoChecked = document.getElementById("info-checked");
-      const infoCorrect = document.getElementById("info-correct");
+      const infoAverage = document.getElementById("info-average");
 
       if (infoCurrent) {
         infoCurrent.textContent = total
-          ? `${currentOrderIndex + 1}`
+          ? String(currentOrderIndex + 1)
           : "–";
       }
       if (infoTotal) {
-        infoTotal.textContent = total ? `${total}` : "–";
+        infoTotal.textContent = total ? String(total) : "–";
       }
 
-      const checkedCount = questionChecked.filter(Boolean).length;
-      let correctCount = 0;
+      let checkedCount = 0;
+      let sumScore = 0;
       currentQuestions.forEach((q, idx) => {
         if (questionChecked[idx]) {
-          if (isAnswerCorrect(q, userAnswers[idx])) {
-            correctCount += 1;
-          }
+          checkedCount++;
+          sumScore += computeQuestionScorePercent(q, userAnswers[idx]);
         }
       });
 
       if (infoChecked) {
-        infoChecked.textContent = total ? `${checkedCount}` : "–";
+        infoChecked.textContent = total ? String(checkedCount) : "–";
       }
-      if (infoCorrect) {
-        infoCorrect.textContent = total ? `${correctCount}` : "–";
+      if (infoAverage) {
+        const avg = checkedCount ? Math.round(sumScore / checkedCount) : 0;
+        infoAverage.textContent = checkedCount ? `${avg} %` : "–";
       }
     }
 
     function evaluateQuiz() {
       if (!currentQuestions.length) return;
       const total = currentQuestions.length;
-      let correctCount = 0;
+      let sumScore = 0;
 
       currentQuestions.forEach((q, idx) => {
-        if (isAnswerCorrect(q, userAnswers[idx])) {
-          correctCount += 1;
-        }
+        const ans = userAnswers[idx] || [];
+        sumScore += computeQuestionScorePercent(q, ans);
       });
 
-      const percent = total ? Math.round((correctCount * 100) / total) : 0;
-
-      let gradeText;
-      if (percent >= 90) gradeText = "Note 1 – Sehr gut";
-      else if (percent >= 80) gradeText = "Note 2 – Gut";
-      else if (percent >= 65) gradeText = "Note 3 – Befriedigend";
-      else if (percent >= 50) gradeText = "Note 4 – Genügend";
-      else gradeText = "Note 5 – Nicht genügend";
+      const overallPercent = total ? sumScore / total : 0;
+      const roundedOverall = Math.round(overallPercent);
+      const gradeText = getGradeText(roundedOverall);
 
       const scoreBanner = document.getElementById("score-banner");
       const scorePercent = document.getElementById("score-percent");
       const scoreGrade = document.getElementById("score-grade");
       const scoreDetails = document.getElementById("score-details");
 
-      if (scorePercent) scorePercent.textContent = `${percent}%`;
+      if (scorePercent) scorePercent.textContent = `${roundedOverall} %`;
       if (scoreGrade) scoreGrade.textContent = gradeText;
       if (scoreDetails) {
-        scoreDetails.textContent = `Richtig beantwortet: ${correctCount} von ${total} Fragen.`;
+        scoreDetails.textContent = `Durchschnitt über alle ${
+          total
+        } Fragen: ${roundedOverall} %.`;
       }
 
-      if (scoreBanner) scoreBanner.classList.remove("hidden");
+      if (scoreBanner) {
+        scoreBanner.classList.remove("hidden", "positive", "negative");
+        if (roundedOverall >= 60) {
+          scoreBanner.classList.add("positive");
+        } else {
+          scoreBanner.classList.add("negative");
+        }
+      }
 
       quizFinished = true;
+    }
+
+    function getGradeText(percent) {
+      if (percent >= 90) return "Note 1 – Sehr gut (positiv)";
+      if (percent >= 80) return "Note 2 – Gut (positiv)";
+      if (percent >= 70) return "Note 3 – Befriedigend (positiv)";
+      if (percent >= 60) return "Note 4 – Genügend (positiv)";
+      return "Note 5 – Nicht genügend (negativ)";
+    }
+
+    // Lösungs-Overlay
+
+    function openSolutionOverlay() {
+      if (!currentQuestions.length) return;
+
+      const total = currentQuestions.length;
+      let sumScore = 0;
+      const perQuestionScores = [];
+
+      currentQuestions.forEach((q, idx) => {
+        const score = computeQuestionScorePercent(q, userAnswers[idx] || []);
+        sumScore += score;
+        perQuestionScores.push(score);
+      });
+
+      const overallPercent = total ? sumScore / total : 0;
+      const roundedOverall = Math.round(overallPercent);
+      const gradeText = getGradeText(roundedOverall);
+
+      const summaryEl = document.getElementById("solution-summary");
+      summaryEl.innerHTML = `
+        Gesamtpunkte: <b>${roundedOverall} %</b> – ${gradeText}<br>
+        Fragenzahl: <b>${total}</b>. Mindestens 60 % = positiv.
+      `;
+
+      const listEl = document.getElementById("solution-list");
+      listEl.innerHTML = "";
+
+      questionOrder.forEach((qOrderIdx, idxInOrder) => {
+        const q = currentQuestions[qOrderIdx];
+        const score = perQuestionScores[qOrderIdx] || 0;
+        const rounded = Math.round(score);
+        const positive = rounded >= 60;
+        const orderArr = optionOrder[qOrderIdx];
+        const correctSet = new Set(q.correctIndices);
+        const selectedSet = new Set(userAnswers[qOrderIdx] || []);
+
+        let optionsHtml = "";
+        orderArr.forEach((origIdx, dispIdx) => {
+          const text = q.options[origIdx];
+          const isCorrect = correctSet.has(origIdx);
+          const wasSelected = selectedSet.has(origIdx);
+
+          let mark = "";
+          let cssClass = "opt-neutral";
+
+          if (isCorrect && wasSelected) {
+            mark = "✓";
+            cssClass = "opt-correct";
+          } else if (isCorrect && !wasSelected) {
+            mark = "✓";
+            cssClass = "opt-neutral";
+          } else if (!isCorrect && wasSelected) {
+            mark = "✗";
+            cssClass = "opt-wrong-selected";
+          } else {
+            mark = "•";
+            cssClass = "opt-neutral";
+          }
+
+          const letter = String.fromCharCode(97 + dispIdx);
+          optionsHtml += `
+            <div class="solution-opt ${cssClass}">
+              <div class="solution-opt-mark">${mark}</div>
+              <div><b>${letter})</b> ${text}</div>
+            </div>
+          `;
+        });
+
+        const scoreClass = positive ? "positive" : "negative";
+
+        const blockHtml = `
+          <div class="solution-question">
+            <div class="solution-q-header">
+              <div class="solution-q-title">Frage ${idxInOrder + 1} – ${
+          q.id
+        }</div>
+              <div class="solution-q-topic">${q.topic || ""}</div>
+            </div>
+            <div>${q.text}</div>
+            <div class="solution-q-score ${scoreClass}">
+              Punkte: ${rounded} %
+            </div>
+            <div class="solution-options">
+              ${optionsHtml}
+            </div>
+            <div class="solution-expl">${q.explanation}</div>
+          </div>
+        `;
+        listEl.insertAdjacentHTML("beforeend", blockHtml);
+      });
+
+      document.getElementById("solution-overlay").classList.remove("hidden");
     }
   </script>
 </body>
