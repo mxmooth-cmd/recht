@@ -6,23 +6,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
-      --bg: #020617;
-      --card-bg: #020617;
-      --panel-bg: #020617;
+      --bg: #f3f4f6;
+      --card-bg: #ffffff;
+      --panel-bg: #ffffff;
       --accent: #2563eb;
-      --accent-soft: rgba(37, 99, 235, 0.15);
-      --accent-border: rgba(37, 99, 235, 0.6);
-      --text: #e5e7eb;
-      --text-soft: #9ca3af;
-      --border-subtle: rgba(148, 163, 184, 0.5);
-      --danger: #f97373;
-      --danger-soft: rgba(248, 113, 113, 0.15);
-      --success: #22c55e;
-      --success-soft: rgba(34, 197, 94, 0.15);
-      --radius-lg: 18px;
-      --radius-md: 12px;
-      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.8);
-      --shadow-subtle: 0 6px 16px rgba(15, 23, 42, 0.9);
+      --accent-soft: #eff6ff;
+      --accent-border: #bfdbfe;
+      --text: #0f172a;
+      --text-soft: #6b7280;
+      --border-subtle: #e5e7eb;
+      --danger: #dc2626;
+      --danger-soft: #fee2e2;
+      --success: #16a34a;
+      --success-soft: #dcfce7;
+      --radius-lg: 16px;
+      --radius-md: 10px;
+      --shadow-soft: 0 14px 30px rgba(15, 23, 42, 0.15);
+      --shadow-subtle: 0 4px 12px rgba(15, 23, 42, 0.08);
     }
 
     * {
@@ -34,7 +34,7 @@
       padding: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
         Roboto, Helvetica, Arial, sans-serif;
-      background: #020617;
+      background: var(--bg);
       color: var(--text);
       min-height: 100vh;
     }
@@ -48,32 +48,16 @@
     .app {
       width: 100%;
       max-width: 1100px;
-      background: #020617;
-      border-radius: 22px;
-      padding: 18px 18px 20px;
-      border: 1px solid rgba(51, 65, 85, 0.9);
-      box-shadow: var(--shadow-soft);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .app::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at top left, rgba(37, 99, 235, 0.14), transparent 55%),
-        radial-gradient(circle at top right, rgba(15, 23, 42, 0.7), transparent 70%);
-      pointer-events: none;
-      opacity: 0.9;
-      z-index: -1;
+      background: var(--bg);
+      border-radius: 18px;
+      padding: 18px 18px 22px;
     }
 
     .app-header {
       display: flex;
       flex-direction: column;
       gap: 6px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .title-row {
@@ -90,10 +74,11 @@
       display: flex;
       align-items: center;
       gap: 8px;
+      font-weight: 650;
     }
 
     .app-title span {
-      background: linear-gradient(120deg, #e5e7eb, #bfdbfe);
+      background: linear-gradient(120deg, #0f172a, #1d4ed8);
       -webkit-background-clip: text;
       color: transparent;
     }
@@ -102,21 +87,21 @@
       font-size: 11px;
       text-transform: uppercase;
       letter-spacing: .16em;
-      padding: 3px 10px;
+      padding: 4px 10px;
       border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.8);
-      color: #cbd5f5;
-      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid var(--border-subtle);
+      color: #1d4ed8;
+      background: #ffffff;
     }
 
     .subtitle {
-      font-size: 12px;
+      font-size: 13px;
       color: var(--text-soft);
-      max-width: 780px;
+      max-width: 840px;
     }
 
     .subtitle b {
-      color: #e5e7eb;
+      color: var(--text);
       font-weight: 600;
     }
 
@@ -133,280 +118,121 @@
       display: inline-flex;
       align-items: center;
       gap: 4px;
-      padding: 2px 8px;
+      padding: 3px 9px;
       border-radius: 999px;
-      border: 1px solid rgba(75, 85, 99, 0.9);
-      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid var(--border-subtle);
+      background: #ffffff;
     }
 
     .mode-info-row span strong {
-      color: #e5e7eb;
+      color: var(--text);
       font-weight: 600;
+    }
+
+    .quiz-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+
+    .quiz-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .quiz-meta-rows {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .quiz-meta-rows span {
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      background: #ffffff;
     }
 
     .hidden {
       display: none !important;
     }
 
-    /* Startseite – Moduswahl */
-
-    .mode-select {
-      margin-top: 10px;
-      padding: 14px 14px 16px;
-      border-radius: 18px;
-      border: 1px solid var(--border-subtle);
-      background: #020617;
-      box-shadow: var(--shadow-subtle);
-    }
-
-    .mode-select-header {
-      margin-bottom: 10px;
-    }
-
-    .mode-select-title {
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: #dbeafe;
-    }
-
-    .mode-select-subtitle {
-      font-size: 12px;
-      color: var(--text-soft);
-      margin-top: 2px;
-    }
-
-    .mode-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 10px;
-    }
-
-    .mode-card {
-      border-radius: 16px;
-      border: 1px solid var(--border-subtle);
-      padding: 10px 11px 12px;
-      background: #020617;
-      color: inherit;
-      cursor: pointer;
-      text-align: left;
+    .question-nav {
       display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-height: 88px;
-      position: relative;
-      overflow: hidden;
-      transition: border-color 0.18s ease, box-shadow 0.18s ease,
-        transform 0.12s ease, background 0.18s ease;
-    }
-
-    .mode-card::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.14), transparent 60%);
-      opacity: 0;
-      transition: opacity 0.18s ease;
-      pointer-events: none;
-    }
-
-    .mode-card:hover {
-      border-color: var(--accent-border);
-      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.9);
-      transform: translateY(-1px);
-      background: #020617;
-    }
-
-    .mode-card:hover::after {
-      opacity: 1;
-    }
-
-    .mode-card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      flex-wrap: wrap;
       gap: 6px;
+      padding: 10px 2px 12px;
+      border-radius: 14px;
+      background: #ffffff;
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-subtle);
+      margin-bottom: 12px;
+      max-height: 120px;
+      overflow-y: auto;
     }
 
-    .mode-card h3 {
-      font-size: 14px;
-      margin: 0;
-      color: #e5e7eb;
-    }
-
-    .mode-tag {
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      padding: 2px 7px;
+    .q-nav-item {
+      border: 1px solid var(--border-subtle);
+      background: #ffffff;
       border-radius: 999px;
-      border: 1px solid rgba(96, 165, 250, 0.8);
-      background: rgba(15, 23, 42, 0.96);
-      color: #bfdbfe;
-    }
-
-    .mode-card p {
+      width: 30px;
+      height: 30px;
       font-size: 12px;
-      color: var(--text-soft);
-      margin: 4px 0 0;
-    }
-
-    .mode-stat {
-      font-size: 11px;
-      color: rgba(191, 219, 254, 0.9);
-      margin-top: 6px;
-    }
-
-    /* Quiz-Hauptseite */
-
-    .quiz-header-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      margin-top: 6px;
-      margin-bottom: 10px;
-    }
-
-    .mode-pill-current {
-      padding: 6px 10px;
-      border-radius: 999px;
-      border: 1px solid var(--accent-border);
-      background: #020617;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      color: #dbeafe;
-    }
-
-    .mode-pill-current small {
-      color: rgba(191, 219, 254, 0.9);
-      font-weight: 500;
-    }
-
-    .layout {
-      display: grid;
-      grid-template-columns: minmax(0, 260px) minmax(0, 1.5fr);
-      gap: 14px;
-    }
-
-    .info-column {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .info-card {
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border-subtle);
-      background: #020617;
-      padding: 10px 11px 11px;
-      font-size: 12px;
-      box-shadow: var(--shadow-subtle);
-    }
-
-    .info-card h3 {
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: #9ca3af;
-      margin: 0 0 6px;
-    }
-
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 6px;
-    }
-
-    .info-item {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      padding: 6px 7px;
-      border-radius: 10px;
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      background: #020617;
-    }
-
-    .info-item-label {
-      font-size: 11px;
+      justify-content: center;
+      cursor: pointer;
+      padding: 0;
       color: var(--text-soft);
+      transition: background 0.12s ease, border-color 0.12s ease,
+        color 0.12s ease, transform 0.06s ease,
+        box-shadow 0.12s ease;
     }
 
-    .info-item-value {
-      font-size: 13px;
-      font-weight: 600;
-      color: #e5e7eb;
+    .q-nav-item:hover {
+      border-color: var(--accent-border);
+      background: var(--accent-soft);
+      color: #1d4ed8;
+      transform: translateY(-0.5px);
+      box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
     }
 
-    .info-small {
-      font-size: 11px;
-      color: var(--text-soft);
-      margin-top: 4px;
-    }
-
-    .score-banner {
-      margin-top: 4px;
-      padding: 8px 9px;
-      border-radius: 14px;
-      border: 1px solid rgba(148, 163, 184, 0.8);
-      background: #020617;
-      font-size: 12px;
-      color: #dbeafe;
-      box-shadow: var(--shadow-subtle);
-    }
-
-    .score-banner.positive {
-      border-color: rgba(34, 197, 94, 0.8);
-      box-shadow: 0 12px 28px rgba(22, 163, 74, 0.5);
-    }
-
-    .score-banner.negative {
-      border-color: rgba(248, 113, 113, 0.9);
-      box-shadow: 0 12px 28px rgba(248, 113, 113, 0.4);
-    }
-
-    .score-main {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 6px;
-      margin-bottom: 3px;
-    }
-
-    .score-percent {
-      font-size: 20px;
-      font-weight: 700;
-    }
-
-    .score-grade {
-      font-size: 13px;
+    .q-nav-item.active {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      color: #1d4ed8;
+      box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
       font-weight: 600;
     }
 
-    .score-details {
-      font-size: 11px;
-      color: rgba(191, 219, 254, 0.9);
+    .q-nav-item.answered {
+      background: #e0f2fe;
+      border-color: #93c5fd;
+      color: #1d4ed8;
+    }
+
+    .q-nav-item.checked {
+      border-color: var(--success);
+      box-shadow: 0 0 0 1px rgba(22, 163, 74, 0.4);
     }
 
     .question-column {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
+      margin-top: 10px;
     }
 
     .question-card {
       border-radius: var(--radius-lg);
       border: 1px solid var(--border-subtle);
-      background: #020617;
-      padding: 12px 14px 13px;
-      box-shadow: var(--shadow-subtle);
+      background: var(--card-bg);
+      padding: 14px 16px 14px;
+      box-shadow: var(--shadow-soft);
     }
 
     .question-header {
@@ -414,14 +240,14 @@
       justify-content: space-between;
       align-items: baseline;
       gap: 8px;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
     .question-number {
-      font-size: 12px;
+      font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 0.16em;
-      color: #9ca3af;
+      color: var(--text-soft);
     }
 
     .question-topic {
@@ -431,16 +257,18 @@
     }
 
     .question-text {
-      font-size: 14px;
+      font-size: 15px;
       margin-bottom: 6px;
+      font-weight: 500;
+      color: var(--text);
     }
 
     .question-context {
       font-size: 11px;
-      color: #e5e7eb;
+      color: var(--text-soft);
       border-radius: 10px;
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      background: #020617;
+      border: 1px solid var(--border-subtle);
+      background: #f9fafb;
       padding: 7px 8px;
       margin-bottom: 6px;
       max-height: 260px;
@@ -458,7 +286,7 @@
     .question-note {
       font-size: 11px;
       color: var(--text-soft);
-      margin-bottom: 4px;
+      margin-bottom: 6px;
     }
 
     .options {
@@ -475,18 +303,19 @@
       gap: 7px;
       padding: 7px 9px;
       border-radius: 10px;
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      background: #020617;
+      border: 1px solid var(--border-subtle);
+      background: #ffffff;
       cursor: pointer;
       font-size: 13px;
-      transition: border-color 0.15s ease, background 0.15s ease,
-        transform 0.06s ease;
+      transition: border-color 0.12s ease, background 0.12s ease,
+        transform 0.06s ease, box-shadow 0.12s ease;
     }
 
     .option:hover {
       border-color: var(--accent-border);
-      background: #020617;
+      background: #f9fafb;
       transform: translateY(-0.5px);
+      box-shadow: 0 3px 8px rgba(15, 23, 42, 0.12);
     }
 
     .option input[type="checkbox"] {
@@ -510,40 +339,41 @@
 
     .option-text {
       flex: 1;
+      color: var(--text);
     }
 
     .option.correct {
-      border-color: rgba(34, 197, 94, 0.9);
+      border-color: var(--success);
       background: var(--success-soft);
     }
 
     .option.incorrect {
-      border-color: rgba(248, 113, 113, 0.95);
+      border-color: var(--danger);
       background: var(--danger-soft);
     }
 
     .option.unselected-correct {
-      box-shadow: 0 0 0 1px rgba(34, 197, 94, 0.7) inset;
+      box-shadow: 0 0 0 1px rgba(22, 163, 74, 0.7) inset;
     }
 
     .explanation {
       font-size: 11px;
       padding: 7px 9px;
       border-radius: 10px;
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      background: #020617;
+      border: 1px solid var(--border-subtle);
+      background: #f9fafb;
       color: var(--text-soft);
-      margin-top: 4px;
+      margin-top: 5px;
     }
 
     .explanation strong {
-      color: #e5e7eb;
+      color: var(--text);
     }
 
     .message {
       font-size: 11px;
-      margin-top: 3px;
-      color: #fde68a;
+      margin-top: 4px;
+      color: #92400e;
     }
 
     .nav-row {
@@ -551,12 +381,12 @@
       align-items: center;
       justify-content: space-between;
       gap: 8px;
-      margin-top: 4px;
+      margin-top: 8px;
     }
 
     .nav-row.second {
       justify-content: flex-end;
-      margin-top: 3px;
+      margin-top: 4px;
       gap: 6px;
     }
 
@@ -570,30 +400,30 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: #020617;
-      color: #e5e7eb;
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      transition: background 0.15s ease, transform 0.1s ease,
-        box-shadow 0.15s ease, border-color 0.15s ease;
+      background: #ffffff;
+      color: var(--text);
+      border: 1px solid var(--border-subtle);
+      transition: background 0.12s ease, transform 0.08s ease,
+        box-shadow 0.12s ease, border-color 0.12s ease, color 0.12s ease;
     }
 
     button:hover {
-      background: rgba(15, 23, 42, 0.95);
+      background: #f9fafb;
       border-color: var(--accent-border);
-      box-shadow: 0 10px 22px rgba(15, 23, 42, 0.95);
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
       transform: translateY(-0.5px);
     }
 
     button:active {
       transform: translateY(0);
-      box-shadow: 0 4px 10px rgba(15, 23, 42, 0.95);
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.12);
     }
 
     button.primary {
       background: linear-gradient(135deg, #2563eb, #1d4ed8);
-      border-color: rgba(37, 99, 235, 0.9);
+      border-color: #1d4ed8;
       color: #f9fafb;
-      box-shadow: 0 12px 24px rgba(37, 99, 235, 0.7);
+      box-shadow: 0 10px 20px rgba(37, 99, 235, 0.45);
     }
 
     button.primary:hover {
@@ -605,20 +435,23 @@
       font-size: 11px;
     }
 
+    button.ghost {
+      background: transparent;
+      border-style: dashed;
+    }
+
     button:disabled {
       opacity: 0.4;
       cursor: default;
       transform: none;
       box-shadow: none;
-      background: #020617;
+      background: #ffffff;
     }
-
-    /* Lösungs-Overlay */
 
     .solution-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(15, 23, 42, 0.96);
+      background: rgba(15, 23, 42, 0.35);
       backdrop-filter: blur(4px);
       z-index: 50;
       display: flex;
@@ -631,10 +464,10 @@
     .solution-panel {
       width: 100%;
       max-width: 980px;
-      background: #020617;
+      background: var(--panel-bg);
       border-radius: 20px;
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 1);
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.4);
       padding: 14px 16px 16px;
     }
 
@@ -651,33 +484,40 @@
       font-size: 16px;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: #dbeafe;
+      color: #1d4ed8;
     }
 
     .solution-summary {
-      font-size: 12px;
+      font-size: 13px;
       color: var(--text-soft);
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .solution-summary b {
-      color: #e5e7eb;
+      color: var(--text);
+    }
+
+    .result-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-bottom: 8px;
     }
 
     .solution-list {
-      margin-top: 8px;
+      margin-top: 6px;
       display: flex;
       flex-direction: column;
       gap: 10px;
-      max-height: calc(100vh - 140px);
+      max-height: calc(100vh - 180px);
       overflow-y: auto;
       padding-right: 4px;
     }
 
     .solution-question {
       border-radius: 14px;
-      border: 1px solid rgba(55, 65, 81, 0.9);
-      background: #020617;
+      border: 1px solid var(--border-subtle);
+      background: #f9fafb;
       padding: 8px 9px 9px;
       font-size: 12px;
     }
@@ -693,6 +533,7 @@
     .solution-q-title {
       font-size: 12px;
       font-weight: 600;
+      color: var(--text);
     }
 
     .solution-q-topic {
@@ -703,7 +544,7 @@
 
     .solution-q-score {
       font-size: 11px;
-      color: #e5e7eb;
+      color: var(--text-soft);
       margin-top: 2px;
     }
 
@@ -753,32 +594,27 @@
       color: var(--text-soft);
     }
 
-    /* Responsiv */
-
     @media (max-width: 900px) {
-      .layout {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .info-column {
-        order: -1;
-      }
-    }
-
-    @media (max-width: 720px) {
       body {
         padding: 10px;
       }
       .app {
-        padding: 14px 12px 16px;
-        border-radius: 18px;
+        padding: 14px 12px 18px;
+        border-radius: 16px;
       }
       .app-title {
         font-size: 19px;
       }
-      .mode-grid {
-        grid-template-columns: minmax(0, 1fr);
+      .question-card {
+        padding: 12px 12px 12px;
       }
-      .quiz-header-bar {
+    }
+
+    @media (max-width: 600px) {
+      .question-nav {
+        max-height: 90px;
+      }
+      .quiz-top-bar {
         flex-direction: column;
         align-items: flex-start;
       }
@@ -792,140 +628,70 @@
         <div class="app-title">
           <span>Rechtsgrundlagen – Prüfungsquiz</span>
         </div>
-        <div class="tag-pill">Öffentliches Recht · Privatrecht · Grundbuch</div>
+        <div class="tag-pill">Öffentliches Recht · Privatrecht · Grundbuch · Haftung</div>
       </div>
       <p class="subtitle">
         Mehrfachauswahl wie in der Prüfung: <b>mindestens eine Antwort ist richtig</b>, aber nie alle.
-        Falsche Kreuze kosten Punkte.
+        Falsche Kreuze kosten Punkte. Ab <b>60&nbsp;% insgesamt</b> ist die Prüfung positiv.
       </p>
       <div class="mode-info-row">
-        <span><strong>Bewertung:</strong> ab 60&nbsp;% insgesamt positiv</span>
-        <span><strong>Frage:</strong> richtige Anteile bringen Punkte, falsche Abzüge</span>
+        <span><strong>Hinweis:</strong> Prüfe einzelne Fragen mit „Antwort prüfen“ oder am Ende alles mit „Gesamtes Quiz auswerten“.</span>
+        <span><strong>Tipp:</strong> Oben kannst du direkt zu jeder Frage springen, beantwortete Fragen werden markiert.</span>
       </div>
     </header>
 
-    <!-- STARTSEITE – MODUSWAHL -->
-    <section id="mode-select" class="mode-select">
-      <div class="mode-select-header">
-        <div class="mode-select-title">Modus wählen</div>
-        <div class="mode-select-subtitle">
-          Entweder alle Themen gemischt oder nur Grundbuchauszüge trainieren.
+    <div class="quiz-top-bar">
+      <div class="quiz-meta">
+        <div class="quiz-meta-rows">
+          <span>Modus: alle Themen gemischt (ÖR, EU, PR, GB, BO, Haftung, PHG, KSchG …)</span>
         </div>
       </div>
-      <div class="mode-grid">
-        <button class="mode-card" data-mode="all">
-          <div class="mode-card-header">
-            <h3>Gesamt-Quiz: Öffentliches &amp; Privatrecht</h3>
-            <span class="mode-tag">Modus A</span>
-          </div>
-          <p>
-            Fragen zu Verfassungsrecht, Verwaltung, BauO, Privatrecht, Verträgen,
-            Gewährleistung/Schadenersatz/Produkthaftung, Sachenrecht und Grundbuch-Basics.
-          </p>
-          <div class="mode-stat">ca. 60 Fragen · Niveau wie Prüfung</div>
-        </button>
+      <button id="restart-btn" class="small ghost" type="button">Fragen neu mischen</button>
+    </div>
 
-        <button class="mode-card" data-mode="grundbuch">
-          <div class="mode-card-header">
-            <h3>Spezial: Grundbuchauszüge lesen</h3>
-            <span class="mode-tag">Modus B</span>
-          </div>
-          <p>
-            Mehrere längere, fiktive Grundbuchsauszüge im Stil echter Auszüge –
-            mit Fragen zu A-, B- und C-Blatt, Rang, Dienstbarkeiten, Hypotheken, Plombe.
-          </p>
-          <div class="mode-stat">12 Lernfragen mit Fällen</div>
-        </button>
-      </div>
-    </section>
+    <div id="question-nav" class="question-nav"></div>
 
-    <!-- QUIZ-SEITE -->
-    <main id="quiz-main" class="hidden">
-      <div class="quiz-header-bar">
-        <div class="mode-pill-current">
-          <span>Aktiver Modus</span>
-          <small id="current-mode-label">–</small>
+    <main class="quiz-main">
+      <section class="question-column">
+        <div id="question-container"></div>
+
+        <div class="nav-row">
+          <button id="prev-btn" type="button">◀ Zurück</button>
+          <button id="check-btn" type="button" class="primary">Antwort prüfen</button>
+          <button id="next-btn" type="button">Weiter ▶</button>
         </div>
-        <div style="display:flex; gap:6px; flex-wrap:wrap;">
-          <button id="restart-btn" class="small">Neues Quiz in diesem Modus</button>
-          <button id="back-btn" class="small">Zur Moduswahl</button>
+        <div class="nav-row second">
+          <button id="eval-btn" type="button" class="primary">
+            Gesamtes Quiz auswerten
+          </button>
         </div>
-      </div>
-
-      <div class="layout">
-        <section class="info-column">
-          <div id="progress-info" class="info-card">
-            <h3>Fortschritt</h3>
-            <div class="info-grid">
-              <div class="info-item">
-                <div class="info-item-label">Frage</div>
-                <div class="info-item-value" id="info-current-question">–</div>
-              </div>
-              <div class="info-item">
-                <div class="info-item-label">Insgesamt</div>
-                <div class="info-item-value" id="info-total-questions">–</div>
-              </div>
-              <div class="info-item">
-                <div class="info-item-label">Geprüft</div>
-                <div class="info-item-value" id="info-checked">–</div>
-              </div>
-              <div class="info-item">
-                <div class="info-item-label">Ø Punkte (geprüft)</div>
-                <div class="info-item-value" id="info-average">–</div>
-              </div>
-            </div>
-            <div class="info-small">
-              Pro Frage: richtige Anteile bringen Punkte, falsche Kreuze ziehen ab.
-            </div>
-          </div>
-
-          <div id="score-banner" class="score-banner hidden">
-            <div class="score-main">
-              <span class="score-percent" id="score-percent">0&nbsp;%</span>
-              <span class="score-grade" id="score-grade">Note –</span>
-            </div>
-            <div class="score-details" id="score-details">
-              Noch keine Gesamtauswertung.
-            </div>
-          </div>
-        </section>
-
-        <section class="question-column">
-          <div id="question-container"></div>
-
-          <div class="nav-row">
-            <button id="prev-btn" type="button">◀ Zurück</button>
-            <button id="check-btn" type="button" class="primary">Antwort prüfen</button>
-            <button id="next-btn" type="button">Weiter ▶</button>
-          </div>
-          <div class="nav-row second">
-            <button id="eval-btn" type="button" class="primary">
-              Gesamtes Quiz auswerten
-            </button>
-          </div>
-        </section>
-      </div>
+      </section>
     </main>
 
-    <!-- LÖSUNGEN / GESAMTAUSWERTUNG -->
+    <!-- ERGEBNIS & LÖSUNGEN -->
     <div id="solution-overlay" class="solution-overlay hidden">
       <div class="solution-panel">
         <div class="solution-header">
-          <h2>Gesamtauswertung &amp; Lösungen</h2>
-          <button id="close-solution-btn" class="small">Schließen ✕</button>
+          <h2 id="solution-title">Gesamtergebnis</h2>
+          <button id="close-solution-btn" class="small" type="button">Schließen ✕</button>
         </div>
         <div id="solution-summary" class="solution-summary"></div>
-        <div id="solution-list" class="solution-list"></div>
+        <div class="result-actions">
+          <button id="show-solutions-btn" class="small primary" type="button">
+            Lösungsschlüssel anzeigen
+          </button>
+        </div>
+        <div id="solution-list" class="solution-list hidden"></div>
       </div>
     </div>
   </div>
 
   <script>
-    // =========================================
-    // FRAGEN – GESAMT-MODUS (verkürzt hier)
-    // =========================================
+    // ============================
+    // Basis-Fragen (dein altes Quiz)
+    // ============================
 
-    const ALL_QUESTIONS = [
+    const BASE_QUESTIONS = [
       // --- Öffentliches / Privatrecht Grundlagen ---
       {
         id: 1,
@@ -957,7 +723,7 @@
       },
       {
         id: 3,
-        topic: "Rechtsquellen – Zwingendes / dispositives Recht",
+        topic: "Rechtsquellen – zwingendes / dispositives Recht",
         text: "Welche Aussagen zu zwingendem und dispositivem Recht treffen zu?",
         options: [
           "Absolut zwingendes Recht kann durch Parteienvereinbarung überhaupt nicht abgeändert werden.",
@@ -1281,7 +1047,7 @@
         ],
         correctIndices: [0, 1],
         explanation:
-          "Nach KSchG ist der KV im Zweifel kostenlos und verbindlich, sofern nichts anderes vereinbart wurde."
+          "Nach KSchG ist der Kostenvoranschlag im Zweifel kostenlos und verbindlich, sofern nichts anderes vereinbart wurde."
       },
       {
         id: 26,
@@ -1309,7 +1075,7 @@
         ],
         correctIndices: [0, 1, 3],
         explanation:
-          "Bankgarantie ist ein abstraktes Sicherungsinstrument; der Begünstigte kann Zahlung verlangen, wenn die vereinbarten Bedingungen eintreten."
+          "Die Bankgarantie ist ein abstraktes Sicherungsinstrument; der Begünstigte kann Zahlung verlangen, wenn die vereinbarten Bedingungen eintreten."
       },
       {
         id: 28,
@@ -1555,382 +1321,241 @@
       }
     ];
 
-    // =======================================================
-    // GRUNDBUCH-MODUS – längere Beispielsauszüge
-    // =======================================================
+    // ============================================
+    // Fragen deines Kollegen (JSON) als Rohdaten
+    // ============================================
 
-    const GRUNDBUCH_QUESTIONS = [
-      {
-        id: "G1",
-        topic: "Grundbuchsauszug 1 – Mehrparteienhaus",
-        contextHtml: `<pre>GRUNDBUCH 01305 Meidling                            EINLAGEZAHL 1422
-BEZIRKSGERICHT Fünfhaus                            SEITE 1
-****************************************************************
-Letzte TZ 1146/1996           PLOMBE 1406/1996        Wohnungseigentum
-****************************************************************
-*******************************  A1 ****************************
-GST-NR   GBA (NUTZUNG)    FLÄCHE   GST-ADRESSE
-127/105  Baufl. (begrünt)    91   Bräuergasse 10
-612      Baufl.             130   Löhnerg. 17
-GESAMTFLÄCHE               221 m²
-
-*******************************  A2 ****************************
-1 a 439/1963  Sicherheitszone Gendarmerieflugplatz Meidling
-3 a 324/1979  Reallast des Gehens und Fahrens über Gst 59/4
-              für Gst 612
-
-*******************************  B *****************************
-1 ANTEIL: 104/172
-   Tupék Gottlieb Wilhelm
-   GEB: 1924-05-05    ADR: Anton-Benyag-Straße 9/4, 1010 Wien
-   s 581/1954 Wohnungseigentum an W 1
-   g 406/1996 Einantwortungsurkunde 1996-04-17 Eigentumsrecht
-
-2 ANTEIL: 68/172
-   Kerbl Maria
-   GEB: 1945-02-05    ADR: Schloßstr. 8, Bruck/Mur 5631
-   s 581/1954 Wohnungseigentum an W 2
-   b 766/1971 Schenkungsvertrag 1970-07-27 Eigentumsrecht
-   c 347/1981 Belastungs- und Veräußerungsverbot
-   d 1145/1996 Änderung der Adresse
-   e 1146/1996 Geburtsdatum</pre>`,
-        text: "Welche Aussagen zu diesem Auszug (B-Blatt und A-Blatt) sind richtig?",
-        options: [
-          "Im A1-Blatt sind Grundstücksnummer, Nutzung und Adresse ersichtlich.",
-          "Im A2-Blatt sind z.B. öffentliche Lasten und Dienstbarkeiten eingetragen.",
-          "Im B-Blatt sieht man die Eigentümer und ihre Anteile.",
-          "Im B-Blatt werden ausschließlich Pfandrechte eingetragen."
-        ],
-        correctIndices: [0, 1, 2],
-        explanation:
-          "A1: Gutsbestand und Adresse; A2: z.B. Reallasten. B-Blatt enthält Eigentümer und Anteile; Pfandrechte stehen im C-Blatt."
-      },
-      {
-        id: "G2",
-        topic: "Grundbuchsauszug 1 – Wohnungseigentum",
-        contextHtml: `<pre>(Auszug wie bei G1 – B-Blatt mit ANTEIL 104/172 und 68/172, Wohnungseigentum an W1 und W2)</pre>`,
-        text: "Welche Aussagen zum Wohnungseigentum in diesem Auszug sind zutreffend?",
-        options: [
-          "Die Anteile (z.B. 104/172) sind ideelle Miteigentumsanteile an der Liegenschaft.",
-          "Mit dem ideellen Anteil ist jeweils Wohnungseigentum an einer bestimmten Wohnung (W1, W2) verbunden.",
-          "Wohnungseigentum wird nicht im Grundbuch, sondern nur im Mietvertrag ausgewiesen.",
-          "Ohne Eintragung im Grundbuch könnte Wohnungseigentum nicht wirksam begründet werden."
-        ],
-        correctIndices: [0, 1, 3],
-        explanation:
-          "Wohnungseigentum setzt die Eintragung von Miteigentumsanteilen und Zuordnung zu bestimmten Objekten im Grundbuch voraus."
-      },
-      {
-        id: "G3",
-        topic: "Grundbuchsauszug 2 – Pfandrechte / C-Blatt",
-        contextHtml: `<pre>*******************************  C ****************************
-1 a 863/1952 Schuldschein 1952-07-25                  1.566.700,--
-   PFANDRECHT
-   für Wohnhaus-Wiederaufbaufonds
-b 1507/1990 Löschungsverpflichtung zugunsten
-   Österreichische Credit-Institut Aktiengesellschaft
-
-4 auf Anteil B-LNR 1
-  a 875/1974 112/1976 Urteil 1973-11-10
-     PFANDRECHT
-     9 % zZ, Kosten 3.846,60, 1.819,10 für
-     Immobilienverwertungsgesellschaft mbH
-
-5 auf Anteil B-LNR 2
-  a 347/1981
-     BELASTUNGS- UND VERÄUSSERUNGSVERBOT für Eva Seifert
-  b 1507/1990 VORRANG von LNR 12 vor 5
-
-12 auf Anteil B-LNR 2
-  a 1507/1990 Schuldschein und Pfandurkunde 1990-07-18
-     PFANDRECHT 8,25 % zZ, höchstens 18 % VZ, NGS 81.000,-- 
-     für Österreichische Credit-Institut Aktiengesellschaft
-  c 1507/1990 VORRANG von LNR 12 vor 5
-
-HINWEIS: Eintragungen ohne Währungsbezeichnung sind Beträge in ATS.</pre>`,
-        text: "Welche Aussagen zu diesem C-Blatt sind richtig?",
-        options: [
-          "Im C-Blatt sind Pfandrechte und sonstige Lasten (z.B. Belastungs- und Veräußerungsverbote) eingetragen.",
-          "Die Eintragung „PFANDRECHT“ kennzeichnet eine Hypothek an der Liegenschaft bzw. an bestimmten Anteilen.",
-          "Belastungs- und Veräußerungsverbote beschränken die Verfügungsmacht eines Eigentümers.",
-          "Pfandrechte werden ausschließlich im B-Blatt eingetragen."
-        ],
-        correctIndices: [0, 1, 2],
-        explanation:
-          "Lasten wie Pfandrechte und Verbote stehen im C-Blatt. Sie können einzelne Anteile (B-LNR) betreffen."
-      },
-      {
-        id: "G4",
-        topic: "Grundbuchsauszug 2 – Rangfolge",
-        contextHtml: `<pre>(Fortsetzung C-Blatt wie bei G3 mit Einträgen 1, 4, 5 und 12 sowie dem Vermerk „VORRANG von LNR 12 vor 5“)</pre>`,
-        text: "Welche Aussagen zur Rangfolge der Pfandrechte sind zutreffend (vereinfacht)?",
-        options: [
-          "Grundsätzlich bestimmt die Zeit der Eintragung (TZ) den Rang der Pfandrechte.",
-          "Durch einen Vorrangvermerk kann ein später eingetragenes Pfandrecht im Rang vor einem älteren stehen.",
-          "Im Verwertungsfall wird nach der Rangordnung aus dem Erlös bezahlt.",
-          "Rang spielt bei Hypotheken keine Rolle."
-        ],
-        correctIndices: [0, 1, 2],
-        explanation:
-          "Prioritätsprinzip: ältere Eintragung geht jüngeren vor. Ein im Grundbuch vermerkter Vorrang kann die Reihenfolge ändern."
-      },
-      {
-        id: "G5",
-        topic: "Grundbuchsauszug 3 – Liegenschaft mit Dienstbarkeit",
-        contextHtml: `<pre>GRUNDBUCH 03201 Umgebung             EINLAGEZAHL 77
-****************************************************************
-A1
-GST-NR   GBA (NUTZUNG)    FLÄCHE   GST-ADRESSE
-12/3     Landw. Nutzfl.   4.520    Feldweg 2
-
-A2
-1 a 210/1980  Dienstbarkeit des Gehens und Fahrens
-              zugunsten EZ 76 (Zufahrtsrecht zum Hof)
-
-B
-1 ANTEIL: 1/1
-   Franz Feld, Landwirt
-   ADR: Feldweg 2, 2300 Beispielstadt
-
-C
-1 a 210/1980  Dienstbarkeit des Gehens und Fahrens
-              für EZ 76 über Gst 12/3</pre>`,
-        text: "Welche Aussagen zu diesem Auszug sind richtig?",
-        options: [
-          "EZ 77 ist die dienende Liegenschaft – sie muss das Geh- und Fahrrecht dulden.",
-          "EZ 76 ist die herrschende Liegenschaft – sie darf das Geh- und Fahrrecht ausüben.",
-          "Die Dienstbarkeit ist nur im A2-Blatt eingetragen, daher wirkt sie nicht gegenüber Dritten.",
-          "Die Dienstbarkeit ist im A2- und im C-Blatt ersichtlich."
-        ],
-        correctIndices: [0, 1, 3],
-        explanation:
-          "Die dienende Liegenschaft trägt die Belastung, die herrschende nutzt das Recht. Dienstbarkeiten erscheinen im A2- und C-Blatt."
-      },
-      {
-        id: "G6",
-        topic: "Grundbuchsauszug 3 – Verkauf",
-        contextHtml: `<pre>(Auszug wie G5 – EZ 77 mit Dienstbarkeit zugunsten EZ 76)</pre>`,
-        text: "Was gilt beim Verkauf der Liegenschaft EZ 77 an einen Dritten?",
-        options: [
-          "Die Dienstbarkeit bleibt bestehen, weil sie ein dingliches Recht ist.",
-          "Der neue Eigentümer muss das Geh- und Fahrrecht weiterhin dulden.",
-          "Die Dienstbarkeit erlischt automatisch mit dem Verkauf.",
-          "Der neue Eigentümer kann die Dienstbarkeit ohne Zustimmung der herrschenden Liegenschaft löschen lassen."
-        ],
-        correctIndices: [0, 1],
-        explanation:
-          "Dingliche Rechte wirken gegenüber Rechtsnachfolgern. Löschung erfordert einvernehmlichen Antrag und Verbücherung."
-      },
-      {
-        id: "G7",
-        topic: "Grundbuchsauszug 4 – Plombe & Eigentumserwerb",
-        contextHtml: `<pre>GRUNDBUCH 01015 Favoriten           EINLAGEZAHL 987
-****************************************************************
-A1
-GST-NR   GBA (NUTZUNG)   FLÄCHE   GST-ADRESSE
-45/1     Baufl.          380      Neubaugasse 5
-
-B (Auszug alt)
-1 ANTEIL: 1/1   Peter Muster
-
-C
-(keine Eintragungen)
-
-Aktuelle TESTDATEN:
-Letzte TZ 1123/2025
-PLOMBE 1123/2025  (Ansuchen auf Einverleibung Kaufvertrag zugunsten Maria Neu)</pre>`,
-        text: "Welche Aussagen zu dieser Plombe sind richtig?",
-        options: [
-          "Die Plombe zeigt ein laufendes Ansuchen auf Einverleibung eines Kaufvertrages an.",
-          "Bis zur Entscheidung über das Ansuchen kann sich der Eigentümerstand ändern.",
-          "Während der Plombe ist das Grundbuch für Dritte nicht einsichtig.",
-          "Auf den aktuellen Eigentümerstand kann nur eingeschränkt vertraut werden."
-        ],
-        correctIndices: [0, 1, 3],
-        explanation:
-          "Die Plombe warnt vor einer möglichen Änderung. Einsicht bleibt möglich, aber der Rechtszustand ist „in Bewegung“."
-      },
-      {
-        id: "G8",
-        topic: "Grundbuchsauszug 4 – nach der Einverleibung",
-        contextHtml: `<pre>B (nach Einverleibung)
-1 ANTEIL: 1/1   Peter Muster    (gelöscht)
-2 ANTEIL: 1/1   Maria Neu       (Kaufvertrag TZ 1123/2025)</pre>`,
-        text: "Welche Aussagen zum Eigentumserwerb sind korrekt?",
-        options: [
-          "Maria Neu wurde erst durch Einverleibung im B-Blatt Eigentümerin.",
-          "Der Kaufvertrag allein ohne Verbücherung hätte keine dingliche Wirkung gegenüber Dritten.",
-          "Peter Muster ist nun nicht mehr als Eigentümer im Grundbuch eingetragen.",
-          "Für Eigentumserwerb an Liegenschaften reicht die Unterfertigung des Kaufvertrages aus."
-        ],
-        correctIndices: [0, 1, 3 - 1], // 0,1,2
-        explanation:
-          "Bei Liegenschaften entsteht Eigentum grundsätzlich mit Einverleibung im Grundbuch (Eintragungsprinzip). Der bloße Vertrag wirkt schuldrechtlich."
-      },
-      {
-        id: "G9",
-        topic: "Grundbuchsauszug 5 – Reallast",
-        contextHtml: `<pre>GRUNDBUCH 04567 Land               EINLAGEZAHL 333
-****************************************************************
-A1
-GST-NR   GBA (NUTZUNG)   FLÄCHE   GST-ADRESSE
-3/1      Hofstelle       980      Hofgasse 1
-
-B
-1 ANTEIL: 1/1   Bauernhof GmbH
-
-C
-1 a 510/1995 Reallast: lebenslängliches Wohn- und Versorgungsrecht
-           zugunsten Frau Altbauerin, geb. 1940
-           (Wohnrecht im Erdgeschoß und Naturalunterhalt)</pre>`,
-        text: "Welche Aussagen zur Reallast sind richtig?",
-        options: [
-          "Sie ist eine dingliche Belastung der Liegenschaft zugunsten einer bestimmten Person.",
-          "Sie kann z.B. ein Wohn- und Versorgungsrecht sichern.",
-          "Sie wirkt auch gegenüber Rechtsnachfolgern der Eigentümerin.",
-          "Sie ist nur ein schuldrechtlicher Anspruch und wird nicht im Grundbuch eingetragen."
-        ],
-        correctIndices: [0, 1, 2],
-        explanation:
-          "Reallasten sind dingliche Rechte im C-Blatt, die auch gegenüber späteren Eigentümern wirken."
-      },
-      {
-        id: "G10",
-        topic: "Grundbuchsauszug 6 – mehrere Pfandrechte",
-        contextHtml: `<pre>GRUNDBUCH 01001 Innere Stadt       EINLAGEZAHL 999
-****************************************************************
-C
-1 a 100/2020 Hypothek EUR 500.000,-- zugunsten Erste Bank
-2 a 300/2023 Hypothek EUR 200.000,-- zugunsten Zweite Bank</pre>`,
-        text: "Welche Aussagen zu Rang und Verwertung sind zutreffend?",
-        options: [
-          "Die Hypothek der Ersten Bank hat aufgrund der älteren TZ den besseren Rang.",
-          "Im Verwertungsfall wird die Erste Bank vor der Zweiten Bank befriedigt.",
-          "Die zweite Hypothek ist automatisch unwirksam, weil schon eine Hypothek besteht.",
-          "Der Rang richtet sich nach der Reihenfolge der Eintragungen."
-        ],
-        correctIndices: [0, 1, 3],
-        explanation:
-          "Mehrere Hypotheken sind möglich; die Befriedigung erfolgt nach Rang (Prioritätsprinzip)."
-      },
-      {
-        id: "G11",
-        topic: "Grundbuchsauszug 7 – Löschung einer Hypothek",
-        contextHtml: `<pre>C (alt)
-1 a 100/2010 Hypothek EUR 200.000,-- zugunsten Sparkasse
-
-C (neu)
-1 a 100/2010 Hypothek ...  (gelöscht)
-  b 850/2025 Löschungsbewilligung der Sparkasse</pre>`,
-        text: "Welche Aussagen zur Löschung der Hypothek sind korrekt?",
-        options: [
-          "Für die Löschung ist eine Löschungsbewilligung des Pfandgläubigers erforderlich.",
-          "Die Löschung wird im Grundbuch als eigene Eintragung vermerkt.",
-          "Mit Tilgung der Forderung erlischt das Pfandrecht automatisch, auch ohne Löschung.",
-          "Erst mit Verbücherung der Löschung ist die Hypothek grundbücherlich beseitigt."
-        ],
-        correctIndices: [0, 1, 3],
-        explanation:
-          "Tilgung der Forderung ist Voraussetzung, aber rechtlich maßgeblich ist die Löschung im Grundbuch."
-      },
-      {
-        id: "G12",
-        topic: "Grundbuchsauszug 8 – Rangordnung",
-        contextHtml: `<pre>GRUNDBUCH 02002 Leopoldstadt       EINLAGEZAHL 777
-****************************************************************
-B
-1 ANTEIL: 1/1    Bauträger GmbH
-
-C
-1 a 200/2024 Anmerkung der Rangordnung für die beabsichtigte Veräußerung
-             (Bauträgervertrag – Wohnungseigentumsbegründung)</pre>`,
-        text: "Welche Aussagen zur Anmerkung der Rangordnung sind richtig (vereinfacht)?",
-        options: [
-          "Sie sichert künftigen Erwerbern einen bestimmten Rang für ihre Eigentumseinverleibung.",
-          "Sie ist v.a. beim Erwerb von Bauträgerwohnungen wichtig.",
-          "Ohne Rangordnung kann Wohnungseigentum rechtlich überhaupt nicht begründet werden.",
-          "Die Rangordnung wird im C-Blatt angemerkt."
-        ],
-        correctIndices: [0, 1, 3],
-        explanation:
-          "Rangordnungen sichern den Rang zukünftiger Einverleibungen, sind aber keine zwingende Voraussetzung für Wohnungseigentum."
-      }
+    const COLLEAGUE_QUESTIONS_RAW = [
+      { "id": 1, "tag": "ÖR", "q": "Welche Staatsgewalten sieht die österreichische Bundesverfassung vor?", "type": "mc", "choices": [ "Legislative, Exekutive, Judikative", "Legislative, Exekutive, Verwaltung", "Bundesrat, Nationalrat, Bundesregierung", "Bundespräsident, Nationalrat, Bundesrat" ], "correct": [ 0 ], "a": "Legislative erlässt Gesetze; Exekutive vollzieht; Judikative entscheidet." },
+      { "id": 2, "tag": "ÖR", "q": "Welche Organe gehören der Legislative an? (Wählen Sie zwei)", "type": "mc", "choices": [ "Nationalrat", "Bundesrat", "Bundespräsident", "VfGH" ], "correct": [ 0, 1 ] },
+      { "id": 3, "tag": "ÖR", "q": "Welche Normen stehen im Stufenbau über Verordnungen?", "type": "mc", "choices": [ "Verfassung und einfache Gesetze", "Nur Verordnungen", "Bescheide", "Rechtsmeinungen" ], "correct": [ 0 ] },
+      { "id": 4, "tag": "ÖR", "q": "Was ist eine individuelle Rechtsnorm?", "type": "mc", "choices": [ "Bescheid", "Verordnung", "Gesetz", "Richtlinie" ], "correct": [ 0 ] },
+      { "id": 5, "tag": "ÖR", "q": "Welche Elemente muss ein Bescheid enthalten?", "type": "mc", "choices": [ "Spruch, Begründung, Rechtsmittelbelehrung", "Nur Spruch", "Nur Begründung", "Nur Unterschrift" ], "correct": [ 0 ] },
+      { "id": 6, "tag": "ÖR", "q": "Wann gilt ein Bescheid als zugestellt?", "type": "mc", "choices": [ "Wenn er in den Machtbereich des Empfängers gelangt", "Bei persönlicher Übergabe erst", "Mit Veröffentlichung im Amtsblatt", "Bei Hinterlegung beim Nachbarn" ], "correct": [ 0 ] },
+      { "id": 7, "tag": "ÖR", "q": "Welche Zustellart erlaubt Ersatzempfang?", "type": "mc", "choices": [ "RSb-Brief", "RSa-Brief", "Hinterlegung", "Einschreiben" ], "correct": [ 0 ] },
+      { "id": 8, "tag": "ÖR", "q": "Welche Rechtsmittel sind gegen einen Verwaltungsbescheid möglich?", "type": "mc", "choices": [ "Beschwerde, Wiederaufnahme, Wiedereinsetzung", "Revision an OGH", "Klage beim EuGH", "Nichtigkeitsklage beim VfGH" ], "correct": [ 0 ] },
+      { "id": 9, "tag": "ÖR", "q": "Welche Behörde ist in Wien primär für Baurecht zuständig?", "type": "mc", "choices": [ "MA 37", "MA 48", "MA 20", "MA 6" ], "correct": [ 0 ] },
+      { "id": 10, "tag": "ÖR", "q": "Was regelt der Flächenwidmungsplan?", "type": "mc", "choices": [ "Nutzung und Widmung von Flächen", "Eigentumsverhältnisse", "Mietverhältnisse", "Steuerfragen" ], "correct": [ 0 ] },
+      { "id": 11, "tag": "ÖR", "q": "Welche Instanz entscheidet über Verfassungswidrigkeit?", "type": "mc", "choices": [ "VfGH", "OGH", "VwGH", "Verwaltungsbehörde" ], "correct": [ 0 ] },
+      { "id": 12, "tag": "EU", "q": "Was bedeutet Anwendungsvorrang des EU-Rechts?", "type": "mc", "choices": [ "EU-Recht geht nationalem Recht vor", "Nationales Recht geht vor", "Beide gelten gleich", "EuGH entscheidet nur" ], "correct": [ 0 ] },
+      { "id": 13, "tag": "EU", "q": "Welches Organ ist Teil der Gesetzgebung der EU?", "type": "mc", "choices": [ "Europäisches Parlament", "EuGH", "Rechnungshof", "Rat der Regionen" ], "correct": [ 0 ] },
+      { "id": 14, "tag": "GB", "q": "Was steht typischerweise im A-Blatt des Grundbuchs?", "type": "mc", "choices": [ "Einlagezahl, Widmung, Flächenangaben", "Eigentümer", "Hypotheken", "Dienstbarkeiten" ], "correct": [ 0 ] },
+      { "id": 15, "tag": "GB", "q": "Welche Eintragungen finden sich im C-Blatt?", "type": "mc", "choices": [ "Hypotheken, Reallasten, Dienstbarkeiten", "Widmungen", "Einlagezahl", "Eigentümer" ], "correct": [ 0 ] },
+      { "id": 16, "tag": "PR", "q": "Welche Frist gilt bei beweglichen Sachen für Gewährleistung?", "type": "mc", "choices": [ "2 Jahre", "1 Jahr", "5 Jahre", "6 Monate" ], "correct": [ 0 ] },
+      { "id": 17, "tag": "PR", "q": "Welche Frist gilt für Baumängel typischerweise?", "type": "mc", "choices": [ "3 Jahre", "6 Monate", "1 Jahr", "10 Jahre" ], "correct": [ 0 ] },
+      { "id": 18, "tag": "PR", "q": "Was ist Eigentumsvorbehalt?", "type": "mc", "choices": [ "Eigentum geht erst mit vollständiger Zahlung über", "Eigentum bleibt immer beim Käufer", "Hypothek", "Dienstbarkeit" ], "correct": [ 0 ] },
+      { "id": 19, "tag": "PR", "q": "Welche Rechtsfolge hat die Einverleibung?", "type": "mc", "choices": [ "Dinglicher Rechtserwerb wird wirksam", "Nur deklarative Wirkung", "Keine Wirkung", "Nur informativ" ], "correct": [ 0 ] },
+      { "id": 20, "tag": "PR", "q": "Welche Rechte stehen dem Käufer bei Mangel zu? (Mehrfachwahl)", "type": "mc", "choices": [ "Nacherfüllung", "Austausch", "Preisminderung", "Wandlung" ], "correct": [ 0, 1, 2, 3 ] },
+      { "id": 21, "tag": "HAFT", "q": "Welche Voraussetzungen sind für deliktischen Schadenersatz erforderlich?", "type": "mc", "choices": [ "Schaden, Kausalität, Rechtswidrigkeit, Verschulden", "Nur Schaden", "Nur Verschulden", "Nur Kausalität" ], "correct": [ 0 ] },
+      { "id": 22, "tag": "HAFT", "q": "Was beschreibt Mitverschulden?", "type": "mc", "choices": [ "Mitwirkung des Geschädigten, Kürzung des Anspruchs", "Erhöhung des Anspruchs", "Keine Auswirkung", "Automatische Haftung" ], "correct": [ 0 ] },
+      { "id": 23, "tag": "PHG", "q": "Welche Schäden deckt das Produkthaftungsgesetz?", "type": "mc", "choices": [ "Personenschäden und Sachschäden an privaten Sachen", "Reine Vermögensschäden", "Nur Sachschäden", "Nur Personenschäden" ], "correct": [ 0 ] },
+      { "id": 24, "tag": "PHG", "q": "Wer kann als Hersteller gelten?", "type": "mc", "choices": [ "Hersteller, Importeur, Quasihersteller", "Nur der Händler", "Nur der Zulieferer", "Nur der Verkäufer" ], "correct": [ 0 ] },
+      { "id": 25, "tag": "AGB", "q": "Wann ist eine AGB-Klausel nach §879 ABGB nichtig?", "type": "mc", "choices": [ "Bei überraschender oder gröblich benachteiligender Regelung", "Bei langer Formulierung", "Bei handschriftlicher Klausel", "Nie" ], "correct": [ 0 ] },
+      { "id": 26, "tag": "KSG", "q": "Wann gilt das 14-tägige Widerrufsrecht?", "type": "mc", "choices": [ "Bei Fernabsatz und Haustürgeschäften", "Beim Kauf im Laden", "Bei Schenkungen", "Bei notariellen Verträgen" ], "correct": [ 0 ] },
+      { "id": 27, "tag": "KOST", "q": "Was ist ein verbindlicher Kostenvoranschlag?", "type": "mc", "choices": [ "Ein vertraglich bindender Preis, Überschreitung nur mit Zustimmung", "Unverbindliche Schätzung", "Nur Richtwert", "Nur intern" ], "correct": [ 0 ] },
+      { "id": 28, "tag": "ARB", "q": "Welche Stellen sind bei Arbeitsunfall relevant?", "type": "mc", "choices": [ "AUVA, Arbeitsinspektorat, Bezirksbehörde", "OGH, VfGH", "EuGH", "Polizei allein" ], "correct": [ 0 ] },
+      { "id": 29, "tag": "VStG", "q": "Welche Rolle hat ein Verantwortlicher nach VStG?", "type": "mc", "choices": [ "Haftung für Verwaltungsübertretungen der Organisation", "Keine Rolle", "Strafrechtliche Verantwortung", "Nur interne Funktion" ], "correct": [ 0 ] },
+      { "id": 30, "tag": "VfGH", "q": "Wofür ist der VfGH zuständig?", "type": "mc", "choices": [ "Verfassungsgerichtsbarkeit, Normenkontrolle", "Zivilrechtliche Revision", "Verwaltungsaufsicht", "Europarecht" ], "correct": [ 0 ] },
+      { "id": 31, "tag": "VwGH", "q": "Welche Funktion hat der VwGH?", "type": "mc", "choices": [ "Überprüfung verwaltungsgerichtlicher Entscheidungen", "OGH-ähnliche Aufgaben", "VfGH-Funktionen", "EuGH-Funktionen" ], "correct": [ 0 ] },
+      { "id": 32, "tag": "OGH", "q": "Welche Aufgabe hat der OGH?", "type": "mc", "choices": [ "Rechtsfortbildung in Zivil- und Strafrecht", "Baurechtsaufsicht", "Verwaltungsrechtsprechung", "Europäische Gesetzgebung" ], "correct": [ 0 ] },
+      { "id": 33, "tag": "BO", "q": "Welche Maßnahme kann die Baupolizei ergreifen?", "type": "mc", "choices": [ "Baueinstellung, Sicherungsmaßnahmen, Beseitigungsauftrag", "Nur Beratung", "Nur Geldstrafe", "Nichts" ], "correct": [ 0 ] },
+      { "id": 34, "tag": "BO", "q": "Welche Unterlagen gehören typischerweise zu einem Bauantrag?", "type": "mc", "choices": [ "Baupläne, Lageplan, Baubeschreibung, statische Nachweise", "Nur schriftlicher Antrag", "Nur Unterschrift", "Nur Kostenvoranschlag" ], "correct": [ 0 ] },
+      { "id": 35, "tag": "GB", "q": "Was schützt die Vormerkung im Grundbuch?", "type": "mc", "choices": [ "Künftige Rechte und deren Rang", "Eigentumserwerb sofort", "Hypothek", "Dienstbarkeit" ], "correct": [ 0 ] },
+      { "id": 36, "tag": "GB", "q": "Was ist die Wirkung einer Löschung einer Hypothek?", "type": "mc", "choices": [ "Die Belastung erlischt", "Eigentum geht verloren", "Grund wird unbeleihbar", "Nichts passiert" ], "correct": [ 0 ] },
+      { "id": 37, "tag": "PR", "q": "Was regelt das Rangprinzip?", "type": "mc", "choices": [ "Priorität der Rechte nach Eintragungszeitpunkt", "Größe des Grundstücks", "Baurechte", "Steuern" ], "correct": [ 0 ] },
+      { "id": 38, "tag": "PR", "q": "Welche Rechte sichert der Eigentumsvorbehalt?", "type": "mc", "choices": [ "Eigentum bis zur Zahlung", "Nutzungsrechte", "Dienstbarkeiten", "Hypotheken" ], "correct": [ 0 ] },
+      { "id": 39, "tag": "PR", "q": "Was ist Ersitzung (Grundsatz)?", "type": "mc", "choices": [ "Erwerb durch längeren Besitz nach gesetzlicher Frist", "Schenkung", "Hypothek", "Vormerkung" ], "correct": [ 0 ] },
+      { "id": 40, "tag": "PR", "q": "Welche Beweislastregel gilt bei Mängeln in den ersten 6 Monaten?", "type": "mc", "choices": [ "Mangel wird zu Gunsten des Käufers vermutet", "Verkäufer muss nichts beweisen", "Käufer trägt immer die Beweislast", "Keine Regel" ], "correct": [ 0 ] },
+      { "id": 41, "tag": "HAFT", "q": "Was ist der Unterschied zwischen vertraglicher und deliktischer Haftung?", "type": "mc", "choices": [ "Vertraglich aus Pflichtverletzung, deliktisch aus unerlaubter Handlung", "Keine Unterschiede", "Beides sind Delikte", "Nur deliktisch wichtig" ], "correct": [ 0 ] },
+      { "id": 42, "tag": "HAFT", "q": "Was regelt §1313a ABGB?", "type": "mc", "choices": [ "Haftung des Schuldners für Erfüllungsgehilfen", "Haftung für Produkte", "Verbraucherschutz", "Mietrecht" ], "correct": [ 0 ] },
+      { "id": 43, "tag": "HAFT", "q": "Wann greift Gefährdungshaftung?", "type": "mc", "choices": [ "Bei besonders gefährlichen Tätigkeiten (z. B. Kfz, Bauwerke)", "Nie", "Nur bei Vertrag", "Nur bei Vorsatz" ], "correct": [ 0 ] },
+      { "id": 44, "tag": "PHG", "q": "Welche Frist gilt im Produkthaftungsrecht (Kenntnis/absolute)?", "type": "mc", "choices": [ "3 Jahre ab Kenntnis, max. 10 Jahre ab Inverkehrbringen", "1 Jahr", "5 Jahre", "Keine Frist" ], "correct": [ 0 ] },
+      { "id": 45, "tag": "AGB", "q": "Welche Klauseln sind im Verbraucherschutz typischerweise unwirksam?", "type": "mc", "choices": [ "Haftungsausschlüsse für Personenschäden, grob benachteiligende Klauseln", "Alles ist wirksam", "Nur Preisangaben", "Nur Lieferfristen" ], "correct": [ 0 ] },
+      { "id": 46, "tag": "KSG", "q": "Welche Informationspflichten bestehen bei Verbraucherverträgen?", "type": "mc", "choices": [ "Pflichten zu Produktinfo, Preis, Widerruf", "Keine Pflichten", "Nur Lieferpflicht", "Nur Rechnungspflicht" ], "correct": [ 0 ] },
+      { "id": 47, "tag": "KOST", "q": "Wann muss ein Unternehmer Überschreitungen eines Kostenvoranschlags melden?", "type": "mc", "choices": [ "Unverzüglich beim Erkennen", "Nie", "Bei Rechnungslegung", "Nur bei Bauwerken" ], "correct": [ 0 ] },
+      { "id": 48, "tag": "ARB", "q": "Wann liegt ein Arbeitsunfall vor?", "type": "mc", "choices": [ "Bei Unfall im Zusammenhang mit Arbeitstätigkeit, Arbeitsweg, Betriebshandlungen", "Nur bei tödlichem Ausgang", "Nur im Betrieb", "Nie" ], "correct": [ 0 ] },
+      { "id": 49, "tag": "VStG", "q": "Was ist eine Verwaltungsübertretung?", "type": "mc", "choices": [ "Leichte bis mittlere Ordnungswidrigkeit des Verwaltungsrechts", "Strafbare Handlung", "Zivilrechtlicher Anspruch", "Technischer Begriff" ], "correct": [ 0 ] },
+      { "id": 50, "tag": "ÖR", "q": "Was versteht man unter Parteistellung?", "type": "mc", "choices": [ "Recht einer Person, am Verfahren teilzunehmen", "Mitgliedschaft in Partei", "Öffentliche Stellung", "Beratungspflicht" ], "correct": [ 0 ] },
+      { "id": 51, "tag": "EU", "q": "Was ist eine EU-Richtlinie?", "type": "mc", "choices": [ "Rechtsakt, der Mitgliedstaaten Ziel vorgibt und Umsetzung verlangt", "Unmittelbar anwendbar", "Nur Empfehlung", "Nur Leitfaden" ], "correct": [ 0 ] },
+      { "id": 52, "tag": "VfGH", "q": "Welche Klageart gibt es beim VfGH?", "type": "mc", "choices": [ "Verfassungsbeschwerde, Organstreit, Normenkontrolle", "Zivilklage", "Strafklage", "Verwaltungsbeschwerde" ], "correct": [ 0 ] },
+      { "id": 53, "tag": "OGH", "q": "Was ist Revision beim OGH?", "type": "mc", "choices": [ "Überprüfung rechtlicher Fragen aus Instanzurteilen", "Neubeurteilung des Sachverhalts", "Zustimmung zu Entscheidungen", "Appellationsverfahren" ], "correct": [ 0 ] },
+      { "id": 54, "tag": "GB", "q": "Welche Funktion hat die Vormerkung im Grundbuch?", "type": "mc", "choices": [ "Sicherung künftiger dinglicher Rechte", "Sofortige Entscheidung", "Hypothek", "Baulast" ], "correct": [ 0 ] },
+      { "id": 55, "tag": "PR", "q": "Welche Folgen hat der Annahmeverzug des Käufers?", "type": "mc", "choices": [ "Gefahr- und Kostenübergang zu Lasten des Käufers", "Käufer wird Eigentümer", "Keine Folgen", "Verkäufer haftet weiter" ], "correct": [ 0 ] },
+      { "id": 56, "tag": "PR", "q": "Was bedeutet \"Wandlung\" im Gewährleistungsrecht?", "type": "mc", "choices": [ "Aufhebung des Kaufvertrags und Rückgewähr", "Nur Reparatur", "Nur Preisminderung", "Nur Schadensersatz" ], "correct": [ 0 ] },
+      { "id": 57, "tag": "HAFT", "q": "Was ist Vertrauensschaden (c.i.c.)?", "type": "mc", "choices": [ "Schaden durch berechtigtes Vertrauen in das Zustandekommen eines Vertrags", "Nur Vermögensschaden", "Nur Personenschaden", "Nur Sachschaden" ], "correct": [ 0 ] },
+      { "id": 58, "tag": "PHG", "q": "Welcher Selbstbehalt gilt bei Sachschäden im PHG?", "type": "mc", "choices": [ "500 €", "0 €", "100 €", "1.000 €" ], "correct": [ 0 ] },
+      { "id": 59, "tag": "AGB", "q": "Welche Vorschrift schützt gegen unklare Klauseln im ABGB?", "type": "mc", "choices": [ "§ 879 ABGB", "§ 1313a ABGB", "§ 6 KSchG", "§ 1 VwVfG" ], "correct": [ 0 ] },
+      { "id": 60, "tag": "KSG", "q": "Wer ist Konsument im KSchG?", "type": "mc", "choices": [ "Natürliche Person, die Rechtsgeschäft zu privaten Zwecken abschließt", "Unternehmer", "Verein", "Behörde" ], "correct": [ 0 ] },
+      { "id": 61, "tag": "KOST", "q": "Was ist der Unterschied verbindlich/unverbindlich bei Kostenvoranschlag?", "type": "mc", "choices": [ "Verbindlich bindet Preis; unverbindlich ist Schätzung", "Keine Unterschiede", "Nur bei Bauanträgen", "Nur bei Verträgen" ], "correct": [ 0 ] },
+      { "id": 62, "tag": "ARB", "q": "Welche Rolle hat die AUVA?", "type": "mc", "choices": [ "Unfallversicherungsträger für Arbeitsunfälle und Berufskrankheiten", "Gericht", "Behörde", "Gewerkschaft" ], "correct": [ 0 ] },
+      { "id": 63, "tag": "VStG", "q": "Welche Sanktionen drohen bei Verwaltungsübertretungen?", "type": "mc", "choices": [ "Verwaltungsstrafen, Geldstrafen, Sicherheitsleistungen", "Nur Freiheitsstrafe", "Nur Zivilklage", "Keine Sanktionen" ], "correct": [ 0 ] },
+      { "id": 64, "tag": "ÖR", "q": "Was ist eine BVE (Beschwerdevorentscheidung)?", "type": "mc", "choices": [ "Vorentscheidung der Behörde über Beschwerde vor Vorlage an Gericht", "Endgültige Entscheidung des Gerichts", "Bericht des Rechnungshofs", "Nur interner Akt" ], "correct": [ 0 ] },
+      { "id": 65, "tag": "EU", "q": "Was ist der EuGH?", "type": "mc", "choices": [ "Gerichtshof der Europäischen Union, zuständig für Auslegung des EU-Rechts", "Parlament", "Kommission", "Rechnungshof" ], "correct": [ 0 ] },
+      { "id": 66, "tag": "OGH", "q": "Welche Wirkung haben OGH-Präjudizien?", "type": "mc", "choices": [ "Richtungsweisend für die Rechtsfortbildung", "Bindend wie Gesetze", "Keine Wirkung", "Nur historisch relevant" ], "correct": [ 0 ] },
+      { "id": 67, "tag": "GB", "q": "Welche Rolle hat das B- Blatt?", "type": "mc", "choices": [ "Eigentümer- und Erwerbsdaten", "Pfandrechte", "Widmungen", "Dienstbarkeiten" ], "correct": [ 0 ] },
+      { "id": 68, "tag": "PR", "q": "Was ist eine Höchstbetragshypothek?", "type": "mc", "choices": [ "Hypothek zur Sicherung mehrerer Forderungen bis zu Höchstbetrag", "Hypothek mit variablen Zinsen", "Nur bei Grundbuchstrafen", "Ungebräuchlich" ], "correct": [ 0 ] },
+      { "id": 69, "tag": "HAFT", "q": "Welche Komponenten gehören zu einem Schadenersatzanspruch?", "type": "mc", "choices": [ "Schaden, Kausalität, Rechtswidrigkeit, Verschulden", "Nur Schaden", "Nur Kausalität", "Nur Verschulden" ], "correct": [ 0 ] },
+      { "id": 70, "tag": "PHG", "q": "Wer haftet bei Produktmängeln gegenüber Verbrauchern?", "type": "mc", "choices": [ "Hersteller und Importeur", "Nur Händler", "Nur Verkäufer", "Nur Händler und Verkäufer" ], "correct": [ 0 ] },
+      { "id": 71, "tag": "AGB", "q": "Wann wird eine AGB-Klausel einbezogen?", "type": "mc", "choices": [ "Hinweis, Zumutbare Kenntnisnahme, Zustimmung des Vertragspartners", "Nur wenn handschriftlich", "Nie", "Automatisch" ], "correct": [ 0 ] },
+      { "id": 72, "tag": "KSG", "q": "Welche Schutzwirkung hat das KSchG?", "type": "mc", "choices": [ "Besondere Schutzvorschriften zugunsten des Konsumenten", "Keine spezielle Wirkung", "Nur steuerliche Wirkung", "Nur arbeitsrechtlich relevant" ], "correct": [ 0 ] },
+      { "id": 73, "tag": "KOST", "q": "Welche Pflicht hat der Unternehmer bei Mehrkosten?", "type": "mc", "choices": [ "Unverzügliche Mitteilung an den Auftraggeber", "Keine Pflicht", "Nur schriftliche Abrechnung", "Nur am Ende" ], "correct": [ 0 ] },
+      { "id": 74, "tag": "ARB", "q": "Welche Folgen hat grobe Fahrlässigkeit des Arbeitgebers?", "type": "mc", "choices": [ "Haftung des Arbeitgebers, ev. Strafverfahren", "Keine Folgen", "Nur Verwarnung", "Nur innerbetriebliche Sanktion" ], "correct": [ 0 ] },
+      { "id": 75, "tag": "VStG", "q": "Wann ist ein Verantwortlicher anzuführen?", "type": "mc", "choices": [ "Wenn die Organisation eine benannte verantwortliche Person festlegen will", "Nie", "Nur bei Strafverfahren", "Nur im Zivilrecht" ], "correct": [ 0 ] },
+      { "id": 76, "tag": "ÖR", "q": "Was ist das Legalitätsprinzip?", "type": "mc", "choices": [ "Verwaltung darf nur auf gesetzlicher Grundlage handeln", "Verwaltung handelt frei", "Gerichte schreiben Gesetze", "Keine Bedeutung" ], "correct": [ 0 ] },
+      { "id": 77, "tag": "EU", "q": "Welche Rechtsakte sind unmittelbar anwendbar?", "type": "mc", "choices": [ "Verordnungen", "Richtlinien", "Empfehlungen", "Leitlinien" ], "correct": [ 0 ] },
+      { "id": 78, "tag": "OGH", "q": "Wann ist ein Revisionsrekurs zum OGH zulässig?", "type": "mc", "choices": [ "Wenn Rechtsfragen von grundsätzlicher Bedeutung betroffen sind", "Immer", "Nie", "Nur bei Strafsachen" ], "correct": [ 0 ] },
+      { "id": 79, "tag": "GB", "q": "Welche Wirkung hat eine Vormerkung bei einem Drittankauf?", "type": "mc", "choices": [ "Sichert Rang und verhindert Nachrang", "Keine Wirkung", "Löscht Hypothek", "Erhöht Steuerlast" ], "correct": [ 0 ] },
+      { "id": 80, "tag": "PR", "q": "Welche Prüfungsfrage zu Mängelrügen ist typisch?", "type": "mc", "choices": [ "Rügefrist, Fristsetzung zur Mangelbeseitigung, Rechtsfolgen", "Nur Preisvergleich", "Nur Eigentumsfragen", "Nur Grundbuchfragen" ], "correct": [ 0 ] },
+      { "id": 81, "tag": "HAFT", "q": "Wann besteht Haftung ohne Verschulden?", "type": "mc", "choices": [ "Gefährdungshaftung und Produkthaftung", "Nie", "Nur bei Vertrag", "Nur bei Vorsatz" ], "correct": [ 0 ] },
+      { "id": 82, "tag": "PHG", "q": "Welche Voraussetzung ist für PHG-Anspruch nicht erforderlich?", "type": "mc", "choices": [ "Verschulden des Herstellers", "Fehler des Produkts", "Schaden", "Kausalität" ], "correct": [ 0 ] },
+      { "id": 83, "tag": "AGB", "q": "Welche Kontrollart prüft die Inhaltsneutralität von AGB?", "type": "mc", "choices": [ "Inhaltskontrolle (grob benachteiligend) ", "Formelle Kontrolle", "Nur Preisprüfung", "Nur Sprache" ], "correct": [ 0 ] },
+      { "id": 84, "tag": "KSG", "q": "Welche Rechtsfolge hat die Nichtinformation über Widerrufsrechte?", "type": "mc", "choices": [ "Verlängerung der Widerrufsfrist", "Keine Folge", "Nur Bußgeld", "Nichtigkeit des Vertrags" ], "correct": [ 0 ] },
+      { "id": 85, "tag": "KOST", "q": "Was ist ein Fixpreis?", "type": "mc", "choices": [ "Verbindlicher Endpreis unabhängig von Aufwand", "Schätzung", "Unverbindliche Angabe", "Nur intern" ], "correct": [ 0 ] },
+      { "id": 86, "tag": "ARB", "q": "Wer trägt primär den Versicherungsschutz bei Arbeitsunfällen?", "type": "mc", "choices": [ "Unfallversicherungsträger (z. B. AUVA)", "Arbeitgeber direkt", "Staat", "Polizei" ], "correct": [ 0 ] },
+      { "id": 87, "tag": "VStG", "q": "Welche Rolle spielen Sicherheitsleistungen?", "type": "mc", "choices": [ "Vorsorgemaßnahme in Verwaltungsverfahren", "Keine Rolle", "Nur Zivilverfahren", "Nur bei Strafprozessen" ], "correct": [ 0 ] },
+      { "id": 88, "tag": "ÖR", "q": "Was ist Parteistellung im Bauverfahren?", "type": "mc", "choices": [ "Recht, Einwendungen zu erheben und Akteneinsicht zu nehmen", "Nur Informationsrechte", "Automatisch für alle Anrainer", "Keine Bedeutung" ], "correct": [ 0 ] },
+      { "id": 89, "tag": "EU", "q": "Was macht die Europäische Kommission?", "type": "mc", "choices": [ "Initiativrecht für EU-Rechtsakte und Überwachung der Verträge", "Rechtsprechung", "Haushaltskontrolle", "Parlamentarische Arbeit" ], "correct": [ 0 ] },
+      { "id": 90, "tag": "OGH", "q": "Welche Bedeutung hat die Judikatur für die Klausurpraxis?", "type": "mc", "choices": [ "Erkenntnisleitend und praxisrelevant für Falllösungen", "Unwichtig", "Nur historisch", "Nur theoretisch" ], "correct": [ 0 ] },
+      { "id": 91, "tag": "GB", "q": "Welche Prüfungspunkte hat ein Grundbuchsantrag?", "type": "mc", "choices": [ "Vormerkung, Einverleibung, Richtigkeit der Unterlagen", "Nur Zahlung", "Nur Adresse", "Nur Unterschrift" ], "correct": [ 0 ] },
+      { "id": 92, "tag": "PR", "q": "Welche Frist gilt für Regelverjährung?", "type": "mc", "choices": [ "3 Jahre", "1 Jahr", "10 Jahre", "30 Jahre" ], "correct": [ 0 ] },
+      { "id": 93, "tag": "HAFT", "q": "Welche Folgen hat ein Schutzgesetzverstoß?", "type": "mc", "choices": [ "Haftung bei Eintritt des geschützten Schadens", "Keine Folgen", "Nur Bußgeld", "Nur intern" ], "correct": [ 0 ] },
+      { "id": 94, "tag": "PHG", "q": "Welche Schäden sind ausgeschlossen?", "type": "mc", "choices": [ "Reine Vermögensschäden sind regelmäßig ausgeschlossen", "Personenschäden", "Sachschäden", "Immaterielle Schäden" ], "correct": [ 0 ] },
+      { "id": 95, "tag": "AGB", "q": "Was muss vor Einbeziehung von AGB geschehen?", "type": "mc", "choices": [ "Hinweis und zumutbare Kenntnisnahme ermöglichen", "Nichts", "Nur Unterschrift", "Nur mündliche Vereinbarung" ], "correct": [ 0 ] },
+      { "id": 96, "tag": "KSG", "q": "Welche Rolle hat der Verbraucherschutz bei Garantieversprechen?", "type": "mc", "choices": [ "Garantiehinweise dürfen Gewährleistungsrechte nicht einschränken", "Garantie ist immer gleichbedeutend mit Gewährleistung", "Garantie ist verboten", "Keine Rolle" ], "correct": [ 0 ] },
+      { "id": 97, "tag": "KOST", "q": "Welche Elemente sollten in einem verbindlichen Kostenvoranschlag stehen?", "type": "mc", "choices": [ "Leistungsumfang, Preis, Laufzeit, Bedingungen für Mehrkosten", "Nur Preis", "Nur Datum", "Nur Unterschrift" ], "correct": [ 0 ] },
+      { "id": 98, "tag": "ARB", "q": "Was bedeutet Haftungsprivileg des Arbeitgebers?", "type": "mc", "choices": [ "Versicherung übernimmt viele Schäden, Arbeitgeber haftet nur bei grober Fahrlässigkeit", "Arbeitgeber haftet immer", "Arbeitgeber haftet nie", "Nur bei Vertrag relevant" ], "correct": [ 0 ] },
+      { "id": 99, "tag": "VStG", "q": "Welche Beweismittel sind in Verwaltungsverfahren relevant?", "type": "mc", "choices": [ "Schriftstücke, Zeugenaussagen, Gutachten", "Nur Zeugenaussagen", "Nur Gutachten", "Nur elektronische Akten" ], "correct": [ 0 ] },
+      { "id": 100, "tag": "ÖR", "q": "Welche Pflichten hat die Behörde bei Amtsermittlung?", "type": "mc", "choices": [ "Materielle Wahrheitspflicht, vollständige Sachverhaltsfeststellung", "Keine Pflichten", "Nur formelle Prüfung", "Nur Fristen beachten" ], "correct": [ 0 ] },
+      { "id": 101, "tag": "EU", "q": "Wann ist Vorabentscheidung an EuGH zu richten?", "type": "mc", "choices": [ "Wenn Rechtsauslegung des Unionsrechts zur Entscheidung nötig ist", "Immer", "Nie", "Nur bei Verfassungsfragen" ], "correct": [ 0 ] },
+      { "id": 102, "tag": "OGH", "q": "Was prüft der OGH in Zivilsachen primär?", "type": "mc", "choices": [ "Rechtliche Fehler in Tatsacheninstanzen", "Neubeurteilung des Sachverhalts", "Verwaltungsrecht", "Strafrecht" ], "correct": [ 0 ] },
+      { "id": 103, "tag": "GB", "q": "Welche Eintragung sichert den Rang?", "type": "mc", "choices": [ "Vormerkung", "Anmerkung", "Vermerk", "Notiz" ], "correct": [ 0 ] },
+      { "id": 104, "tag": "PR", "q": "Welche Frage ist typisch in Altklausuren zur Zustellung?", "type": "mc", "choices": [ "Unterschied RSa vs RSb und Rechtsfolgen", "Wann endet das Studium?", "Hypothekenberechnung", "EU-Verordnungstext" ], "correct": [ 0 ] },
+      { "id": 105, "tag": "HAFT", "q": "Was ist Erfüllungsinteresse?", "type": "mc", "choices": [ "Stellung des Gläubigers wie bei ordnungsgemäßer Vertragserfüllung", "Nur Schadenersatz", "Nur Rücktritt", "Nur AGB-Angelegenheit" ], "correct": [ 0 ] },
+      { "id": 106, "tag": "PHG", "q": "Welche Rolle hat der Importeur?", "type": "mc", "choices": [ "Kann wie Hersteller haften, wenn er Produkt in Verkehr bringt", "Keine Rolle", "Nur Händler", "Nur Verkäufer" ], "correct": [ 0 ] },
+      { "id": 107, "tag": "AGB", "q": "Was ist Überraschungsklausel?", "type": "mc", "choices": [ "Klausel, die Vertragspartner nicht erwarten und deshalb nicht einbezogen wird", "Klausel mit hoher Schriftgröße", "Klausel mit Preisangabe", "Klausel im Anhang" ], "correct": [ 0 ] },
+      { "id": 108, "tag": "KSG", "q": "Welche Konsequenz hat missbräuchliche AGB-Klausel?", "type": "mc", "choices": [ "Nichtigkeit der Klausel", "Nichtigkeit des gesamten Vertrags", "Strafrechtliche Verfolgung", "Keine Konsequenz" ], "correct": [ 0 ] },
+      { "id": 109, "tag": "KOST", "q": "Was ist der Unterschied zwischen Kostenvoranschlag und Angebot?", "type": "mc", "choices": [ "Angebot ist oft bindend; Voranschlag kann unverbindlich sein", "Kein Unterschied", "Voranschlag ist bindend", "Nur Begriffliche Abweichung" ], "correct": [ 0 ] },
+      { "id": 110, "tag": "ARB", "q": "Welche Unterlagen sind bei Arbeitsunfall wichtig?", "type": "mc", "choices": [ "Unfallmeldung, Dienstzeugnisse, ärztliche Befunde", "Nur Polizeibericht", "Nur Zeugenaussage", "Nur Kostenaufstellung" ], "correct": [ 0 ] },
+      { "id": 111, "tag": "VStG", "q": "Welche Voraussetzungen braucht es für eine Verantwortlichkeit der Organisation?", "type": "mc", "choices": [ "Benennung einer verantwortlichen Person und Organisationspflichten", "Nur Größe des Unternehmens", "Nur Gewinnorientierung", "Keine Voraussetzung" ], "correct": [ 0 ] },
+      { "id": 112, "tag": "ÖR", "q": "Welche Prüfungsfrage könnte zum Flächenwidmungsplan gestellt werden?", "type": "mc", "choices": [ "Beurteilung von Widmungsänderungen und Auswirkung auf Bauverfahren", "Hypothekenfrage", "Vertragsrecht", "Steuerrecht" ], "correct": [ 0 ] },
+      { "id": 113, "tag": "EU", "q": "Welche Wirkung haben EU-Entscheidungen?", "type": "mc", "choices": [ "Verbindlich für Adressaten, meist Mitgliedstaaten", "Nur Empfehlung", "Nur intern", "Keine Wirkung" ], "correct": [ 0 ] },
+      { "id": 114, "tag": "OGH", "q": "Welche Bedeutung hat die Revisionsrechtsprechung für Studenten?", "type": "mc", "choices": [ "Leitlinien für Fallbearbeitung und Rechtsauffassungen", "Keine Bedeutung", "Nur für Richter relevant", "Nur historisch" ], "correct": [ 0 ] },
+      { "id": 115, "tag": "GB", "q": "Welche Prüfung ist bei Grundbuchänderung erforderlich?", "type": "mc", "choices": [ "Formelle Voraussetzungen, Einreichunterlagen, Zustimmung ggf.", "Nur Zahlung", "Nur Unterschrift", "Nur mündliche Zustimmung" ], "correct": [ 0 ] },
+      { "id": 116, "tag": "PR", "q": "Welche Fallstruktur ist bei Gewährleistungsfällen üblich?", "type": "mc", "choices": [ "Mangel — Rüge — Fristsetzung — Rechtsfolgen", "Nur Klage", "Nur Rücktritt", "Nur Schadensersatz" ], "correct": [ 0 ] },
+      { "id": 117, "tag": "HAFT", "q": "Welche Rolle spielt Adäquanz bei Kausalität?", "type": "mc", "choices": [ "Nur adäquate, typische Folgen sind ersatzfähig", "Jede Folge ist ersatzfähig", "Adäquanz irrelevant", "Nur bei Vertrag gültig" ], "correct": [ 0 ] },
+      { "id": 118, "tag": "PHG", "q": "Welche Kenntnisse sind für PHG-Anspruch relevant?", "type": "mc", "choices": [ "Kenntnis des Schadenszeitpunkts und des Mangels", "Keine Kenntnisse nötig", "Nur Verkäuferkenntnis", "Nur Herstellerkenntnis" ], "correct": [ 0 ] },
+      { "id": 119, "tag": "AGB", "q": "Welche Prüfung ist bei AGB-Inhaltskontrolle vorgesehen?", "type": "mc", "choices": [ "Ob Klausel gröblich benachteiligend ist", "Ob Klausel lang ist", "Ob Klausel handschriftlich ist", "Ob Klausel teuer ist" ], "correct": [ 0 ] },
+      { "id": 120, "tag": "KSG", "q": "Welche Rechte hat Konsument bei Vertragsverletzung?", "type": "mc", "choices": [ "Widerruf, Schadenersatz, Preisminderung, Rücktritt je nach Fall", "Keine Rechte", "Nur Bußgeld", "Nur Vertragsstrafe" ], "correct": [ 0 ] },
+      { "id": 121, "tag": "GB", "q": "Welche Wirkung hat eine Einverleibung im Grundbuch auf Dritte?", "type": "mc", "choices": [ "Dritte sind an die Eintragung gebunden und Rang ist gesichert", "Keine Wirkung", "Nur informativ", "Nur intern" ], "correct": [ 0 ] },
+      { "id": 122, "tag": "BO", "q": "Welche Frist gilt für die Baubewilligungskommunikation (Beispiel)?", "type": "mc", "choices": [ "Variiert, oft Fristen nach Landesrecht (prüfungsrelevant: Fristeinhaltung)", "Immer 1 Woche", "Immer 6 Monate", "Keine Frist" ], "correct": [ 0 ] },
+      { "id": 123, "tag": "PR", "q": "Welche Rolle spielt die Aufklärungspflicht vor Vertragsschluss?", "type": "mc", "choices": [ "Vertrauensbildung; Verletzung kann c.i.c.-Ansprüche begründen", "Keine Rolle", "Nur intern relevant", "Nur bei staatlichen Verträgen relevant" ], "correct": [ 0 ] },
+      { "id": 124, "tag": "HAFT", "q": "Wie ist Mitverschulden prozentual zu berücksichtigen?", "type": "mc", "choices": [ "Kürzung des Ersatzanspruchs nach Quoten", "Vollständiger Wegfall", "Verdoppelung des Anspruchs", "Keine Berücksichtigung" ], "correct": [ 0 ] },
+      { "id": 125, "tag": "PHG", "q": "Ist eine Produkthaftung verjährbar?", "type": "mc", "choices": [ "Ja — 3 Jahre ab Kenntnis, maximal 10 Jahre ab Inverkehrbringen", "Nein", "Nur 1 Jahr", "Nur 5 Jahre" ], "correct": [ 0 ] },
+      { "id": 126, "tag": "AGB", "q": "Welche Schritte sind bei AGB-Einbeziehung zu dokumentieren?", "type": "mc", "choices": [ "Hinweis, Zugänglichmachung, Einverständnis", "Nur Hinweis", "Nur Übergabe", "Nichts" ], "correct": [ 0 ] },
+      { "id": 127, "tag": "KSG", "q": "Welche Sanktionen bestehen bei Verstößen gegen Verbraucherschutzpflichten?", "type": "mc", "choices": [ "Geldstrafen, Unterlassungsansprüche, Schadenersatz", "Nur Verwarnung", "Nur Rücktritt", "Keine Sanktionen" ], "correct": [ 0 ] },
+      { "id": 128, "tag": "KOST", "q": "Kann ein Kostenvoranschlag in einem Werkvertrag Bestandteil der Vergütung sein?", "type": "mc", "choices": [ "Ja, wenn ausdrücklich vereinbart (Fixpreis vs. Schätzung)", "Nein", "Nur bei Miete", "Nur bei Dienstvertrag" ], "correct": [ 0 ] },
+      { "id": 129, "tag": "ARB", "q": "Welche Prüfungspunkte sind bei Arbeitsunfall-Fällen in Klausuren relevant?", "type": "mc", "choices": [ "Zuständigkeiten, Verschulden, Versicherungsdeckung, Schadensfolgen", "Nur Kosten", "Nur medizinische Aspekte", "Nur Verjährung" ], "correct": [ 0 ] },
+      { "id": 130, "tag": "ÖR", "q": "Welche Prüfungsfrage zu Zustellung und Rechtsfolgen taucht häufig auf?", "type": "mc", "choices": [ "Unterschied RSa/RSb und rechtliche Wirkungen", "Wann ist ein Gesetz in Kraft?", "Wie wird ein Vertrag abgeschlossen?", "Welche Gebühren fallen an?" ], "correct": [ 0 ] }
     ];
 
-    // =======================================
-    // QUIZ-LOGIK – Mehrfachantworten & Modi
-    // =======================================
-
-    let currentMode = null;           // "all" oder "grundbuch"
-    let currentQuestions = [];
-    let questionOrder = [];           // Reihenfolge der Fragen
-    let optionOrder = [];             // pro Frage: Permutation der Antwort-Indizes
-    let currentOrderIndex = 0;
-    let userAnswers = [];             // pro Frage: gewählte Original-Indizes
-    let questionChecked = [];         // pro Frage: bereits „Antwort prüfen“ gedrückt?
-    let quizFinished = false;
-
-    const MODE_LABELS = {
-      all: "Gesamt-Quiz: Öffentliches & Privatrecht",
-      grundbuch: "Spezial-Modus: Grundbuchauszüge"
+    const TAG_TOPICS = {
+      "ÖR": "Öffentliches Recht / Verfassungs- & Verwaltungsrecht",
+      "EU": "Europarecht / EU-Institutionen",
+      "GB": "Grundbuch / Sachenrecht",
+      "PR": "Privatrecht / Verträge / Sachenrecht",
+      "HAFT": "Haftungsrecht / Schadenersatz",
+      "PHG": "Produkthaftungsgesetz",
+      "AGB": "AGB / Konsumentenschutz",
+      "KSG": "Konsumentenschutzgesetz / Verbraucherverträge",
+      "KOST": "Kostenvoranschlag / Werkvertrag / Preis",
+      "ARB": "Arbeitsrecht / Arbeitsunfall",
+      "VStG": "Verwaltungsstrafrecht (VStG)",
+      "VfGH": "Verfassungsgerichtshof (VfGH)",
+      "VwGH": "Verwaltungsgerichtshof (VwGH)",
+      "OGH": "Oberster Gerichtshof (OGH)",
+      "BO": "Bauordnung / Baurecht"
     };
 
-    document.addEventListener("DOMContentLoaded", () => {
-      const modeButtons = document.querySelectorAll(".mode-card[data-mode]");
-      const modeSelectSection = document.getElementById("mode-select");
-      const quizMain = document.getElementById("quiz-main");
-      const modeLabel = document.getElementById("current-mode-label");
+    const TAG_HINTS = {
+      "ÖR": "Themengebiet: Öffentliches Recht (Verfassungs- und Verwaltungsrecht).",
+      "EU": "Themengebiet: Europarecht und EU-Institutionen.",
+      "GB": "Themengebiet: Grundbuch und Liegenschaftsrecht.",
+      "PR": "Themengebiet: Allgemeines Privatrecht (ABGB, Vertrags- und Sachenrecht).",
+      "HAFT": "Themengebiet: Haftungsrecht und Schadenersatz.",
+      "PHG": "Themengebiet: Produkthaftungsgesetz.",
+      "AGB": "Themengebiet: Allgemeine Geschäftsbedingungen und AGB-Kontrolle.",
+      "KSG": "Themengebiet: Konsumentenschutzgesetz / Verbraucherschutz.",
+      "KOST": "Themengebiet: Kostenvoranschlag, Werkvertrag, Preisvereinbarung.",
+      "ARB": "Themengebiet: Arbeitsrecht / Arbeitsunfall / Versicherung.",
+      "VStG": "Themengebiet: Verwaltungsstrafrecht (VStG).",
+      "VfGH": "Themengebiet: Verfassungsgerichtshof / Normenkontrolle.",
+      "VwGH": "Themengebiet: Verwaltungsgerichtshof / verwaltungsgerichtliche Entscheidungen.",
+      "OGH": "Themengebiet: OGH / Höchstgericht in Zivil- und Strafsachen.",
+      "BO": "Themengebiet: Bauordnung und baurechtliche Verfahren."
+    };
 
+    const EXTRA_QUESTIONS = COLLEAGUE_QUESTIONS_RAW.map((item) => {
+      const topic = TAG_TOPICS[item.tag] || "Recht allgemein";
+      const baseExplanation =
+        item.a ||
+        "Richtig ist/sind die angegebene(n) Antwort(en), weil sie der gesetzlichen Definition bzw. der Zuständigkeit in diesem Themenbereich entsprechen.";
+      const tagHint = TAG_HINTS[item.tag] ? " " + TAG_HINTS[item.tag] : "";
+      return {
+        id: "N" + item.id,
+        topic,
+        text: item.q,
+        options: item.choices,
+        correctIndices: item.correct,
+        explanation: baseExplanation + tagHint
+      };
+    });
+
+    const ALL_QUESTIONS = BASE_QUESTIONS.concat(EXTRA_QUESTIONS);
+
+    // ============================
+    // Quiz-Logik
+    // ============================
+
+    let currentQuestions = [];
+    let questionOrder = [];      // Mapping Reihenfolge -> Index in currentQuestions
+    let optionOrder = [];        // Pro Frage: Permutation der Antwort-Indizes
+    let currentOrderIndex = 0;   // Position in questionOrder
+    let userAnswers = [];        // pro Frageindex: Array gewählter Original-Indizes
+    let questionChecked = [];    // pro Frageindex: Antwort bereits geprüft?
+    let quizFinished = false;
+    let lastEvaluation = null;
+
+    document.addEventListener("DOMContentLoaded", () => {
       const prevBtn = document.getElementById("prev-btn");
       const nextBtn = document.getElementById("next-btn");
       const checkBtn = document.getElementById("check-btn");
       const evalBtn = document.getElementById("eval-btn");
-      const backBtn = document.getElementById("back-btn");
       const restartBtn = document.getElementById("restart-btn");
       const closeSolutionBtn = document.getElementById("close-solution-btn");
-
-      modeButtons.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const mode = btn.getAttribute("data-mode");
-          currentMode = mode;
-          modeLabel.textContent = MODE_LABELS[mode] || "–";
-          modeSelectSection.classList.add("hidden");
-          quizMain.classList.remove("hidden");
-          startQuiz(mode);
-        });
-      });
+      const showSolutionsBtn = document.getElementById("show-solutions-btn");
 
       prevBtn.addEventListener("click", showPrevQuestion);
       nextBtn.addEventListener("click", showNextQuestion);
       checkBtn.addEventListener("click", checkCurrentQuestion);
       evalBtn.addEventListener("click", () => {
-        evaluateQuiz();
-        openSolutionOverlay();
+        openResultOverlay();
       });
-
-      backBtn.addEventListener("click", () => {
-        // Zur Startseite zurück
-        currentMode = null;
-        currentQuestions = [];
-        questionOrder = [];
-        optionOrder = [];
-        userAnswers = [];
-        questionChecked = [];
-        currentOrderIndex = 0;
-        quizFinished = false;
-        document.getElementById("score-banner").classList.add("hidden");
-        document.getElementById("solution-overlay").classList.add("hidden");
-        quizMain.classList.add("hidden");
-        modeSelectSection.classList.remove("hidden");
-      });
-
       restartBtn.addEventListener("click", () => {
-        if (!currentMode) return;
-        startQuiz(currentMode);
+        startQuiz();
       });
-
       closeSolutionBtn.addEventListener("click", () => {
         document.getElementById("solution-overlay").classList.add("hidden");
+        // Lösungen beim nächsten Öffnen wieder ausblenden
+        document.getElementById("solution-list").classList.add("hidden");
+        document.getElementById("solution-title").textContent = "Gesamtergebnis";
+      });
+      showSolutionsBtn.addEventListener("click", () => {
+        const listEl = document.getElementById("solution-list");
+        if (listEl.classList.contains("hidden")) {
+          buildSolutionList();
+          listEl.classList.remove("hidden");
+          document.getElementById("solution-title").textContent = "Lösungsschlüssel & Auswertung";
+        }
       });
 
       // Tastatursteuerung
@@ -1945,17 +1570,16 @@ C
           checkCurrentQuestion();
         }
       });
+
+      // Quiz direkt starten
+      startQuiz();
     });
 
-    function startQuiz(mode) {
-      currentQuestions =
-        mode === "grundbuch" ? GRUNDBUCH_QUESTIONS : ALL_QUESTIONS;
-
-      // Frage-Reihenfolge mischen
+    function startQuiz() {
+      currentQuestions = ALL_QUESTIONS.slice();
       questionOrder = currentQuestions.map((_, idx) => idx);
       shuffle(questionOrder);
 
-      // Antwort-Reihenfolge pro Frage mischen
       optionOrder = currentQuestions.map((q) => {
         const arr = q.options.map((_, idx) => idx);
         shuffle(arr);
@@ -1966,14 +1590,10 @@ C
       userAnswers = currentQuestions.map(() => []);
       questionChecked = currentQuestions.map(() => false);
       quizFinished = false;
-
-      const scoreBanner = document.getElementById("score-banner");
-      scoreBanner.classList.add("hidden");
-      scoreBanner.classList.remove("positive", "negative");
-      document.getElementById("solution-overlay").classList.add("hidden");
+      lastEvaluation = null;
 
       renderCurrentQuestion();
-      updateProgressInfo();
+      updateQuestionNav();
     }
 
     function shuffle(array) {
@@ -1996,7 +1616,7 @@ C
           const optText = q.options[origIdx];
           const selected =
             (userAnswers[qIndex] || []).includes(origIdx) ? "checked" : "";
-          const letter = String.fromCharCode(97 + dispIdx); // a,b,c,...
+          const letter = String.fromCharCode(97 + dispIdx); // a, b, c, ...
           return `
             <label class="option">
               <input type="checkbox" data-orig-index="${origIdx}" ${selected}>
@@ -2013,7 +1633,7 @@ C
 
       const explanationHtml = `
         <div class="explanation hidden" id="explanation">
-          <strong>Lösung:</strong><br>
+          <strong>Lösung & Begründung:</strong><br>
           ${q.explanation}
         </div>
       `;
@@ -2021,15 +1641,13 @@ C
       questionContainer.innerHTML = `
         <div class="question-card" id="question-card">
           <div class="question-header">
-            <div class="question-number">Frage ${
-              currentOrderIndex + 1
-            } von ${total}</div>
+            <div class="question-number">Frage ${currentOrderIndex + 1} von ${total}</div>
             <div class="question-topic">${q.topic || ""}</div>
           </div>
           <div class="question-text">${q.text}</div>
           ${contextHtml}
           <div class="question-note">
-            Mehrfachauswahl möglich – mindestens eine Antwort ist richtig.
+            Mehrfachauswahl möglich – mindestens eine Antwort ist richtig, aber nie alle. Falsche Kreuze ziehen Punkte ab.
           </div>
           <div class="options">
             ${optionHtml}
@@ -2039,7 +1657,10 @@ C
         </div>
       `;
 
-      // Wenn die Frage bereits geprüft wurde, Darstellung wiederherstellen
+      // Auswahl-Änderungen sofort speichern, damit Navigation oben weiß „beantwortet“
+      attachOptionChangeHandler(qIndex);
+
+      // Falls die Frage bereits geprüft wurde, Darstellung wiederherstellen
       if (questionChecked[qIndex]) {
         const card = document.getElementById("question-card");
         const selected = userAnswers[qIndex] || [];
@@ -2055,7 +1676,27 @@ C
         }
       }
 
-      updateProgressInfo();
+      updateQuestionNav();
+    }
+
+    function attachOptionChangeHandler(qIndex) {
+      const card = document.getElementById("question-card");
+      if (!card) return;
+      const optionsContainer = card.querySelector(".options");
+      if (!optionsContainer) return;
+
+      optionsContainer.addEventListener("change", () => {
+        const checkboxes = optionsContainer.querySelectorAll('input[type="checkbox"]');
+        const selectedOriginalIndices = [];
+        checkboxes.forEach((cb) => {
+          if (cb.checked) {
+            const orig = parseInt(cb.getAttribute("data-orig-index"), 10);
+            selectedOriginalIndices.push(orig);
+          }
+        });
+        userAnswers[qIndex] = selectedOriginalIndices;
+        updateQuestionNav();
+      });
     }
 
     function showPrevQuestion() {
@@ -2115,7 +1756,7 @@ C
       const explEl = document.getElementById("explanation");
       if (explEl) explEl.classList.remove("hidden");
 
-      updateProgressInfo();
+      updateQuestionNav();
     }
 
     function buildQuestionMessage(percent) {
@@ -2124,7 +1765,7 @@ C
         return `Frage-Punkte: ${percent} % – positiv, aber nicht alles richtig.`;
       if (percent > 0)
         return `Frage-Punkte: ${percent} % – teilweise richtig, aber noch negativ (< 60 %).`;
-      return "Frage-Punkte: 0 % – keine Punkte, siehe Erklärung.";
+      return "Frage-Punkte: 0 % – keine Punkte, sieh dir die Begründung an.";
     }
 
     function applyEvaluationStyles(card, question, selectedOriginalIndices, qIndex) {
@@ -2187,77 +1828,73 @@ C
       return score;
     }
 
-    function updateProgressInfo() {
-      const total = currentQuestions.length || 0;
-      const infoCurrent = document.getElementById("info-current-question");
-      const infoTotal = document.getElementById("info-total-questions");
-      const infoChecked = document.getElementById("info-checked");
-      const infoAverage = document.getElementById("info-average");
-
-      if (infoCurrent) {
-        infoCurrent.textContent = total
-          ? String(currentOrderIndex + 1)
-          : "–";
-      }
-      if (infoTotal) {
-        infoTotal.textContent = total ? String(total) : "–";
+    function updateQuestionNav() {
+      const nav = document.getElementById("question-nav");
+      if (!nav) return;
+      const total = currentQuestions.length;
+      if (!total) {
+        nav.innerHTML = "";
+        return;
       }
 
-      let checkedCount = 0;
-      let sumScore = 0;
-      currentQuestions.forEach((q, idx) => {
-        if (questionChecked[idx]) {
-          checkedCount++;
-          sumScore += computeQuestionScorePercent(q, userAnswers[idx]);
-        }
+      let html = "";
+      questionOrder.forEach((qIdx, orderIndex) => {
+        const answered = (userAnswers[qIdx] && userAnswers[qIdx].length > 0);
+        const checked = questionChecked[qIdx];
+        const classes = ["q-nav-item"];
+        if (orderIndex === currentOrderIndex) classes.push("active");
+        if (answered) classes.push("answered");
+        if (checked) classes.push("checked");
+        html += `<button type="button" class="${classes.join(" ")}" data-order-index="${orderIndex}">${orderIndex + 1}</button>`;
       });
 
-      if (infoChecked) {
-        infoChecked.textContent = total ? String(checkedCount) : "–";
-      }
-      if (infoAverage) {
-        const avg = checkedCount ? Math.round(sumScore / checkedCount) : 0;
-        infoAverage.textContent = checkedCount ? `${avg} %` : "–";
-      }
+      nav.innerHTML = html;
+
+      nav.querySelectorAll(".q-nav-item").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const idx = parseInt(btn.getAttribute("data-order-index"), 10);
+          if (!isNaN(idx)) {
+            currentOrderIndex = idx;
+            renderCurrentQuestion();
+          }
+        });
+      });
     }
 
     function evaluateQuiz() {
-      if (!currentQuestions.length) return;
+      if (!currentQuestions.length) {
+        lastEvaluation = {
+          perQuestionScores: [],
+          overallPercent: 0,
+          roundedOverall: 0,
+          gradeText: getGradeText(0)
+        };
+        return lastEvaluation;
+      }
+
       const total = currentQuestions.length;
       let sumScore = 0;
+      const perQuestionScores = [];
 
       currentQuestions.forEach((q, idx) => {
-        const ans = userAnswers[idx] || [];
-        sumScore += computeQuestionScorePercent(q, ans);
+        const score = computeQuestionScorePercent(q, userAnswers[idx] || []);
+        sumScore += score;
+        perQuestionScores[idx] = score;
       });
 
       const overallPercent = total ? sumScore / total : 0;
       const roundedOverall = Math.round(overallPercent);
       const gradeText = getGradeText(roundedOverall);
 
-      const scoreBanner = document.getElementById("score-banner");
-      const scorePercent = document.getElementById("score-percent");
-      const scoreGrade = document.getElementById("score-grade");
-      const scoreDetails = document.getElementById("score-details");
-
-      if (scorePercent) scorePercent.textContent = `${roundedOverall} %`;
-      if (scoreGrade) scoreGrade.textContent = gradeText;
-      if (scoreDetails) {
-        scoreDetails.textContent = `Durchschnitt über alle ${
-          total
-        } Fragen: ${roundedOverall} %.`;
-      }
-
-      if (scoreBanner) {
-        scoreBanner.classList.remove("hidden", "positive", "negative");
-        if (roundedOverall >= 60) {
-          scoreBanner.classList.add("positive");
-        } else {
-          scoreBanner.classList.add("negative");
-        }
-      }
-
+      lastEvaluation = {
+        perQuestionScores,
+        overallPercent,
+        roundedOverall,
+        gradeText
+      };
       quizFinished = true;
+
+      return lastEvaluation;
     }
 
     function getGradeText(percent) {
@@ -2268,31 +1905,26 @@ C
       return "Note 5 – Nicht genügend (negativ)";
     }
 
-    // Lösungs-Overlay
-
-    function openSolutionOverlay() {
-      if (!currentQuestions.length) return;
-
-      const total = currentQuestions.length;
-      let sumScore = 0;
-      const perQuestionScores = [];
-
-      currentQuestions.forEach((q, idx) => {
-        const score = computeQuestionScorePercent(q, userAnswers[idx] || []);
-        sumScore += score;
-        perQuestionScores.push(score);
-      });
-
-      const overallPercent = total ? sumScore / total : 0;
-      const roundedOverall = Math.round(overallPercent);
-      const gradeText = getGradeText(roundedOverall);
-
+    function openResultOverlay() {
+      const evalRes = evaluateQuiz();
       const summaryEl = document.getElementById("solution-summary");
+      const total = currentQuestions.length;
+
       summaryEl.innerHTML = `
-        Gesamtpunkte: <b>${roundedOverall} %</b> – ${gradeText}<br>
-        Fragenzahl: <b>${total}</b>. Mindestens 60 % = positiv.
+        Du hast insgesamt <b>${evalRes.roundedOverall} %</b> erreicht – ${evalRes.gradeText}.<br>
+        Auswertung über <b>${total}</b> Fragen. Mindestens 60&nbsp;% sind für eine positive Beurteilung erforderlich.
       `;
 
+      document.getElementById("solution-title").textContent = "Gesamtergebnis";
+      document.getElementById("solution-list").classList.add("hidden");
+      document.getElementById("solution-overlay").classList.remove("hidden");
+    }
+
+    function buildSolutionList() {
+      if (!lastEvaluation) {
+        evaluateQuiz();
+      }
+      const perQuestionScores = lastEvaluation.perQuestionScores || [];
       const listEl = document.getElementById("solution-list");
       listEl.innerHTML = "";
 
@@ -2342,14 +1974,12 @@ C
         const blockHtml = `
           <div class="solution-question">
             <div class="solution-q-header">
-              <div class="solution-q-title">Frage ${idxInOrder + 1} – ${
-          q.id
-        }</div>
+              <div class="solution-q-title">Frage ${idxInOrder + 1} – ${q.id}</div>
               <div class="solution-q-topic">${q.topic || ""}</div>
             </div>
             <div>${q.text}</div>
             <div class="solution-q-score ${scoreClass}">
-              Punkte: ${rounded} %
+              Punkte für diese Frage: ${rounded} %
             </div>
             <div class="solution-options">
               ${optionsHtml}
@@ -2359,8 +1989,6 @@ C
         `;
         listEl.insertAdjacentHTML("beforeend", blockHtml);
       });
-
-      document.getElementById("solution-overlay").classList.remove("hidden");
     }
   </script>
 </body>
