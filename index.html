@@ -6,30 +6,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
-      --bg: #f3f4f6;
+      --bg: #e5e7eb;
       --card-bg: #ffffff;
-      --panel-bg: #ffffff;
+      --panel-bg: #f9fafb;
       --accent: #2563eb;
-      --accent-soft: #eff6ff;
-      --accent-border: #bfdbfe;
+      --accent-soft: rgba(37, 99, 235, 0.08);
+      --accent-border: rgba(37, 99, 235, 0.5);
       --text: #0f172a;
-      --text-soft: #6b7280;
-      --border-subtle: #e5e7eb;
+      --text-soft: #64748b;
+      --border-subtle: rgba(148, 163, 184, 0.6);
       --danger: #dc2626;
-      --danger-soft: #fee2e2;
+      --danger-soft: rgba(220, 38, 38, 0.08);
       --success: #16a34a;
-      --success-soft: #dcfce7;
-      --radius-lg: 16px;
-      --radius-md: 10px;
-      --shadow-soft: 0 14px 30px rgba(15, 23, 42, 0.15);
-      --shadow-subtle: 0 4px 12px rgba(15, 23, 42, 0.08);
+      --success-soft: rgba(22, 163, 74, 0.08);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --shadow-soft: 0 18px 40px rgba(15, 23, 42, 0.12);
+      --shadow-subtle: 0 6px 16px rgba(15, 23, 42, 0.08);
     }
 
     * {
       box-sizing: border-box;
     }
 
-    html, body {
+    html,
+    body {
       margin: 0;
       padding: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -48,16 +49,32 @@
     .app {
       width: 100%;
       max-width: 1100px;
-      background: var(--bg);
-      border-radius: 18px;
-      padding: 18px 18px 22px;
+      background: var(--card-bg);
+      border-radius: 22px;
+      padding: 18px 18px 20px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .app::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.12), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(148, 163, 184, 0.15), transparent 60%);
+      pointer-events: none;
+      opacity: 0.85;
+      z-index: -1;
     }
 
     .app-header {
       display: flex;
       flex-direction: column;
       gap: 6px;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
     .title-row {
@@ -74,7 +91,6 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      font-weight: 650;
     }
 
     .app-title span {
@@ -86,18 +102,18 @@
     .tag-pill {
       font-size: 11px;
       text-transform: uppercase;
-      letter-spacing: .16em;
-      padding: 4px 10px;
+      letter-spacing: 0.16em;
+      padding: 3px 10px;
       border-radius: 999px;
       border: 1px solid var(--border-subtle);
-      color: #1d4ed8;
-      background: #ffffff;
+      color: var(--text-soft);
+      background: rgba(248, 250, 252, 0.9);
     }
 
     .subtitle {
-      font-size: 13px;
+      font-size: 12px;
       color: var(--text-soft);
-      max-width: 840px;
+      max-width: 780px;
     }
 
     .subtitle b {
@@ -118,10 +134,10 @@
       display: inline-flex;
       align-items: center;
       gap: 4px;
-      padding: 3px 9px;
+      padding: 2px 8px;
       border-radius: 999px;
-      border: 1px solid var(--border-subtle);
-      background: #ffffff;
+      border: 1px solid rgba(203, 213, 225, 0.9);
+      background: rgba(248, 250, 252, 0.98);
     }
 
     .mode-info-row span strong {
@@ -129,110 +145,200 @@
       font-weight: 600;
     }
 
-    .quiz-top-bar {
+    .hidden {
+      display: none !important;
+    }
+
+    .quiz-header-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 8px;
-      margin-top: 10px;
-      margin-bottom: 8px;
+      gap: 10px;
+      margin-top: 8px;
+      margin-bottom: 10px;
+    }
+
+    .mode-pill-current {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--accent-border);
+      background: rgba(239, 246, 255, 0.9);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #1d4ed8;
+    }
+
+    .quiz-actions {
+      display: flex;
+      gap: 6px;
       flex-wrap: wrap;
     }
 
-    .quiz-meta {
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 260px) minmax(0, 1.5fr);
+      gap: 14px;
+    }
+
+    .info-column {
       display: flex;
       flex-direction: column;
-      gap: 3px;
+      gap: 10px;
+    }
+
+    .info-card {
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      background: var(--panel-bg);
+      padding: 10px 11px 11px;
+      font-size: 12px;
+      box-shadow: var(--shadow-subtle);
+    }
+
+    .info-card h3 {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-soft);
+      margin: 0 0 6px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px;
+    }
+
+    .info-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding: 6px 7px;
+      border-radius: 10px;
+      border: 1px solid rgba(203, 213, 225, 0.9);
+      background: #ffffff;
+    }
+
+    .info-item-label {
       font-size: 11px;
       color: var(--text-soft);
     }
 
-    .quiz-meta-rows {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
+    .info-item-value {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
     }
 
-    .quiz-meta-rows span {
-      padding: 2px 8px;
-      border-radius: 999px;
-      border: 1px solid var(--border-subtle);
+    .info-small {
+      font-size: 11px;
+      color: var(--text-soft);
+      margin-top: 4px;
+    }
+
+    .score-banner {
+      margin-top: 4px;
+      padding: 8px 9px;
+      border-radius: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.9);
       background: #ffffff;
+      font-size: 12px;
+      color: var(--text);
+      box-shadow: var(--shadow-subtle);
     }
 
-    .hidden {
-      display: none !important;
+    .score-banner.positive {
+      border-color: rgba(22, 163, 74, 0.85);
+      box-shadow: 0 12px 28px rgba(22, 163, 74, 0.25);
+    }
+
+    .score-banner.negative {
+      border-color: rgba(220, 38, 38, 0.9);
+      box-shadow: 0 12px 28px rgba(220, 38, 38, 0.22);
+    }
+
+    .score-main {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 6px;
+      margin-bottom: 3px;
+    }
+
+    .score-percent {
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .score-grade {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .score-details {
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+
+    .question-column {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
 
     .question-nav {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
-      padding: 10px 2px 12px;
-      border-radius: 14px;
-      background: #ffffff;
-      border: 1px solid var(--border-subtle);
-      box-shadow: var(--shadow-subtle);
-      margin-bottom: 12px;
-      max-height: 120px;
+      gap: 4px;
+      margin-bottom: 6px;
+      max-height: 110px;
       overflow-y: auto;
+      padding-right: 2px;
     }
 
-    .q-nav-item {
+    .qnav-item {
+      min-width: 28px;
+      padding: 4px 6px;
+      border-radius: 999px;
       border: 1px solid var(--border-subtle);
       background: #ffffff;
-      border-radius: 999px;
-      width: 30px;
-      height: 30px;
-      font-size: 12px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+      font-size: 11px;
+      text-align: center;
       cursor: pointer;
-      padding: 0;
       color: var(--text-soft);
-      transition: background 0.12s ease, border-color 0.12s ease,
-        color 0.12s ease, transform 0.06s ease,
-        box-shadow 0.12s ease;
+      transition: background 0.15s ease, border-color 0.15s ease,
+        color 0.15s ease, transform 0.06s ease;
     }
 
-    .q-nav-item:hover {
-      border-color: var(--accent-border);
+    .qnav-item:hover {
       background: var(--accent-soft);
+      border-color: var(--accent-border);
       color: #1d4ed8;
       transform: translateY(-0.5px);
-      box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
     }
 
-    .q-nav-item.active {
+    .qnav-item.current {
+      background: var(--accent);
+      color: #ffffff;
       border-color: var(--accent);
+    }
+
+    .qnav-item.answered {
       background: var(--accent-soft);
+      border-color: var(--accent-border);
       color: #1d4ed8;
-      box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
-      font-weight: 600;
-    }
-
-    .q-nav-item.answered {
-      background: #e0f2fe;
-      border-color: #93c5fd;
-      color: #1d4ed8;
-    }
-
-    .q-nav-item.checked {
-      border-color: var(--success);
-      box-shadow: 0 0 0 1px rgba(22, 163, 74, 0.4);
-    }
-
-    .question-column {
-      margin-top: 10px;
     }
 
     .question-card {
       border-radius: var(--radius-lg);
       border: 1px solid var(--border-subtle);
-      background: var(--card-bg);
-      padding: 14px 16px 14px;
-      box-shadow: var(--shadow-soft);
+      background: #ffffff;
+      padding: 12px 14px 13px;
+      box-shadow: var(--shadow-subtle);
     }
 
     .question-header {
@@ -240,11 +346,11 @@
       justify-content: space-between;
       align-items: baseline;
       gap: 8px;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .question-number {
-      font-size: 11px;
+      font-size: 12px;
       text-transform: uppercase;
       letter-spacing: 0.16em;
       color: var(--text-soft);
@@ -257,36 +363,14 @@
     }
 
     .question-text {
-      font-size: 15px;
+      font-size: 14px;
       margin-bottom: 6px;
-      font-weight: 500;
-      color: var(--text);
-    }
-
-    .question-context {
-      font-size: 11px;
-      color: var(--text-soft);
-      border-radius: 10px;
-      border: 1px solid var(--border-subtle);
-      background: #f9fafb;
-      padding: 7px 8px;
-      margin-bottom: 6px;
-      max-height: 260px;
-      overflow: auto;
-    }
-
-    .question-context pre {
-      margin: 0;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-        "Liberation Mono", "Courier New", monospace;
-      font-size: 11px;
-      white-space: pre;
     }
 
     .question-note {
       font-size: 11px;
       color: var(--text-soft);
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
 
     .options {
@@ -303,19 +387,18 @@
       gap: 7px;
       padding: 7px 9px;
       border-radius: 10px;
-      border: 1px solid var(--border-subtle);
+      border: 1px solid rgba(203, 213, 225, 0.9);
       background: #ffffff;
       cursor: pointer;
       font-size: 13px;
-      transition: border-color 0.12s ease, background 0.12s ease,
-        transform 0.06s ease, box-shadow 0.12s ease;
+      transition: border-color 0.15s ease, background 0.15s ease,
+        transform 0.06s ease;
     }
 
     .option:hover {
       border-color: var(--accent-border);
-      background: #f9fafb;
+      background: var(--accent-soft);
       transform: translateY(-0.5px);
-      box-shadow: 0 3px 8px rgba(15, 23, 42, 0.12);
     }
 
     .option input[type="checkbox"] {
@@ -339,31 +422,30 @@
 
     .option-text {
       flex: 1;
-      color: var(--text);
     }
 
     .option.correct {
-      border-color: var(--success);
+      border-color: rgba(22, 163, 74, 0.9);
       background: var(--success-soft);
     }
 
     .option.incorrect {
-      border-color: var(--danger);
+      border-color: rgba(220, 38, 38, 0.95);
       background: var(--danger-soft);
     }
 
     .option.unselected-correct {
-      box-shadow: 0 0 0 1px rgba(22, 163, 74, 0.7) inset;
+      box-shadow: 0 0 0 1px rgba(22, 163, 74, 0.75) inset;
     }
 
     .explanation {
       font-size: 11px;
       padding: 7px 9px;
       border-radius: 10px;
-      border: 1px solid var(--border-subtle);
-      background: #f9fafb;
+      border: 1px solid rgba(203, 213, 225, 0.9);
+      background: var(--panel-bg);
       color: var(--text-soft);
-      margin-top: 5px;
+      margin-top: 4px;
     }
 
     .explanation strong {
@@ -372,8 +454,8 @@
 
     .message {
       font-size: 11px;
-      margin-top: 4px;
-      color: #92400e;
+      margin-top: 3px;
+      color: #b45309;
     }
 
     .nav-row {
@@ -381,12 +463,12 @@
       align-items: center;
       justify-content: space-between;
       gap: 8px;
-      margin-top: 8px;
+      margin-top: 4px;
     }
 
     .nav-row.second {
       justify-content: flex-end;
-      margin-top: 4px;
+      margin-top: 3px;
       gap: 6px;
     }
 
@@ -402,28 +484,28 @@
       gap: 6px;
       background: #ffffff;
       color: var(--text);
-      border: 1px solid var(--border-subtle);
-      transition: background 0.12s ease, transform 0.08s ease,
-        box-shadow 0.12s ease, border-color 0.12s ease, color 0.12s ease;
+      border: 1px solid rgba(203, 213, 225, 0.9);
+      transition: background 0.15s ease, transform 0.1s ease,
+        box-shadow 0.15s ease, border-color 0.15s ease;
     }
 
     button:hover {
-      background: #f9fafb;
+      background: rgba(239, 246, 255, 0.9);
       border-color: var(--accent-border);
-      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+      box-shadow: 0 10px 22px rgba(148, 163, 184, 0.4);
       transform: translateY(-0.5px);
     }
 
     button:active {
       transform: translateY(0);
-      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.12);
+      box-shadow: 0 4px 10px rgba(148, 163, 184, 0.4);
     }
 
     button.primary {
       background: linear-gradient(135deg, #2563eb, #1d4ed8);
-      border-color: #1d4ed8;
+      border-color: rgba(37, 99, 235, 0.9);
       color: #f9fafb;
-      box-shadow: 0 10px 20px rgba(37, 99, 235, 0.45);
+      box-shadow: 0 12px 24px rgba(37, 99, 235, 0.5);
     }
 
     button.primary:hover {
@@ -435,23 +517,20 @@
       font-size: 11px;
     }
 
-    button.ghost {
-      background: transparent;
-      border-style: dashed;
-    }
-
     button:disabled {
       opacity: 0.4;
       cursor: default;
       transform: none;
       box-shadow: none;
-      background: #ffffff;
+      background: #f9fafb;
     }
+
+    /* Lösungs-Overlay */
 
     .solution-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(15, 23, 42, 0.35);
+      background: rgba(15, 23, 42, 0.7);
       backdrop-filter: blur(4px);
       z-index: 50;
       display: flex;
@@ -464,10 +543,10 @@
     .solution-panel {
       width: 100%;
       max-width: 980px;
-      background: var(--panel-bg);
+      background: #ffffff;
       border-radius: 20px;
-      border: 1px solid var(--border-subtle);
-      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.4);
+      border: 1px solid rgba(148, 163, 184, 0.9);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.7);
       padding: 14px 16px 16px;
     }
 
@@ -488,35 +567,28 @@
     }
 
     .solution-summary {
-      font-size: 13px;
+      font-size: 12px;
       color: var(--text-soft);
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .solution-summary b {
       color: var(--text);
     }
 
-    .result-actions {
-      display: flex;
-      justify-content: flex-end;
-      gap: 8px;
-      margin-bottom: 8px;
-    }
-
     .solution-list {
-      margin-top: 6px;
+      margin-top: 8px;
       display: flex;
       flex-direction: column;
       gap: 10px;
-      max-height: calc(100vh - 180px);
+      max-height: calc(100vh - 140px);
       overflow-y: auto;
       padding-right: 4px;
     }
 
     .solution-question {
       border-radius: 14px;
-      border: 1px solid var(--border-subtle);
+      border: 1px solid rgba(203, 213, 225, 0.9);
       background: #f9fafb;
       padding: 8px 9px 9px;
       font-size: 12px;
@@ -533,7 +605,6 @@
     .solution-q-title {
       font-size: 12px;
       font-weight: 600;
-      color: var(--text);
     }
 
     .solution-q-topic {
@@ -544,7 +615,7 @@
 
     .solution-q-score {
       font-size: 11px;
-      color: var(--text-soft);
+      color: var(--text);
       margin-top: 2px;
     }
 
@@ -594,27 +665,33 @@
       color: var(--text-soft);
     }
 
+    /* Responsiv */
+
     @media (max-width: 900px) {
-      body {
-        padding: 10px;
+      .layout {
+        grid-template-columns: minmax(0, 1fr);
       }
-      .app {
-        padding: 14px 12px 18px;
-        border-radius: 16px;
-      }
-      .app-title {
-        font-size: 19px;
-      }
-      .question-card {
-        padding: 12px 12px 12px;
+
+      .info-column {
+        order: -1;
       }
     }
 
-    @media (max-width: 600px) {
-      .question-nav {
-        max-height: 90px;
+    @media (max-width: 720px) {
+      body {
+        padding: 10px;
       }
-      .quiz-top-bar {
+
+      .app {
+        padding: 14px 12px 16px;
+        border-radius: 18px;
+      }
+
+      .app-title {
+        font-size: 19px;
+      }
+
+      .quiz-header-bar {
         flex-direction: column;
         align-items: flex-start;
       }
@@ -628,704 +705,100 @@
         <div class="app-title">
           <span>Rechtsgrundlagen – Prüfungsquiz</span>
         </div>
-        <div class="tag-pill">Öffentliches Recht · Privatrecht · Grundbuch · Haftung</div>
+        <div class="tag-pill">
+          ÖR · Privatrecht · Grundbuch · Gewährleistung/Haftung
+        </div>
       </div>
       <p class="subtitle">
-        Mehrfachauswahl wie in der Prüfung: <b>mindestens eine Antwort ist richtig</b>, aber nie alle.
-        Falsche Kreuze kosten Punkte. Ab <b>60&nbsp;% insgesamt</b> ist die Prüfung positiv.
+        Mehrfachauswahl wie in der Prüfung: <b>mindestens eine Antwort ist richtig, aber nie alle</b>.
+        Falsche Kreuze ziehen Punkte ab. Bewertung: ab <b>60&nbsp;%</b> insgesamt positiv.
       </p>
       <div class="mode-info-row">
-        <span><strong>Hinweis:</strong> Prüfe einzelne Fragen mit „Antwort prüfen“ oder am Ende alles mit „Gesamtes Quiz auswerten“.</span>
-        <span><strong>Tipp:</strong> Oben kannst du direkt zu jeder Frage springen, beantwortete Fragen werden markiert.</span>
+        <span><strong>Scoring:</strong> richtige Antworten +, falsche −, gewichtet nach Anzahl der richtigen Lösungen (max. 100&nbsp;% pro Frage, min. 0&nbsp;%).</span>
       </div>
     </header>
 
-    <div class="quiz-top-bar">
-      <div class="quiz-meta">
-        <div class="quiz-meta-rows">
-          <span>Modus: alle Themen gemischt (ÖR, EU, PR, GB, BO, Haftung, PHG, KSchG …)</span>
+    <main id="quiz-main">
+      <div class="quiz-header-bar">
+        <div class="mode-pill-current">
+          Rechtsgrundlagen · Gesamt-Quiz
+        </div>
+        <div class="quiz-actions">
+          <button id="restart-btn" class="small">Test neu starten</button>
+          <button id="reshuffle-btn" class="small">Fragen neu mischen</button>
         </div>
       </div>
-      <button id="restart-btn" class="small ghost" type="button">Fragen neu mischen</button>
-    </div>
 
-    <div id="question-nav" class="question-nav"></div>
+      <div class="layout">
+        <section class="info-column">
+          <div id="progress-info" class="info-card">
+            <h3>Fortschritt</h3>
+            <div class="info-grid">
+              <div class="info-item">
+                <div class="info-item-label">Aktuelle Frage</div>
+                <div class="info-item-value" id="info-current-question">–</div>
+              </div>
+              <div class="info-item">
+                <div class="info-item-label">Insgesamt</div>
+                <div class="info-item-value" id="info-total-questions">–</div>
+              </div>
+              <div class="info-item">
+                <div class="info-item-label">Beantwortet</div>
+                <div class="info-item-value" id="info-answered">–</div>
+              </div>
+            </div>
+            <div class="info-small">
+              Du kannst zwischen den Fragen springen; deine Auswahl bleibt erhalten, bis du neu startest.
+            </div>
+          </div>
 
-    <main class="quiz-main">
-      <section class="question-column">
-        <div id="question-container"></div>
+          <div id="score-banner" class="score-banner hidden">
+            <div class="score-main">
+              <span class="score-percent" id="score-percent">0&nbsp;%</span>
+              <span class="score-grade" id="score-grade">Note –</span>
+            </div>
+            <div class="score-details" id="score-details">
+              Noch keine Gesamtauswertung.
+            </div>
+          </div>
+        </section>
 
-        <div class="nav-row">
-          <button id="prev-btn" type="button">◀ Zurück</button>
-          <button id="check-btn" type="button" class="primary">Antwort prüfen</button>
-          <button id="next-btn" type="button">Weiter ▶</button>
-        </div>
-        <div class="nav-row second">
-          <button id="eval-btn" type="button" class="primary">
-            Gesamtes Quiz auswerten
-          </button>
-        </div>
-      </section>
+        <section class="question-column">
+          <div id="question-nav" class="question-nav"></div>
+          <div id="question-container"></div>
+
+          <div class="nav-row">
+            <button id="prev-btn" type="button">◀ Zurück</button>
+            <button id="check-btn" type="button" class="primary">Antwort prüfen</button>
+            <button id="next-btn" type="button">Weiter ▶</button>
+          </div>
+          <div class="nav-row second">
+            <button id="eval-btn" type="button" class="primary">
+              Gesamtes Quiz auswerten
+            </button>
+          </div>
+        </section>
+      </div>
     </main>
 
-    <!-- ERGEBNIS & LÖSUNGEN -->
+    <!-- LÖSUNGEN / GESAMTAUSWERTUNG -->
     <div id="solution-overlay" class="solution-overlay hidden">
       <div class="solution-panel">
         <div class="solution-header">
-          <h2 id="solution-title">Gesamtergebnis</h2>
-          <button id="close-solution-btn" class="small" type="button">Schließen ✕</button>
+          <h2>Gesamtauswertung &amp; Lösungen</h2>
+          <button id="close-solution-btn" class="small">Schließen ✕</button>
         </div>
         <div id="solution-summary" class="solution-summary"></div>
-        <div class="result-actions">
-          <button id="show-solutions-btn" class="small primary" type="button">
-            Lösungsschlüssel anzeigen
-          </button>
-        </div>
-        <div id="solution-list" class="solution-list hidden"></div>
+        <div id="solution-list" class="solution-list"></div>
       </div>
     </div>
   </div>
 
   <script>
-    // ============================
-    // Basis-Fragen (dein altes Quiz)
-    // ============================
-
-    const BASE_QUESTIONS = [
-      // --- Öffentliches / Privatrecht Grundlagen ---
-      {
-        id: 1,
-        topic: "Rechtsgebiete – Grundlagen",
-        text: "Welche Aussagen zum Privatrecht sind zutreffend?",
-        options: [
-          "Privatrecht regelt Rechtsbeziehungen, bei denen sich die Beteiligten gleichberechtigt gegenüberstehen.",
-          "Für die Rechtsdurchsetzung im Privatrecht sind Zivilgerichte zuständig.",
-          "Privatrecht regelt die Ausübung hoheitlicher Macht durch den Staat.",
-          "Privatrecht regelt die Zuständigkeit und Tätigkeit von Bundes- und Landesbehörden."
-        ],
-        correctIndices: [0, 1],
-        explanation:
-          "Privatrecht (Zivilrecht) betrifft gleichberechtigte Beziehungen zwischen Privaten; zuständig sind ordentliche Gerichte. Hoheitsverwaltung und Behördenzuständigkeit gehören zum öffentlichen Recht."
-      },
-      {
-        id: 2,
-        topic: "Rechtsgebiete – Grundlagen",
-        text: "Welche Aussagen zum Öffentlichen Recht sind richtig?",
-        options: [
-          "Öffentliches Recht regelt u.a. die Tätigkeit von mit Hoheitsgewalt ausgestatteten Rechtsträgern.",
-          "Öffentliches Recht regelt Rechtsbeziehungen, bei denen sich die Beteiligten gleichberechtigt gegenüberstehen.",
-          "Zum öffentlichen Recht zählen z.B. Verfassungsrecht und Verwaltungsrecht.",
-          "Im öffentlichen Recht geht es niemals um hoheitliche Macht."
-        ],
-        correctIndices: [0, 2],
-        explanation:
-          "Öffentliches Recht betrifft hoheitliche Tätigkeit (Bund, Länder, Gemeinden). Verfassungs- und Verwaltungsrecht sind zentrale Teilgebiete."
-      },
-      {
-        id: 3,
-        topic: "Rechtsquellen – zwingendes / dispositives Recht",
-        text: "Welche Aussagen zu zwingendem und dispositivem Recht treffen zu?",
-        options: [
-          "Absolut zwingendes Recht kann durch Parteienvereinbarung überhaupt nicht abgeändert werden.",
-          "Relativ zwingendes Recht kann nur zugunsten eines bestimmten Vertragspartners abgeändert werden.",
-          "Dispositives Recht kann durch vertragliche Vereinbarung geändert werden, solange keine zwingenden Normen verletzt werden.",
-          "Dispositives Recht wird auch absolut zwingendes Recht genannt."
-        ],
-        correctIndices: [0, 1, 2],
-        explanation:
-          "Absolut zwingendes Recht ist gar nicht veränderbar, relativ zwingendes nur zugunsten einer Partei. Dispositives Recht ist „nachgiebig“ und kann vertraglich ersetzt werden."
-      },
-      {
-        id: 4,
-        topic: "Stufenbau der Rechtsordnung",
-        text: "Welche Aussagen zum Stufenbau der Rechtsordnung sind richtig?",
-        options: [
-          "Verordnungen sind Normen mit genereller Rechtskraft und müssen dem Gesetz entsprechen.",
-          "Nationale Verordnungen und EU-Verordnungen sind immer gleichrangig.",
-          "Das EU-Recht hat Anwendungsvorrang, steht aber nicht einfach „über“ der österreichischen Verfassung.",
-          "Eine rangniedrigere Norm darf nur auf Grundlage einer höheren Norm erlassen werden und darf ihr nicht widersprechen."
-        ],
-        correctIndices: [0, 3],
-        explanation:
-          "Verordnungen brauchen eine gesetzliche Grundlage. Rangniedrigere Normen müssen inhaltlich und formal auf eine höherrangige Norm gestützt sein und dürfen ihr nicht widersprechen."
-      },
-      {
-        id: 5,
-        topic: "Verfassungsprinzipien",
-        text: "Das demokratische Prinzip im engeren Sinn besagt unter anderem, dass …",
-        options: [
-          "alle Staatsbürger an der Staatswillensbildung beteiligt sind und damit Träger der Staatsgewalt sind.",
-          "Österreich in Bundesländer mit eigenen Kompetenzen aufgeteilt ist.",
-          "Österreich ein gewähltes Staatsoberhaupt hat.",
-          "die Staatsbürger gegenüber dem Staat Grund- und Freiheitsrechte haben."
-        ],
-        correctIndices: [0],
-        explanation:
-          "Kern des demokratischen Prinzips ist die Beteiligung der Staatsbürger an der Staatswillensbildung (Souveränität)."
-      },
-      {
-        id: 6,
-        topic: "Verfassungsprinzipien / Gewaltentrennung",
-        text: "Welche Aussagen zum gewaltentrennenden Prinzip sind zutreffend?",
-        options: [
-          "Es trennt Gesetzgebung, Verwaltung und Gerichtsbarkeit, um Machtkonzentration zu verhindern.",
-          "Es wird auch Föderalismus genannt.",
-          "Es bedeutet, dass die Staatsfunktionen von unterschiedlichen, weitgehend unabhängigen Organen ausgeübt werden.",
-          "Es umfasst hauptsächlich die Grund- und Freiheitsrechte."
-        ],
-        correctIndices: [0, 2],
-        explanation:
-          "Gewaltenteilung trennt die Funktionen Gesetzgebung, Vollziehung und Gerichtsbarkeit und ordnet sie verschiedenen Organen zu."
-      },
-      {
-        id: 7,
-        topic: "Bundesgesetzgebung",
-        text: "Welche Aussagen zur Bundesgesetzgebung sind richtig?",
-        options: [
-          "Der Nationalrat beschließt Bundesgesetze, der Bundesrat wirkt mit.",
-          "Der Bundespräsident beurkundet Bundesgesetze vor der Kundmachung.",
-          "Die Gesetzgebungsperiode des Nationalrats dauert grundsätzlich 5 Jahre.",
-          "Die Bundesregierung kann einfache Gesetze ohne Nationalrat beschließen."
-        ],
-        correctIndices: [0, 1, 2],
-        explanation:
-          "Gesetze werden im Parlament beschlossen, vom Bundespräsidenten beurkundet und im BGBl. kundgemacht. Die Bundesregierung kann selbst keine Gesetze erlassen."
-      },
-      {
-        id: 8,
-        topic: "Höchstgerichte",
-        text: "Welche Aussagen zu den österreichischen Höchstgerichten sind korrekt?",
-        options: [
-          "Der Verfassungsgerichtshof prüft u.a. Gesetze und Verordnungen auf Verfassungsmäßigkeit.",
-          "Der Verwaltungsgerichtshof kontrolliert Entscheidungen der Verwaltungsgerichte.",
-          "Der Oberste Gerichtshof ist Höchstgericht in Zivil- und Strafsachen.",
-          "Der EuGH hebt österreichische Verfassungsbestimmungen auf, wenn sie ihm nicht gefallen."
-        ],
-        correctIndices: [0, 1, 2],
-        explanation:
-          "VfGH, VwGH und OGH sind die drei österreichischen Höchstgerichte. Der EuGH entscheidet über EU-Rechtsfragen, aber nicht direkt über österreichische Verfassungsbestimmungen."
-      },
-      {
-        id: 9,
-        topic: "Justiz / ordentliche Gerichtsbarkeit",
-        text: "Welche Aussagen zur ordentlichen Gerichtsbarkeit treffen zu?",
-        options: [
-          "Ordentliche Gerichte sind für Zivil- und Strafsachen zuständig, soweit nicht Verwaltungsbehörden zuständig sind.",
-          "Gerichtsverfahren sind grundsätzlich mündlich und öffentlich.",
-          "Es gibt eine Geschäftsverteilung, die regelt, welcher Richter für welche Fälle zuständig ist.",
-          "Ordentliche Gerichte vollziehen ausschließlich Verwaltungsrecht."
-        ],
-        correctIndices: [0, 1, 2],
-        explanation:
-          "Ordentliche Gerichte (BG, LG, OLG, OGH) verhandeln Zivil- und Strafsachen. Die Zuständigkeit ist durch Geschäftsverteilung geregelt."
-      },
-
-      // --- Verwaltung / Verwaltungsverfahren / Verwaltungsstrafrecht ---
-      {
-        id: 10,
-        topic: "Verwaltung – Begriff",
-        text: "Welche Aussagen zur Verwaltung sind richtig?",
-        options: [
-          "Verwaltung ist alle staatliche Vollziehung, die nicht Gesetzgebung oder Gerichtsbarkeit ist.",
-          "Verwaltung wird von Verwaltungsbehörden ausgeübt.",
-          "Verwaltung kann hoheitlich oder privatrechtlich erfolgen.",
-          "Verwaltung ist ein anderer Begriff für Gerichtsbarkeit."
-        ],
-        correctIndices: [0, 1, 2],
-        explanation:
-          "Zur Verwaltung gehören hoheitliche Akte (Bescheide, Verordnungen) und privatrechtliches Handeln (z.B. Verträge der öffentlichen Hand)."
-      },
-      {
-        id: 11,
-        topic: "Hoheitsverwaltung – Handlungsformen",
-        text: "Welche Handlungsformen gehören zur Hoheitsverwaltung?",
-        options: [
-          "Verordnungen.",
-          "Bescheide.",
-          "Urteile.",
-          "Privatwirtschaftliche Verträge der Gemeinde."
-        ],
-        correctIndices: [0, 1],
-        explanation:
-          "Verordnungen und Bescheide sind typische hoheitliche Akte der Verwaltung. Urteile stammen von Gerichten, Verträge sind privatwirtschaftliches Handeln."
-      },
-      {
-        id: 12,
-        topic: "Bescheid",
-        text: "Welche Wesensmerkmale eines Bescheids sind zutreffend?",
-        options: [
-          "Er richtet sich an einen bestimmten individuellen Adressatenkreis.",
-          "Er ist ein hoheitlicher Akt einer Verwaltungsbehörde.",
-          "Er wird durch Zustellung oder Verkündung rechtswirksam.",
-          "Er ist eine generelle Norm mit unbestimmtem Adressatenkreis."
-        ],
-        correctIndices: [0, 1, 2],
-        explanation:
-          "Bescheide sind individuelle Verwaltungsakte. Generelle Normen mit unbestimmtem Adressatenkreis sind Gesetze oder Verordnungen."
-      },
-      {
-        id: 13,
-        topic: "Parteistellung",
-        text: "Mit der Parteistellung im Verwaltungsverfahren sind welche Rechte verbunden?",
-        options: [
-          "Recht auf Akteneinsicht.",
-          "Recht, Rechtsmittel zu erheben.",
-          "Rechtsanspruch auf Entscheidung der Behörde innerhalb angemessener Frist.",
-          "Nur mündliche Verkündung, aber keine Zustellung des Bescheids."
-        ],
-        correctIndices: [0, 1, 2],
-        explanation:
-          "Parteistellung sichert u.a. Akteneinsicht, Parteiengehör, Rechtsmittelrecht und Anspruch auf Entscheidung."
-      },
-      {
-        id: 14,
-        topic: "Verwaltungsverfahrensrecht – Rechtsquellen",
-        text: "Welche Rechtsquellen gehören insbesondere zum Verwaltungsverfahrensrecht?",
-        options: [
-          "Allgemeines Verwaltungsverfahrensgesetz (AVG).",
-          "Zustellgesetz (ZustG).",
-          "Verwaltungsstrafgesetz (VStG).",
-          "Strafprozessordnung (StPO)."
-        ],
-        correctIndices: [0, 1, 2],
-        explanation:
-          "AVG, ZustG und VStG regeln das Verwaltungsverfahren; StPO betrifft das gerichtliche Strafverfahren."
-      },
-      {
-        id: 15,
-        topic: "Zustellung",
-        text: "Welche Aussagen zur Zustellung behördlicher Schriftstücke treffen zu?",
-        options: [
-          "RSa bedeutet, dass nur der Empfänger selbst übernehmen darf.",
-          "RSb erlaubt die Übergabe auch an andere Empfangsberechtigte im Haushalt.",
-          "Bei Hinterlegung gilt das Schriftstück mit dem ersten Tag der Abholfrist als zugestellt.",
-          "Die Rechtsmittelfrist ist gewahrt, wenn das Schriftstück am ersten Tag nach Fristablauf zur Post gegeben wird."
-        ],
-        correctIndices: [0, 1, 2],
-        explanation:
-          "RSa: nur Empfänger; RSb: Haushaltsangehörige; Hinterlegung: Zustellung mit 1. Tag der Abholfrist. Für Fristen zählt die Aufgabe am letzten Tag."
-      },
-      {
-        id: 16,
-        topic: "Beschwerde / Beschwerdevorentscheidung",
-        text: "Welche Aussagen zur Bescheidbeschwerde sind richtig?",
-        options: [
-          "Sie ist grundsätzlich binnen vier Wochen ab Zustellung einzubringen.",
-          "Sie ist bei der bescheiderlassenden Behörde einzubringen.",
-          "Die Behörde kann eine Beschwerdevorentscheidung erlassen.",
-          "Gegen eine Beschwerdevorentscheidung gibt es keine weitere Möglichkeit."
-        ],
-        correctIndices: [0, 1, 2],
-        explanation:
-          "Die Beschwerde wird bei der Ausgangsbehörde eingebracht. Diese kann eine Beschwerdevorentscheidung treffen; dagegen ist ein Vorlageantrag an das Verwaltungsgericht möglich."
-      },
-      {
-        id: 17,
-        topic: "Verwaltungsstrafrecht – Rechtsquellen",
-        text: "Welche Aussagen zu den Rechtsquellen des Verwaltungsstrafrechts sind korrekt?",
-        options: [
-          "Verwaltungsstrafbestimmungen und Strafausmaß stehen im Strafgesetzbuch (StGB).",
-          "Verwaltungsstrafbestimmungen und Strafausmaß finden sich in den jeweiligen Materiengesetzen (z.B. BauO).",
-          "Das Verwaltungsstrafgesetz regelt den Ablauf des Verwaltungsstrafverfahrens.",
-          "Der Ablauf des Verwaltungsstrafverfahrens ist ausschließlich in der Strafprozessordnung geregelt."
-        ],
-        correctIndices: [1, 2],
-        explanation:
-          "Die einzelnen Tatbestände stehen in Materiengesetzen; das VStG regelt das Verwaltungsstrafverfahren."
-      },
-      {
-        id: 18,
-        topic: "Fahrlässigkeit",
-        text: "Welche Aussage zur Fahrlässigkeit ist NICHT zutreffend?",
-        options: [
-          "Fahrlässig handelt, wer die gebotene Sorgfalt außer Acht lässt.",
-          "Fahrlässig handelt, wer geistig und körperlich fähig wäre, die Sorgfalt einzuhalten.",
-          "Fahrlässigkeit liegt auch bei Unzurechnungsfähigkeit vor.",
-          "Maßstab ist u.a., was einem Täter zugemutet werden kann."
-        ],
-        correctIndices: [2],
-        explanation:
-          "Unzurechnungsfähige sind strafrechtlich grundsätzlich nicht verantwortlich; Fahrlässigkeit setzt Zurechnungsfähigkeit voraus."
-      },
-
-      // --- Raumordnung / BauO / Gewerbe ---
-      {
-        id: 19,
-        topic: "Raumordnung – Flächenwidmungsplan",
-        text: "Welche Aussagen zum Flächenwidmungsplan sind richtig?",
-        options: [
-          "Er ist grundsätzlich eine Verordnung der Gemeinde und teilt das Gemeindegebiet in Widmungskategorien ein.",
-          "Er wird als Bescheid von der Baubehörde an jeden Grundeigentümer zugestellt.",
-          "Er unterliegt der Aufsicht der jeweiligen Landesregierung.",
-          "Er ist Grundlage für Baubewilligungen, da in der Regel Baulandwidmung erforderlich ist."
-        ],
-        correctIndices: [0, 2, 3],
-        explanation:
-          "Flächenwidmungspläne sind Verordnungen der Gemeinde, stehen unter Landesaufsicht und sind zentrale Grundlage für Baubewilligungen."
-      },
-      {
-        id: 20,
-        topic: "Gewerberecht – Gewerbeberechtigung",
-        text: "Wann ist eine Gewerbeberechtigung nach der GewO erforderlich?",
-        options: [
-          "Bei Ausübung eines freien Gewerbes.",
-          "Bei Ausübung eines reglementierten Gewerbes.",
-          "Nie, wenn keine Betriebsanlagengenehmigung notwendig ist.",
-          "Nicht, wenn die Tätigkeit ausdrücklich von der GewO ausgenommen ist."
-        ],
-        correctIndices: [0, 1, 3],
-        explanation:
-          "Sowohl freie als auch reglementierte Gewerbe sind anzeigepflichtig bzw. bewilligungspflichtig. Ausgenommene Tätigkeiten fallen nicht unter die GewO."
-      },
-
-      // --- Privatrecht / Verträge / AGB / Sicherheiten ---
-      {
-        id: 21,
-        topic: "Privatrechtsquellen",
-        text: "Welche Aussagen zu den Privatrechtsquellen sind richtig?",
-        options: [
-          "Das ABGB ist das Basisgesetz des österreichischen Privatrechts.",
-          "Sonderprivatrechtsgesetze gehen als speziellere Normen dem ABGB vor.",
-          "Sonderprivatrechtsgesetze dürfen keine abweichenden Regelungen enthalten.",
-          "Das ABGB gilt subsidiär, wenn kein spezielleres Privatrechtsgesetz eingreift."
-        ],
-        correctIndices: [0, 1, 3],
-        explanation:
-          "Spezialgesetze (Mietrecht, KSchG usw.) gehen vor; das ABGB ergänzt subsidiär."
-      },
-      {
-        id: 22,
-        topic: "Geschäftsfähigkeit",
-        text: "Geschäftsfähigkeit: Welche Aussagen zu einer 16-jährigen Person sind richtig (vereinfacht)?",
-        options: [
-          "Sie kann über eigenes Einkommen verfügen, soweit Lebensbedürfnisse nicht gefährdet werden.",
-          "Sie ist voll geschäftsfähig.",
-          "Sie darf alterstypische Geschäfte abschließen und Schenkungen ohne Bedingungen annehmen.",
-          "Sie kann überhaupt keine wirksamen Rechtsgeschäfte abschließen."
-        ],
-        correctIndices: [0, 2],
-        explanation:
-          "Jugendliche sind beschränkt geschäftsfähig: bestimmte Geschäfte sind möglich, aber nicht alle."
-      },
-      {
-        id: 23,
-        topic: "Vertragsabschluss",
-        text: "Welche Voraussetzungen sind für einen gültigen Vertrag im Regelfall erforderlich?",
-        options: [
-          "Übereinstimmende Willenserklärungen (Anbot und Annahme).",
-          "Geschäftsfähigkeit der Parteien.",
-          "Immer Schriftlichkeit – sonst ist der Vertrag unwirksam.",
-          "Kein Verstoß gegen zwingendes Recht oder gute Sitten."
-        ],
-        correctIndices: [0, 1, 3],
-        explanation:
-          "Essentiell sind Anbot/Annahme, Geschäftsfähigkeit und zulässiger Vertragsinhalt. Schriftlichkeit ist nur ausnahmsweise zwingend."
-      },
-      {
-        id: 24,
-        topic: "AGB",
-        text: "Welche Aussagen zu Allgemeinen Geschäftsbedingungen (AGB) treffen zu?",
-        options: [
-          "AGB gelten, wenn auf sie hingewiesen und sie akzeptiert werden.",
-          "AGB werden für immer wieder gleichartig abgeschlossene Verträge erstellt.",
-          "Unklare Klauseln werden zum Nachteil des Verwenders ausgelegt (Transparenzgebot).",
-          "AGB sind gegenüber Konsumenten immer unzulässig."
-        ],
-        correctIndices: [0, 1, 2],
-        explanation:
-          "AGB sind zulässig, müssen aber transparent sein und wirksam einbezogen werden."
-      },
-      {
-        id: 25,
-        topic: "Kostenvoranschlag – Verbraucher",
-        text: "Welche Aussagen zum Kostenvoranschlag an Verbraucher (ohne besondere Vereinbarung) sind korrekt?",
-        options: [
-          "Er ist kostenlos.",
-          "Der genannte Preis gilt als verbindlich.",
-          "Die Erstellung ist kostenpflichtig.",
-          "Der genannte Preis ist unverbindlich."
-        ],
-        correctIndices: [0, 1],
-        explanation:
-          "Nach KSchG ist der Kostenvoranschlag im Zweifel kostenlos und verbindlich, sofern nichts anderes vereinbart wurde."
-      },
-      {
-        id: 26,
-        topic: "Sicherheiten – Eigentumsvorbehalt",
-        text: "Welche Aussagen zum Eigentumsvorbehalt sind richtig?",
-        options: [
-          "Vereinbarung, dass der Käufer erst mit vollständiger Zahlung Eigentümer wird.",
-          "Ohne Eigentumsvorbehalt wird der Käufer mit Übergabe Eigentümer.",
-          "Bei Insolvenz des Käufers kann der Verkäufer die Sache aussondern, wenn ein Eigentumsvorbehalt besteht.",
-          "Eigentumsvorbehalt gilt automatisch bei jedem Kauf, auch ohne Vereinbarung."
-        ],
-        correctIndices: [0, 1, 2],
-        explanation:
-          "Der Eigentumsvorbehalt muss ausdrücklich vereinbart werden; er sichert den Verkäufer bei Nichtzahlung/Insolvenz."
-      },
-      {
-        id: 27,
-        topic: "Sicherheiten – Bankgarantie",
-        text: "Welche Aussagen zur Bankgarantie treffen zu?",
-        options: [
-          "Sie ist ein abstraktes Zahlungsversprechen einer Bank zugunsten eines Dritten.",
-          "Sie wird u.a. zur Sicherung eines Haftrücklasses verwendet.",
-          "Sie ist streng akzessorisch vom Bestand des Grundgeschäfts abhängig.",
-          "Sie ist grundsätzlich vom Grundgeschäft rechtlich unabhängig."
-        ],
-        correctIndices: [0, 1, 3],
-        explanation:
-          "Die Bankgarantie ist ein abstraktes Sicherungsinstrument; der Begünstigte kann Zahlung verlangen, wenn die vereinbarten Bedingungen eintreten."
-      },
-      {
-        id: 28,
-        topic: "Konventionalstrafe",
-        text: "Welche Aussagen zur Konventionalstrafe (= Pönale) sind korrekt?",
-        options: [
-          "Sie ist ein pauschalierter Schadenersatz für den Fall der Schlechterfüllung oder Nichterfüllung.",
-          "Sie ist grundsätzlich verschuldensabhängig.",
-          "Das Gericht kann eine überhöhte Konventionalstrafe mäßigen.",
-          "Sie kann vertraglich nicht vereinbart werden."
-        ],
-        correctIndices: [0, 1, 2],
-        explanation:
-          "Die Konventionalstrafe wird vertraglich vereinbart, ist verschuldensabhängig und unterliegt dem richterlichen Mäßigungsrecht."
-      },
-      {
-        id: 29,
-        topic: "Lieferverzug / Annahmeverzug",
-        text: "Welche Aussagen sind richtig (vereinfacht)?",
-        options: [
-          "Beim absoluten Fixgeschäft zerfällt der Vertrag bei Nichterfüllung zum vereinbarten Termin.",
-          "Beim Termingeschäft kann nach Nachfristsetzung vom Vertrag zurückgetreten werden.",
-          "Im Annahmeverzug trägt der Gläubiger die Gefahr des zufälligen Unterganges.",
-          "Bei Verzug bestehen nie Schadenersatzansprüche."
-        ],
-        correctIndices: [0, 1, 2],
-        explanation:
-          "Fixgeschäft: Vertrag fällt bei Nichterfüllung automatisch; Termingeschäft: Nachfrist + Rücktritt; im Annahmeverzug geht die Gefahr auf den Gläubiger über."
-      },
-
-      // --- Gewährleistung / Schadenersatz / Produkthaftung ---
-      {
-        id: 30,
-        topic: "Gewährleistung – Grundlagen",
-        text: "Welche Aussagen zur Gewährleistung sind richtig (vereinfacht)?",
-        options: [
-          "Der Mangel muss bei Übergabe vorhanden sein.",
-          "Gewährleistung ist verschuldensunabhängig.",
-          "Regelmäßige Frist: 2 Jahre bewegliche, 3 Jahre unbewegliche Sachen.",
-          "Zwischen Unternehmer und Verbraucher kann Gewährleistung völlig ausgeschlossen werden."
-        ],
-        correctIndices: [0, 1, 2],
-        explanation:
-          "Gewährleistung knüpft an den Zeitpunkt der Übergabe an, ist verschuldensunabhängig und im Verbrauchergeschäft zwingend."
-      },
-      {
-        id: 31,
-        topic: "Gewährleistung – Beweislastumkehr",
-        text: "Welche Aussagen zur Beweislastumkehr im Verbrauchergeschäft sind zutreffend?",
-        options: [
-          "Tritt ein Mangel innerhalb von 6 Monaten auf, wird vermutet, dass er bei Übergabe vorhanden war.",
-          "In den ersten 6 Monaten muss der Unternehmer beweisen, dass die Sache mangelfrei war.",
-          "In den ersten 6 Monaten trägt immer der Verbraucher die volle Beweislast.",
-          "Bei typischen Verschleißteilen kann die Vermutung ausgeschlossen sein."
-        ],
-        correctIndices: [0, 1, 3],
-        explanation:
-          "Die Vermutung wirkt zugunsten des Verbrauchers; der Unternehmer muss ggf. das Gegenteil beweisen."
-      },
-      {
-        id: 32,
-        topic: "Gewährleistung – Rechtsbehelfe",
-        text: "Welche Gewährleistungsbehelfe stehen dem Käufer zu?",
-        options: [
-          "Verbesserung (Reparatur).",
-          "Austausch.",
-          "Preisminderung.",
-          "Wandlung."
-        ],
-        correctIndices: [0, 1, 2, 3],
-        explanation:
-          "Primär Verbesserung oder Austausch; sekundär Preisminderung oder Wandlung."
-      },
-      {
-        id: 33,
-        topic: "Schadenersatz – Voraussetzungen",
-        text: "Welche Voraussetzungen müssen für Schadenersatzansprüche typischerweise vorliegen?",
-        options: [
-          "Schaden.",
-          "Rechtswidrigkeit.",
-          "Verschulden (außer bei Gefährdungshaftung).",
-          "Zufall ohne Rechtswidrigkeit."
-        ],
-        correctIndices: [0, 1, 2],
-        explanation:
-          "Klassisch: Schaden, Rechtswidrigkeit, Kausalität, Verschulden."
-      },
-      {
-        id: 34,
-        topic: "Erfüllungsgehilfenhaftung",
-        text: "Welche Regelung beschreibt § 1313a ABGB?",
-        options: [
-          "Erfüllungsgehilfenhaftung.",
-          "Amtshaftung.",
-          "Produkthaftung.",
-          "Organhaftung."
-        ],
-        correctIndices: [0],
-        explanation:
-          "Der Schuldner haftet für Verschulden seiner Erfüllungsgehilfen wie für eigenes."
-      },
-      {
-        id: 35,
-        topic: "Produkthaftung",
-        text: "Welche Aussagen zur Produkthaftung sind korrekt (vereinfacht)?",
-        options: [
-          "Sie ist verschuldensunabhängig.",
-          "Die absolute Frist beträgt 10 Jahre ab Inverkehrbringen.",
-          "Sie ersetzt alle Gewährleistungsrechte.",
-          "Sie betrifft v.a. Personen- und bestimmte Sachschäden."
-        ],
-        correctIndices: [0, 1, 3],
-        explanation:
-          "Produkthaftung ergänzt die Gewährleistung; absolute Verjährung nach 10 Jahren."
-      },
-      {
-        id: 36,
-        topic: "Verjährung",
-        text: "Welche Aussagen zur Verjährung treffen zu?",
-        options: [
-          "Verjährung macht den Anspruch gerichtlich nicht mehr durchsetzbar, er kann aber freiwillig erfüllt werden.",
-          "Der Anspruch erlischt automatisch und kann auch freiwillig nicht mehr erfüllt werden.",
-          "Viele Forderungen des täglichen Lebens verjähren nach 3 Jahren.",
-          "Eine bloße Mahnung hemmt die Verjährung nicht dauerhaft."
-        ],
-        correctIndices: [0, 2, 3],
-        explanation:
-          "Verjährung ist eine Einrede. Typische Forderungen verjähren in 3 Jahren; Mahnungen allein unterbrechen die Frist nicht."
-      },
-
-      // --- Sachenrecht / Grundbuch-Basics ---
-      {
-        id: 37,
-        topic: "Sachenrecht – Grundsätze",
-        text: "Welche Grundsätze des Sachenrechts sind zutreffend?",
-        options: [
-          "Publizität.",
-          "Spezialität.",
-          "Typenzwang.",
-          "Beliebigkeitsprinzip."
-        ],
-        correctIndices: [0, 1, 2],
-        explanation:
-          "Sachenrechte sind streng typisiert, beziehen sich auf bestimmte Sachen und sollen nach außen erkennbar sein."
-      },
-      {
-        id: 38,
-        topic: "Pfandrecht – Grundsätze",
-        text: "Welche Grundsätze des Pfandrechts sind richtig?",
-        options: [
-          "Akzessorietät: Pfandrecht hängt vom Bestand der gesicherten Forderung ab.",
-          "Spezialität: Pfandrechte können nur an bestimmten, individualisierten Sachen begründet werden.",
-          "Priorität: Rang nach Zeitpunkt der Eintragung.",
-          "Publizität spielt keine Rolle."
-        ],
-        correctIndices: [0, 1, 2],
-        explanation:
-          "Akzessorietät, Spezialität, Priorität und Publizität sind zentrale Pfandrechtsgrundsätze."
-      },
-      {
-        id: 39,
-        topic: "Servitut",
-        text: "Welche Aussagen zu Servituten (Dienstbarkeiten) sind richtig?",
-        options: [
-          "Sie sind beschränkte dingliche Nutzungsrechte an fremden Sachen.",
-          "Der Belastete muss i.d.R. dulden oder unterlassen.",
-          "Sie können ersessen werden.",
-          "Sie verjähren automatisch nach 5 Jahren Nichtausübung."
-        ],
-        correctIndices: [0, 1, 2],
-        explanation:
-          "Servituten sind beschränkte Nutzungsrechte; Ersitzung ist möglich, die Verjährungsfristen sind sehr lang."
-      },
-      {
-        id: 40,
-        topic: "Baurecht",
-        text: "Welche Aussagen zum Baurecht (Baurechtsgesetz) sind richtig?",
-        options: [
-          "Es ist ein selbständiges, veräußerliches und vererbliches Recht an einer fremden Liegenschaft.",
-          "Es wird durch Eintragung im Grundbuch begründet.",
-          "Es gilt als unbewegliche Sache.",
-          "Es darf nur von der öffentlichen Hand vergeben werden."
-        ],
-        correctIndices: [0, 1, 2],
-        explanation:
-          "Baurechte werden grundbücherlich eingetragen und sind wie Liegenschaften zu behandeln; auch Private können Baurechte vereinbaren."
-      },
-      {
-        id: 41,
-        topic: "Grundbuch – Aufbau",
-        text: "Welche Bestandteile gehören typischerweise zum Grundbuch (vereinfacht)?",
-        options: [
-          "Hauptbuch mit A-, B- und C-Blatt.",
-          "Urkundensammlung.",
-          "Kataster (Grundstücksverzeichnis).",
-          "Flächenwidmungsplan."
-        ],
-        correctIndices: [0, 1, 2],
-        explanation:
-          "Flächenwidmungspläne gehören zur Raumordnung, nicht zum Grundbuch."
-      },
-      {
-        id: 42,
-        topic: "Grundbuch – Blätter",
-        text: "Welche Zuordnungen sind korrekt?",
-        options: [
-          "A-Blatt: Gutsbestand / Widmung / Grundstücksdaten.",
-          "B-Blatt: Eigentumsverhältnisse.",
-          "C-Blatt: Lasten (Hypotheken, Dienstbarkeiten, Reallasten).",
-          "B-Blatt: Pfandrechte."
-        ],
-        correctIndices: [0, 1, 2],
-        explanation:
-          "Pfandrechte stehen im C-Blatt, nicht im B-Blatt."
-      },
-      {
-        id: 43,
-        topic: "Grundbuch – Plombe",
-        text: "Welche Aussagen zur Plombe sind zutreffend?",
-        options: [
-          "Sie zeigt ein anhängiges Grundbuchsgesuch an.",
-          "Während der Plombe kann sich der Rechtszustand durch Eintragung ändern.",
-          "Nach Einverleibung wird aus der TZ der Plombe die „letzte TZ“.",
-          "Sie bedeutet, dass das Grundbuch nicht mehr einsichtig ist."
-        ],
-        correctIndices: [0, 1, 2],
-        explanation:
-          "Die Plombe ist ein Warnhinweis auf laufende Eintragungen; Einsicht bleibt möglich."
-      },
-      {
-        id: 44,
-        topic: "Justizberufe",
-        text: "Welche Aussagen zu Berufen in der Justiz sind richtig?",
-        options: [
-          "Richter sind unabhängig und nur dem Gesetz unterworfen.",
-          "Staatsanwälte vertreten im Strafverfahren die Anklage.",
-          "Rechtsanwälte vertreten und beraten Parteien.",
-          "Notare vollziehen Strafurteile."
-        ],
-        correctIndices: [0, 1, 2],
-        explanation:
-          "Notare sind u.a. für Beurkundungen, Verlassenschaften und Gesellschaftsgründungen zuständig, nicht für Strafvollzug."
-      }
-    ];
-
-    // ============================================
-    // Fragen deines Kollegen (JSON) als Rohdaten
-    // ============================================
-
-    const COLLEAGUE_QUESTIONS_RAW = [
+    // ==========================
+    // Rohdaten – 130 Fragen
+    // ==========================
+    const RAW_QUESTIONS = [
       { "id": 1, "tag": "ÖR", "q": "Welche Staatsgewalten sieht die österreichische Bundesverfassung vor?", "type": "mc", "choices": [ "Legislative, Exekutive, Judikative", "Legislative, Exekutive, Verwaltung", "Bundesrat, Nationalrat, Bundesregierung", "Bundespräsident, Nationalrat, Bundesrat" ], "correct": [ 0 ], "a": "Legislative erlässt Gesetze; Exekutive vollzieht; Judikative entscheidet." },
       { "id": 2, "tag": "ÖR", "q": "Welche Organe gehören der Legislative an? (Wählen Sie zwei)", "type": "mc", "choices": [ "Nationalrat", "Bundesrat", "Bundespräsident", "VfGH" ], "correct": [ 0, 1 ] },
       { "id": 3, "tag": "ÖR", "q": "Welche Normen stehen im Stufenbau über Verordnungen?", "type": "mc", "choices": [ "Verfassung und einfache Gesetze", "Nur Verordnungen", "Bescheide", "Rechtsmeinungen" ], "correct": [ 0 ] },
@@ -1384,7 +857,7 @@
       { "id": 56, "tag": "PR", "q": "Was bedeutet \"Wandlung\" im Gewährleistungsrecht?", "type": "mc", "choices": [ "Aufhebung des Kaufvertrags und Rückgewähr", "Nur Reparatur", "Nur Preisminderung", "Nur Schadensersatz" ], "correct": [ 0 ] },
       { "id": 57, "tag": "HAFT", "q": "Was ist Vertrauensschaden (c.i.c.)?", "type": "mc", "choices": [ "Schaden durch berechtigtes Vertrauen in das Zustandekommen eines Vertrags", "Nur Vermögensschaden", "Nur Personenschaden", "Nur Sachschaden" ], "correct": [ 0 ] },
       { "id": 58, "tag": "PHG", "q": "Welcher Selbstbehalt gilt bei Sachschäden im PHG?", "type": "mc", "choices": [ "500 €", "0 €", "100 €", "1.000 €" ], "correct": [ 0 ] },
-      { "id": 59, "tag": "AGB", "q": "Welche Vorschrift schützt gegen unklare Klauseln im ABGB?", "type": "mc", "choices": [ "§ 879 ABGB", "§ 1313a ABGB", "§ 6 KSchG", "§ 1 VwVfG" ], "correct": [ 0 ] },
+      { "id": 59, "tag": "AGB", "q": "Welche Vorschrift schützt gegen unfaire/benachteiligende Klauseln im ABGB?", "type": "mc", "choices": [ "§ 879 ABGB", "§ 1313a ABGB", "§ 6 KSchG", "§ 1 VwVfG" ], "correct": [ 0 ] },
       { "id": 60, "tag": "KSG", "q": "Wer ist Konsument im KSchG?", "type": "mc", "choices": [ "Natürliche Person, die Rechtsgeschäft zu privaten Zwecken abschließt", "Unternehmer", "Verein", "Behörde" ], "correct": [ 0 ] },
       { "id": 61, "tag": "KOST", "q": "Was ist der Unterschied verbindlich/unverbindlich bei Kostenvoranschlag?", "type": "mc", "choices": [ "Verbindlich bindet Preis; unverbindlich ist Schätzung", "Keine Unterschiede", "Nur bei Bauanträgen", "Nur bei Verträgen" ], "correct": [ 0 ] },
       { "id": 62, "tag": "ARB", "q": "Welche Rolle hat die AUVA?", "type": "mc", "choices": [ "Unfallversicherungsträger für Arbeitsunfälle und Berufskrankheiten", "Gericht", "Behörde", "Gewerkschaft" ], "correct": [ 0 ] },
@@ -1458,72 +931,43 @@
       { "id": 130, "tag": "ÖR", "q": "Welche Prüfungsfrage zu Zustellung und Rechtsfolgen taucht häufig auf?", "type": "mc", "choices": [ "Unterschied RSa/RSb und rechtliche Wirkungen", "Wann ist ein Gesetz in Kraft?", "Wie wird ein Vertrag abgeschlossen?", "Welche Gebühren fallen an?" ], "correct": [ 0 ] }
     ];
 
-    const TAG_TOPICS = {
-      "ÖR": "Öffentliches Recht / Verfassungs- & Verwaltungsrecht",
-      "EU": "Europarecht / EU-Institutionen",
+    const TOPIC_LABELS = {
+      "ÖR": "Öffentliches Recht",
+      "EU": "Europarecht",
       "GB": "Grundbuch / Sachenrecht",
-      "PR": "Privatrecht / Verträge / Sachenrecht",
-      "HAFT": "Haftungsrecht / Schadenersatz",
-      "PHG": "Produkthaftungsgesetz",
-      "AGB": "AGB / Konsumentenschutz",
-      "KSG": "Konsumentenschutzgesetz / Verbraucherverträge",
-      "KOST": "Kostenvoranschlag / Werkvertrag / Preis",
+      "PR": "Privatrecht / Verträge",
+      "HAFT": "Schadenersatz / Haftung",
+      "PHG": "Produkthaftung (PHG)",
+      "AGB": "AGB / Vertragsklauseln",
+      "KSG": "Konsumentenschutz (KSchG)",
+      "KOST": "Kostenvoranschlag / Werkvertragsrecht",
       "ARB": "Arbeitsrecht / Arbeitsunfall",
-      "VStG": "Verwaltungsstrafrecht (VStG)",
+      "VStG": "Verwaltungsstrafgesetz (VStG)",
       "VfGH": "Verfassungsgerichtshof (VfGH)",
       "VwGH": "Verwaltungsgerichtshof (VwGH)",
       "OGH": "Oberster Gerichtshof (OGH)",
       "BO": "Bauordnung / Baurecht"
     };
 
-    const TAG_HINTS = {
-      "ÖR": "Themengebiet: Öffentliches Recht (Verfassungs- und Verwaltungsrecht).",
-      "EU": "Themengebiet: Europarecht und EU-Institutionen.",
-      "GB": "Themengebiet: Grundbuch und Liegenschaftsrecht.",
-      "PR": "Themengebiet: Allgemeines Privatrecht (ABGB, Vertrags- und Sachenrecht).",
-      "HAFT": "Themengebiet: Haftungsrecht und Schadenersatz.",
-      "PHG": "Themengebiet: Produkthaftungsgesetz.",
-      "AGB": "Themengebiet: Allgemeine Geschäftsbedingungen und AGB-Kontrolle.",
-      "KSG": "Themengebiet: Konsumentenschutzgesetz / Verbraucherschutz.",
-      "KOST": "Themengebiet: Kostenvoranschlag, Werkvertrag, Preisvereinbarung.",
-      "ARB": "Themengebiet: Arbeitsrecht / Arbeitsunfall / Versicherung.",
-      "VStG": "Themengebiet: Verwaltungsstrafrecht (VStG).",
-      "VfGH": "Themengebiet: Verfassungsgerichtshof / Normenkontrolle.",
-      "VwGH": "Themengebiet: Verwaltungsgerichtshof / verwaltungsgerichtliche Entscheidungen.",
-      "OGH": "Themengebiet: OGH / Höchstgericht in Zivil- und Strafsachen.",
-      "BO": "Themengebiet: Bauordnung und baurechtliche Verfahren."
-    };
+    const QUESTIONS = RAW_QUESTIONS.map((item) => ({
+      id: item.id,
+      tag: item.tag,
+      topic: TOPIC_LABELS[item.tag] || "",
+      text: item.q,
+      options: item.choices,
+      correctIndices: item.correct,
+      explanationNote: item.a || ""
+    }));
 
-    const EXTRA_QUESTIONS = COLLEAGUE_QUESTIONS_RAW.map((item) => {
-      const topic = TAG_TOPICS[item.tag] || "Recht allgemein";
-      const baseExplanation =
-        item.a ||
-        "Richtig ist/sind die angegebene(n) Antwort(en), weil sie der gesetzlichen Definition bzw. der Zuständigkeit in diesem Themenbereich entsprechen.";
-      const tagHint = TAG_HINTS[item.tag] ? " " + TAG_HINTS[item.tag] : "";
-      return {
-        id: "N" + item.id,
-        topic,
-        text: item.q,
-        options: item.choices,
-        correctIndices: item.correct,
-        explanation: baseExplanation + tagHint
-      };
-    });
-
-    const ALL_QUESTIONS = BASE_QUESTIONS.concat(EXTRA_QUESTIONS);
-
-    // ============================
-    // Quiz-Logik
-    // ============================
-
-    let currentQuestions = [];
-    let questionOrder = [];      // Mapping Reihenfolge -> Index in currentQuestions
-    let optionOrder = [];        // Pro Frage: Permutation der Antwort-Indizes
-    let currentOrderIndex = 0;   // Position in questionOrder
-    let userAnswers = [];        // pro Frageindex: Array gewählter Original-Indizes
-    let questionChecked = [];    // pro Frageindex: Antwort bereits geprüft?
+    // ===============================
+    // State
+    // ===============================
+    let questionOrder = [];
+    let optionOrder = [];
+    let currentOrderIndex = 0;
+    let userAnswers = [];
+    let questionChecked = [];
     let quizFinished = false;
-    let lastEvaluation = null;
 
     document.addEventListener("DOMContentLoaded", () => {
       const prevBtn = document.getElementById("prev-btn");
@@ -1531,36 +975,26 @@
       const checkBtn = document.getElementById("check-btn");
       const evalBtn = document.getElementById("eval-btn");
       const restartBtn = document.getElementById("restart-btn");
+      const reshuffleBtn = document.getElementById("reshuffle-btn");
       const closeSolutionBtn = document.getElementById("close-solution-btn");
-      const showSolutionsBtn = document.getElementById("show-solutions-btn");
+
+      resetQuiz(true);
 
       prevBtn.addEventListener("click", showPrevQuestion);
       nextBtn.addEventListener("click", showNextQuestion);
       checkBtn.addEventListener("click", checkCurrentQuestion);
       evalBtn.addEventListener("click", () => {
-        openResultOverlay();
+        evaluateQuiz();
+        openSolutionOverlay();
       });
-      restartBtn.addEventListener("click", () => {
-        startQuiz();
-      });
+      restartBtn.addEventListener("click", () => resetQuiz(false));
+      reshuffleBtn.addEventListener("click", () => resetQuiz(true));
       closeSolutionBtn.addEventListener("click", () => {
         document.getElementById("solution-overlay").classList.add("hidden");
-        // Lösungen beim nächsten Öffnen wieder ausblenden
-        document.getElementById("solution-list").classList.add("hidden");
-        document.getElementById("solution-title").textContent = "Gesamtergebnis";
-      });
-      showSolutionsBtn.addEventListener("click", () => {
-        const listEl = document.getElementById("solution-list");
-        if (listEl.classList.contains("hidden")) {
-          buildSolutionList();
-          listEl.classList.remove("hidden");
-          document.getElementById("solution-title").textContent = "Lösungsschlüssel & Auswertung";
-        }
       });
 
-      // Tastatursteuerung
       document.addEventListener("keydown", (e) => {
-        if (!currentQuestions.length) return;
+        if (!QUESTIONS.length) return;
         if (e.key === "ArrowRight") {
           showNextQuestion();
         } else if (e.key === "ArrowLeft") {
@@ -1570,30 +1004,38 @@
           checkCurrentQuestion();
         }
       });
-
-      // Quiz direkt starten
-      startQuiz();
     });
 
-    function startQuiz() {
-      currentQuestions = ALL_QUESTIONS.slice();
-      questionOrder = currentQuestions.map((_, idx) => idx);
-      shuffle(questionOrder);
+    function resetQuiz(reshuffleQuestions) {
+      if (!QUESTIONS.length) return;
+      const total = QUESTIONS.length;
 
-      optionOrder = currentQuestions.map((q) => {
+      if (reshuffleQuestions || !questionOrder.length) {
+        questionOrder = QUESTIONS.map((_, idx) => idx);
+        shuffle(questionOrder);
+      }
+
+      optionOrder = QUESTIONS.map((q) => {
         const arr = q.options.map((_, idx) => idx);
         shuffle(arr);
         return arr;
       });
 
       currentOrderIndex = 0;
-      userAnswers = currentQuestions.map(() => []);
-      questionChecked = currentQuestions.map(() => false);
+      userAnswers = QUESTIONS.map(() => []);
+      questionChecked = QUESTIONS.map(() => false);
       quizFinished = false;
-      lastEvaluation = null;
+
+      const scoreBanner = document.getElementById("score-banner");
+      if (scoreBanner) {
+        scoreBanner.classList.add("hidden");
+        scoreBanner.classList.remove("positive", "negative");
+      }
+      document.getElementById("solution-overlay").classList.add("hidden");
 
       renderCurrentQuestion();
-      updateQuestionNav();
+      updateProgressInfo();
+      renderQuestionNav();
     }
 
     function shuffle(array) {
@@ -1603,71 +1045,89 @@
       }
     }
 
-    function renderCurrentQuestion() {
-      if (!currentQuestions.length) return;
-      const questionContainer = document.getElementById("question-container");
-      const total = currentQuestions.length;
-      const qIndex = questionOrder[currentOrderIndex];
-      const q = currentQuestions[qIndex];
-      const order = optionOrder[qIndex];
+    function renderQuestionNav() {
+      const nav = document.getElementById("question-nav");
+      if (!nav || !questionOrder.length) return;
+      const total = questionOrder.length;
+      let html = "";
+      for (let i = 0; i < total; i++) {
+        const qIndex = questionOrder[i];
+        const answered = userAnswers[qIndex] && userAnswers[qIndex].length > 0;
+        const classes = [
+          "qnav-item",
+          i === currentOrderIndex ? "current" : "",
+          answered ? "answered" : ""
+        ]
+          .filter(Boolean)
+          .join(" ");
+        html += `<button type="button" class="${classes}" data-order-index="${i}">${i + 1}</button>`;
+      }
+      nav.innerHTML = html;
 
-      const optionHtml = order
+      nav.querySelectorAll("button[data-order-index]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const idx = parseInt(btn.getAttribute("data-order-index"), 10);
+          if (!isNaN(idx)) {
+            currentOrderIndex = idx;
+            renderCurrentQuestion();
+          }
+        });
+      });
+    }
+
+    function renderCurrentQuestion() {
+      if (!QUESTIONS.length) return;
+      const questionContainer = document.getElementById("question-container");
+      const total = QUESTIONS.length;
+      const qIndex = questionOrder[currentOrderIndex];
+      const q = QUESTIONS[qIndex];
+      const order = optionOrder[qIndex];
+      const selected = userAnswers[qIndex] || [];
+
+      const optionsHtml = order
         .map((origIdx, dispIdx) => {
-          const optText = q.options[origIdx];
-          const selected =
-            (userAnswers[qIndex] || []).includes(origIdx) ? "checked" : "";
-          const letter = String.fromCharCode(97 + dispIdx); // a, b, c, ...
+          const text = q.options[origIdx];
+          const isChecked = selected.includes(origIdx) ? "checked" : "";
+          const letter = String.fromCharCode(97 + dispIdx);
           return `
             <label class="option">
-              <input type="checkbox" data-orig-index="${origIdx}" ${selected}>
+              <input type="checkbox" data-orig-index="${origIdx}" ${isChecked}>
               <span class="option-letter">${letter})</span>
-              <span class="option-text">${optText}</span>
+              <span class="option-text">${text}</span>
             </label>
           `;
         })
         .join("");
 
-      const contextHtml = q.contextHtml
-        ? `<div class="question-context">${q.contextHtml}</div>`
-        : "";
-
-      const explanationHtml = `
-        <div class="explanation hidden" id="explanation">
-          <strong>Lösung & Begründung:</strong><br>
-          ${q.explanation}
-        </div>
-      `;
-
       questionContainer.innerHTML = `
         <div class="question-card" id="question-card">
           <div class="question-header">
             <div class="question-number">Frage ${currentOrderIndex + 1} von ${total}</div>
-            <div class="question-topic">${q.topic || ""}</div>
+            <div class="question-topic">${q.topic}</div>
           </div>
           <div class="question-text">${q.text}</div>
-          ${contextHtml}
           <div class="question-note">
             Mehrfachauswahl möglich – mindestens eine Antwort ist richtig, aber nie alle. Falsche Kreuze ziehen Punkte ab.
           </div>
           <div class="options">
-            ${optionHtml}
+            ${optionsHtml}
           </div>
-          ${explanationHtml}
+          <div class="explanation hidden" id="explanation"></div>
           <div class="message" id="message"></div>
         </div>
       `;
 
-      // Auswahl-Änderungen sofort speichern, damit Navigation oben weiß „beantwortet“
-      attachOptionChangeHandler(qIndex);
+      attachOptionChangeHandlers(qIndex);
 
-      // Falls die Frage bereits geprüft wurde, Darstellung wiederherstellen
       if (questionChecked[qIndex]) {
         const card = document.getElementById("question-card");
-        const selected = userAnswers[qIndex] || [];
         applyEvaluationStyles(card, q, selected, qIndex);
         const explEl = document.getElementById("explanation");
-        if (explEl) explEl.classList.remove("hidden");
-
+        if (explEl) {
+          explEl.innerHTML =
+            "<strong>Begründung:</strong><br>" + getExplanation(q);
+          explEl.classList.remove("hidden");
+        }
         const msgEl = document.getElementById("message");
         if (msgEl) {
           const qScore = computeQuestionScorePercent(q, selected);
@@ -1676,31 +1136,38 @@
         }
       }
 
-      updateQuestionNav();
+      updateProgressInfo();
+      renderQuestionNav();
     }
 
-    function attachOptionChangeHandler(qIndex) {
+    function attachOptionChangeHandlers(qIndex) {
       const card = document.getElementById("question-card");
       if (!card) return;
-      const optionsContainer = card.querySelector(".options");
-      if (!optionsContainer) return;
-
-      optionsContainer.addEventListener("change", () => {
-        const checkboxes = optionsContainer.querySelectorAll('input[type="checkbox"]');
-        const selectedOriginalIndices = [];
-        checkboxes.forEach((cb) => {
+      const checkboxes = card.querySelectorAll('input[type="checkbox"]');
+      checkboxes.forEach((cb) => {
+        cb.addEventListener("change", () => {
+          const origIdx = parseInt(cb.getAttribute("data-orig-index"), 10);
+          if (isNaN(origIdx)) return;
+          let arr = userAnswers[qIndex] || [];
           if (cb.checked) {
-            const orig = parseInt(cb.getAttribute("data-orig-index"), 10);
-            selectedOriginalIndices.push(orig);
+            if (!arr.includes(origIdx)) arr.push(origIdx);
+          } else {
+            arr = arr.filter((i) => i !== origIdx);
           }
+          userAnswers[qIndex] = arr;
+          questionChecked[qIndex] = false;
+          const explEl = document.getElementById("explanation");
+          if (explEl) explEl.classList.add("hidden");
+          const msgEl = document.getElementById("message");
+          if (msgEl) msgEl.textContent = "";
+          renderQuestionNav();
+          updateProgressInfo();
         });
-        userAnswers[qIndex] = selectedOriginalIndices;
-        updateQuestionNav();
       });
     }
 
     function showPrevQuestion() {
-      if (!currentQuestions.length) return;
+      if (!QUESTIONS.length) return;
       if (currentOrderIndex > 0) {
         currentOrderIndex -= 1;
         renderCurrentQuestion();
@@ -1708,7 +1175,7 @@
     }
 
     function showNextQuestion() {
-      if (!currentQuestions.length) return;
+      if (!QUESTIONS.length) return;
       if (currentOrderIndex < questionOrder.length - 1) {
         currentOrderIndex += 1;
         renderCurrentQuestion();
@@ -1716,9 +1183,9 @@
     }
 
     function checkCurrentQuestion() {
-      if (!currentQuestions.length) return;
+      if (!QUESTIONS.length) return;
       const qIndex = questionOrder[currentOrderIndex];
-      const q = currentQuestions[qIndex];
+      const q = QUESTIONS[qIndex];
       const card = document.getElementById("question-card");
       if (!card) return;
 
@@ -1727,20 +1194,9 @@
       checkboxes.forEach((cb) => {
         if (cb.checked) {
           const orig = parseInt(cb.getAttribute("data-orig-index"), 10);
-          selectedOriginalIndices.push(orig);
+          if (!isNaN(orig)) selectedOriginalIndices.push(orig);
         }
       });
-
-      const messageEl = document.getElementById("message");
-      if (!selectedOriginalIndices.length) {
-        if (messageEl) {
-          messageEl.textContent =
-            "Bitte wähle mindestens eine Antwort aus, bevor du prüfst.";
-        }
-        return;
-      } else if (messageEl) {
-        messageEl.textContent = "";
-      }
 
       userAnswers[qIndex] = selectedOriginalIndices;
       questionChecked[qIndex] = true;
@@ -1749,14 +1205,20 @@
 
       const qScore = computeQuestionScorePercent(q, selectedOriginalIndices);
       const rounded = Math.round(qScore);
-      if (messageEl) {
-        messageEl.textContent = buildQuestionMessage(rounded);
+      const msgEl = document.getElementById("message");
+      if (msgEl) {
+        msgEl.textContent = buildQuestionMessage(rounded);
       }
 
       const explEl = document.getElementById("explanation");
-      if (explEl) explEl.classList.remove("hidden");
+      if (explEl) {
+        explEl.innerHTML =
+          "<strong>Begründung:</strong><br>" + getExplanation(q);
+        explEl.classList.remove("hidden");
+      }
 
-      updateQuestionNav();
+      updateProgressInfo();
+      renderQuestionNav();
     }
 
     function buildQuestionMessage(percent) {
@@ -1765,12 +1227,12 @@
         return `Frage-Punkte: ${percent} % – positiv, aber nicht alles richtig.`;
       if (percent > 0)
         return `Frage-Punkte: ${percent} % – teilweise richtig, aber noch negativ (< 60 %).`;
-      return "Frage-Punkte: 0 % – keine Punkte, sieh dir die Begründung an.";
+      return "Frage-Punkte: 0 % – keine Punkte für diese Frage.";
     }
 
     function applyEvaluationStyles(card, question, selectedOriginalIndices, qIndex) {
       const optionsEls = card.querySelectorAll(".option");
-      const selectedSet = new Set(selectedOriginalIndices);
+      const selectedSet = new Set(selectedOriginalIndices || []);
       const correctSet = new Set(question.correctIndices);
       const order = optionOrder[qIndex];
 
@@ -1790,111 +1252,88 @@
       });
     }
 
+    // Neue Bewertungslogik:
+    // Jede richtige Antwort = + (100 / Anzahl richtiger Antworten)
+    // Jede falsche Antwort = - (100 / Anzahl richtiger Antworten)
+    // Minimum 0 %, Maximum 100 %
     function computeQuestionScorePercent(question, selectedOriginalIndices) {
-      if (!selectedOriginalIndices || !selectedOriginalIndices.length) {
-        return 0;
-      }
-      const totalOptions = question.options.length;
       const correctSet = new Set(question.correctIndices);
-      const totalCorrect = correctSet.size;
-      if (totalCorrect === 0) return 0;
+      const K = correctSet.size;
+      if (K === 0) return 0;
 
-      const allIdx = [];
-      for (let i = 0; i < totalOptions; i++) allIdx.push(i);
-      const incorrectIndices = allIdx.filter((i) => !correctSet.has(i));
-      const totalIncorrect = incorrectIndices.length;
+      const selectedSet = new Set(selectedOriginalIndices || []);
+      let rSel = 0;
+      let wSel = 0;
 
-      const selSet = new Set(selectedOriginalIndices);
-      let correctSelected = 0;
-      let incorrectSelected = 0;
-
-      selSet.forEach((idx) => {
+      selectedSet.forEach((idx) => {
         if (correctSet.has(idx)) {
-          correctSelected++;
-        } else if (incorrectIndices.includes(idx)) {
-          incorrectSelected++;
+          rSel++;
+        } else {
+          wSel++;
         }
       });
 
-      const pos = correctSelected / totalCorrect;
-      let neg = 0;
-      if (totalIncorrect > 0) {
-        neg = incorrectSelected / totalIncorrect;
-      }
-
-      let score = (pos - neg) * 100;
+      const step = 100 / K;
+      let score = (rSel - wSel) * step;
       if (score < 0) score = 0;
       if (score > 100) score = 100;
       return score;
     }
 
-    function updateQuestionNav() {
-      const nav = document.getElementById("question-nav");
-      if (!nav) return;
-      const total = currentQuestions.length;
-      if (!total) {
-        nav.innerHTML = "";
-        return;
+    function updateProgressInfo() {
+      const total = QUESTIONS.length;
+      const infoCurrent = document.getElementById("info-current-question");
+      const infoTotal = document.getElementById("info-total-questions");
+      const infoAnswered = document.getElementById("info-answered");
+
+      if (infoCurrent) {
+        infoCurrent.textContent = total ? String(currentOrderIndex + 1) : "–";
       }
-
-      let html = "";
-      questionOrder.forEach((qIdx, orderIndex) => {
-        const answered = (userAnswers[qIdx] && userAnswers[qIdx].length > 0);
-        const checked = questionChecked[qIdx];
-        const classes = ["q-nav-item"];
-        if (orderIndex === currentOrderIndex) classes.push("active");
-        if (answered) classes.push("answered");
-        if (checked) classes.push("checked");
-        html += `<button type="button" class="${classes.join(" ")}" data-order-index="${orderIndex}">${orderIndex + 1}</button>`;
-      });
-
-      nav.innerHTML = html;
-
-      nav.querySelectorAll(".q-nav-item").forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const idx = parseInt(btn.getAttribute("data-order-index"), 10);
-          if (!isNaN(idx)) {
-            currentOrderIndex = idx;
-            renderCurrentQuestion();
-          }
-        });
-      });
+      if (infoTotal) {
+        infoTotal.textContent = total ? String(total) : "–";
+      }
+      if (infoAnswered) {
+        const answeredCount = QUESTIONS.reduce((acc, _, qIdx) => {
+          const arr = userAnswers[qIdx];
+          return acc + (arr && arr.length ? 1 : 0);
+        }, 0);
+        infoAnswered.textContent = total ? String(answeredCount) : "–";
+      }
     }
 
     function evaluateQuiz() {
-      if (!currentQuestions.length) {
-        lastEvaluation = {
-          perQuestionScores: [],
-          overallPercent: 0,
-          roundedOverall: 0,
-          gradeText: getGradeText(0)
-        };
-        return lastEvaluation;
-      }
-
-      const total = currentQuestions.length;
+      if (!QUESTIONS.length) return;
+      const total = QUESTIONS.length;
       let sumScore = 0;
-      const perQuestionScores = [];
 
-      currentQuestions.forEach((q, idx) => {
-        const score = computeQuestionScorePercent(q, userAnswers[idx] || []);
-        sumScore += score;
-        perQuestionScores[idx] = score;
+      QUESTIONS.forEach((q, idx) => {
+        sumScore += computeQuestionScorePercent(q, userAnswers[idx] || []);
       });
 
       const overallPercent = total ? sumScore / total : 0;
       const roundedOverall = Math.round(overallPercent);
-      const gradeText = getGradeText(roundedOverall);
 
-      lastEvaluation = {
-        perQuestionScores,
-        overallPercent,
-        roundedOverall,
-        gradeText
-      };
+      const scoreBanner = document.getElementById("score-banner");
+      const scorePercent = document.getElementById("score-percent");
+      const scoreGrade = document.getElementById("score-grade");
+      const scoreDetails = document.getElementById("score-details");
+
+      if (scorePercent) scorePercent.textContent = `${roundedOverall} %`;
+      if (scoreGrade) scoreGrade.textContent = getGradeText(roundedOverall);
+      if (scoreDetails) {
+        scoreDetails.textContent = `Durchschnitt über alle ${total} Fragen: ${roundedOverall} %.`;
+      }
+
+      if (scoreBanner) {
+        scoreBanner.classList.remove("hidden", "positive", "negative");
+        if (roundedOverall >= 60) {
+          scoreBanner.classList.add("positive");
+        } else {
+          scoreBanner.classList.add("negative");
+        }
+      }
+
       quizFinished = true;
-
-      return lastEvaluation;
     }
 
     function getGradeText(percent) {
@@ -1905,40 +1344,42 @@
       return "Note 5 – Nicht genügend (negativ)";
     }
 
-    function openResultOverlay() {
-      const evalRes = evaluateQuiz();
-      const summaryEl = document.getElementById("solution-summary");
-      const total = currentQuestions.length;
+    function openSolutionOverlay() {
+      if (!QUESTIONS.length) return;
 
+      const total = QUESTIONS.length;
+      let sumScore = 0;
+      const perQuestionScores = QUESTIONS.map((q, idx) => {
+        const s = computeQuestionScorePercent(q, userAnswers[idx] || []);
+        sumScore += s;
+        return s;
+      });
+
+      const overallPercent = total ? sumScore / total : 0;
+      const roundedOverall = Math.round(overallPercent);
+
+      const summaryEl = document.getElementById("solution-summary");
       summaryEl.innerHTML = `
-        Du hast insgesamt <b>${evalRes.roundedOverall} %</b> erreicht – ${evalRes.gradeText}.<br>
-        Auswertung über <b>${total}</b> Fragen. Mindestens 60&nbsp;% sind für eine positive Beurteilung erforderlich.
+        Gesamtpunkte: <b>${roundedOverall} %</b> – ${getGradeText(
+          roundedOverall
+        )}<br>
+        Fragenzahl: <b>${total}</b>. Mindestens 60 % = positiv.
       `;
 
-      document.getElementById("solution-title").textContent = "Gesamtergebnis";
-      document.getElementById("solution-list").classList.add("hidden");
-      document.getElementById("solution-overlay").classList.remove("hidden");
-    }
-
-    function buildSolutionList() {
-      if (!lastEvaluation) {
-        evaluateQuiz();
-      }
-      const perQuestionScores = lastEvaluation.perQuestionScores || [];
       const listEl = document.getElementById("solution-list");
       listEl.innerHTML = "";
 
-      questionOrder.forEach((qOrderIdx, idxInOrder) => {
-        const q = currentQuestions[qOrderIdx];
-        const score = perQuestionScores[qOrderIdx] || 0;
+      questionOrder.forEach((qIndex, idxInOrder) => {
+        const q = QUESTIONS[qIndex];
+        const score = perQuestionScores[qIndex] || 0;
         const rounded = Math.round(score);
         const positive = rounded >= 60;
-        const orderArr = optionOrder[qOrderIdx];
+        const order = optionOrder[qIndex];
         const correctSet = new Set(q.correctIndices);
-        const selectedSet = new Set(userAnswers[qOrderIdx] || []);
+        const selectedSet = new Set(userAnswers[qIndex] || []);
 
         let optionsHtml = "";
-        orderArr.forEach((origIdx, dispIdx) => {
+        order.forEach((origIdx, dispIdx) => {
           const text = q.options[origIdx];
           const isCorrect = correctSet.has(origIdx);
           const wasSelected = selectedSet.has(origIdx);
@@ -1957,7 +1398,6 @@
             cssClass = "opt-wrong-selected";
           } else {
             mark = "•";
-            cssClass = "opt-neutral";
           }
 
           const letter = String.fromCharCode(97 + dispIdx);
@@ -1970,25 +1410,86 @@
         });
 
         const scoreClass = positive ? "positive" : "negative";
+        const explText = getExplanation(q);
 
         const blockHtml = `
           <div class="solution-question">
             <div class="solution-q-header">
-              <div class="solution-q-title">Frage ${idxInOrder + 1} – ${q.id}</div>
-              <div class="solution-q-topic">${q.topic || ""}</div>
+              <div class="solution-q-title">Frage ${idxInOrder + 1} – ${
+          q.id
+        }</div>
+              <div class="solution-q-topic">${q.topic}</div>
             </div>
             <div>${q.text}</div>
             <div class="solution-q-score ${scoreClass}">
-              Punkte für diese Frage: ${rounded} %
+              Punkte: ${rounded} %
             </div>
             <div class="solution-options">
               ${optionsHtml}
             </div>
-            <div class="solution-expl">${q.explanation}</div>
+            <div class="solution-expl">${explText}</div>
           </div>
         `;
         listEl.insertAdjacentHTML("beforeend", blockHtml);
       });
+
+      document.getElementById("solution-overlay").classList.remove("hidden");
+    }
+
+    function getExplanation(q) {
+      const correctTexts = q.correctIndices.map((idx) => q.options[idx]);
+      const base =
+        "Richtig " +
+        (correctTexts.length === 1 ? "ist" : "sind") +
+        " hier: " +
+        correctTexts.join(" · ") +
+        ".";
+      let extra = "";
+
+      if (q.explanationNote && q.explanationNote.trim() !== "") {
+        extra = " " + q.explanationNote.trim();
+      } else {
+        extra = getTagSpecificExplanation(q.tag);
+      }
+
+      return base + extra;
+    }
+
+    function getTagSpecificExplanation(tag) {
+      switch (tag) {
+        case "ÖR":
+          return " Die richtigen Antworten entsprechen den Grundsätzen des österreichischen öffentlichen Rechts (Verfassung, Verwaltung, Zuständigkeiten). Die übrigen Aussagen sind so im Gesetz nicht vorgesehen.";
+        case "EU":
+          return " Die richtigen Antworten geben die Rolle und Wirkung der Institutionen bzw. Rechtsakte der Europäischen Union korrekt wieder; die anderen Optionen stimmen mit dem Europarecht nicht überein.";
+        case "GB":
+          return " Die richtigen Antworten treffen Aussagen über Aufbau und Wirkungen des Grundbuchs (A-, B-, C-Blatt, Einverleibung, Rang). Die falschen Antworten ordnen Begriffe dem falschen Blatt oder einer unzutreffenden Rechtsfolge zu.";
+        case "PR":
+          return " Die richtigen Antworten folgen den Grundsätzen des österreichischen Privatrechts (ABGB, Verträge, Sachenrecht). Die falschen Antworten widersprechen diesen Regeln oder lassen wichtige Voraussetzungen weg.";
+        case "HAFT":
+          return " Hier geht es um die Voraussetzungen und Rechtsfolgen von Schadenersatzansprüchen (Schaden, Rechtswidrigkeit, Kausalität, Verschulden, Mitverschulden etc.). Die übrigen Optionen blenden einen oder mehrere dieser Punkte aus.";
+        case "PHG":
+          return " Die richtigen Antworten entsprechen den Grundsätzen des Produkthaftungsgesetzes (PHG: verschuldensunabhängige Haftung, Fristen, erfasste Schäden). Die falschen Antworten weichen von diesen Vorgaben ab.";
+        case "AGB":
+          return " Die richtigen Antworten beschreiben Einbeziehung und Inhaltskontrolle von Allgemeinen Geschäftsbedingungen (AGB), insbesondere Transparenz und Verbot gröblich benachteiligender Klauseln. Die falschen Optionen stimmen damit nicht überein.";
+        case "KSG":
+          return " Das Konsumentenschutzgesetz (KSchG) enthält besondere Schutzvorschriften zugunsten von Konsument:innen, etwa Widerrufsrechte, Informationspflichten und Grenzen für Garantiezusagen. Die falschen Antworten verkennen diese Schutzrichtung.";
+        case "KOST":
+          return " Die richtigen Antworten geben die Rechtslage zu Kostenvoranschlag, Fixpreis und Mehrkosten im Werkvertragsrecht wieder. Die übrigen Optionen überzeichnen oder verkennen die Bindungswirkung.";
+        case "ARB":
+          return " Hier geht es um Arbeitsunfälle, den Versicherungsschutz (z. B. AUVA) und die Pflichten des Arbeitgebers. Die falschen Antworten spiegeln nicht das System der gesetzlichen Unfallversicherung wider.";
+        case "VStG":
+          return " Das Verwaltungsstrafgesetz (VStG) regelt Verwaltungsübertretungen, Verantwortlichkeit von Personen und Organisationen sowie mögliche Sanktionen. Die falschen Antworten passen nicht zu diesem System.";
+        case "VfGH":
+          return " Die richtigen Antworten beschreiben Aufgaben und Klagearten beim Verfassungsgerichtshof (z. B. Normenkontrolle, Verfassungsbeschwerde). Die falschen betreffen andere Gerichtsbarkeiten.";
+        case "VwGH":
+          return " Der Verwaltungsgerichtshof (VwGH) überprüft Entscheidungen der Verwaltungsgerichte auf Rechtsrichtigkeit. Andere Antworten ordnen ihm Aufgaben zu, die anderen Gerichten zukommen.";
+        case "OGH":
+          return " Der Oberste Gerichtshof (OGH) ist Höchstgericht in Zivil- und Strafsachen und sorgt für einheitliche Rechtsanwendung. Die falschen Antworten betreffen andere Gerichte oder Funktionen.";
+        case "BO":
+          return " Die richtigen Antworten betreffen die Bauordnung: Zuständigkeiten der Baupolizei, notwendige Unterlagen und Fristen. Falsche Antworten beschreiben Inhalte, die dort so nicht geregelt sind.";
+        default:
+          return " Die übrigen Antwortmöglichkeiten sind mit der maßgeblichen gesetzlichen Regelung nicht vereinbar.";
+      }
     }
   </script>
 </body>
