@@ -796,7 +796,7 @@
 
   <script>
     // ==========================
-    // Rohdaten – 130 Fragen
+    // Rohdaten – 130 Basisfragen
     // ==========================
     const RAW_QUESTIONS = [
       { "id": 1, "tag": "ÖR", "q": "Welche Staatsgewalten sieht die österreichische Bundesverfassung vor?", "type": "mc", "choices": [ "Legislative, Exekutive, Judikative", "Legislative, Exekutive, Verwaltung", "Bundesrat, Nationalrat, Bundesregierung", "Bundespräsident, Nationalrat, Bundesrat" ], "correct": [ 0 ], "a": "Legislative erlässt Gesetze; Exekutive vollzieht; Judikative entscheidet." },
@@ -910,7 +910,7 @@
       { "id": 109, "tag": "KOST", "q": "Was ist der Unterschied zwischen Kostenvoranschlag und Angebot?", "type": "mc", "choices": [ "Angebot ist oft bindend; Voranschlag kann unverbindlich sein", "Kein Unterschied", "Voranschlag ist bindend", "Nur Begriffliche Abweichung" ], "correct": [ 0 ] },
       { "id": 110, "tag": "ARB", "q": "Welche Unterlagen sind bei Arbeitsunfall wichtig?", "type": "mc", "choices": [ "Unfallmeldung, Dienstzeugnisse, ärztliche Befunde", "Nur Polizeibericht", "Nur Zeugenaussage", "Nur Kostenaufstellung" ], "correct": [ 0 ] },
       { "id": 111, "tag": "VStG", "q": "Welche Voraussetzungen braucht es für eine Verantwortlichkeit der Organisation?", "type": "mc", "choices": [ "Benennung einer verantwortlichen Person und Organisationspflichten", "Nur Größe des Unternehmens", "Nur Gewinnorientierung", "Keine Voraussetzung" ], "correct": [ 0 ] },
-      { "id": 112, "tag": "ÖR", "q": "Welche Prüfungsfrage könnte zum Flächenwidmungsplan gestellt werden?", "type": "mc", "choices": [ "Beurteilung von Widmungsänderungen und Auswirkung auf Bauverfahren", "Hypothekenfrage", "Vertragsrecht", "Steuerrecht" ], "correct": [ 0 ] },
+      { "id": 112, "tag": "ÖR", "q": "Welche Prüfungsfrage zu Flächenwidmungsplan taucht häufig auf?", "type": "mc", "choices": [ "Beurteilung von Widmungsänderungen und Auswirkung auf Bauverfahren", "Hypothekenfrage", "Vertragsrecht", "Steuerrecht" ], "correct": [ 0 ] },
       { "id": 113, "tag": "EU", "q": "Welche Wirkung haben EU-Entscheidungen?", "type": "mc", "choices": [ "Verbindlich für Adressaten, meist Mitgliedstaaten", "Nur Empfehlung", "Nur intern", "Keine Wirkung" ], "correct": [ 0 ] },
       { "id": 114, "tag": "OGH", "q": "Welche Bedeutung hat die Revisionsrechtsprechung für Studenten?", "type": "mc", "choices": [ "Leitlinien für Fallbearbeitung und Rechtsauffassungen", "Keine Bedeutung", "Nur für Richter relevant", "Nur historisch" ], "correct": [ 0 ] },
       { "id": 115, "tag": "GB", "q": "Welche Prüfung ist bei Grundbuchänderung erforderlich?", "type": "mc", "choices": [ "Formelle Voraussetzungen, Einreichunterlagen, Zustimmung ggf.", "Nur Zahlung", "Nur Unterschrift", "Nur mündliche Zustimmung" ], "correct": [ 0 ] },
@@ -949,7 +949,8 @@
       "BO": "Bauordnung / Baurecht"
     };
 
-    const QUESTIONS = RAW_QUESTIONS.map((item) => ({
+    // Basisfragen aus RAW_QUESTIONS
+    const BASE_QUESTIONS = RAW_QUESTIONS.map((item) => ({
       id: item.id,
       tag: item.tag,
       topic: TOPIC_LABELS[item.tag] || "",
@@ -958,6 +959,435 @@
       correctIndices: item.correct,
       explanationNote: item.a || ""
     }));
+
+    // ==========================
+    // Zusätzliche Fall- / Vertiefungsfragen (IDs 131–158)
+    // ==========================
+    const EXTRA_QUESTIONS = [
+      {
+        id: 131,
+        tag: "ÖR",
+        topic: "Normensystem: Grundstückskauf & Bau",
+        text: "Beim Kauf eines Grundstücks und der Errichtung eines Wohnhauses: Welche Aussagen zur Einordnung in öffentliches bzw. privates Recht und in generelle bzw. individuelle Normen sind richtig?",
+        options: [
+          "Der Kaufvertrag über das Grundstück ist grundsätzlich Privatrecht und beruht auf individuellen Normen (Vertrag zwischen den Parteien).",
+          "Die Baubewilligung der Behörde ist ein Akt des öffentlichen Rechts und stellt eine individuelle Norm (Bescheid) dar.",
+          "Die Bauordnung des Landes ist eine generelle Norm des öffentlichen Rechts.",
+          "Die Grundbuchseintragung ist ein privatrechtlicher Vertrag zwischen Eigentümer und Gericht."
+        ],
+        correctIndices: [0, 1, 2],
+        explanationNote:
+          "Kaufvertrag = Privatrecht, Baubewilligung = individueller Hoheitsakt, Bauordnung = generelle Norm des öffentlichen Rechts. Die Grundbuchseintragung ist hoheitliche Tätigkeit des Gerichts, kein privatrechtlicher Vertrag."
+      },
+      {
+        id: 132,
+        tag: "ÖR",
+        topic: "Recht, Moral, Religion, Ethik",
+        text: "Wodurch unterscheidet sich staatliches Recht typischerweise von anderen Normensystemen wie Moral, Ethik oder Religion?",
+        options: [
+          "Rechtsnormen können vom Staat mit Zwangsmitteln (z.B. Geld- oder Freiheitsstrafe) durchgesetzt werden.",
+          "Rechtsnormen werden in einem formalisierten Verfahren erlassen und kundgemacht (z.B. BGBl., RIS).",
+          "Moralische Normen sind immer strafrechtlich sanktioniert.",
+          "Religiöse Gebote gelten als staatliches Recht nur, wenn sie in staatliche Rechtsnormen übernommen werden."
+        ],
+        correctIndices: [0, 1, 3],
+        explanationNote:
+          "Recht ist durch staatliche Durchsetzbarkeit und formalisierte Kundmachung gekennzeichnet. Moral und Religion wirken vor allem sozial bzw. innerkirchlich; sie werden nur dann zum staatlichen Recht, wenn der Gesetzgeber sie übernimmt."
+      },
+      {
+        id: 133,
+        tag: "ÖR",
+        topic: "Rechtsrecherche",
+        text: "Wo können Sie in Österreich typischerweise Rechtsvorschriften recherchieren?",
+        options: [
+          "Im Rechtsinformationssystem des Bundes (RIS).",
+          "Im Bundesgesetzblatt (BGBl.).",
+          "Im Firmenbuch.",
+          "Auf der Website des Parlaments (z.B. über die Gesetzes- und Materialien-Datenbank)."
+        ],
+        correctIndices: [0, 1, 3],
+        explanationNote:
+          "RIS, BGBl. und die Parlaments-Website dienen der Veröffentlichung und Dokumentation von Rechtsvorschriften. Das Firmenbuch enthält Unternehmensdaten, aber keine systematische Sammlung von Gesetzen."
+      },
+      {
+        id: 134,
+        tag: "ÖR",
+        topic: "Repräsentative Demokratie",
+        text: "Welche Aussagen zur repräsentativen Demokratie in Österreich treffen zu?",
+        options: [
+          "Die Staatsbürger wählen Vertreter (Abgeordnete), die im Parlament Gesetze beschließen.",
+          "Alle Bundesgesetze werden in Volksabstimmungen direkt von den Bürgern beschlossen.",
+          "Auch auf Landes- und Gemeindeebene treffen gewählte Vertretungskörper (Landtag, Gemeinderat) Entscheidungen.",
+          "Repräsentative Demokratie schließt Elemente direkter Demokratie (z.B. Volksbegehren, Volksabstimmungen) vollständig aus."
+        ],
+        correctIndices: [0, 2],
+        explanationNote:
+          "Kern ist die Wahl von Vertretern, die stellvertretend Entscheidungen treffen. Es gibt ergänzend direktdemokratische Instrumente, aber nicht für jedes Gesetz; daher sind Aussagen zu reiner Direktdemokratie oder völligem Ausschluss direkter Demokratie falsch."
+      },
+      {
+        id: 135,
+        tag: "ÖR",
+        topic: "Verfassungsrecht im Alltag",
+        text: "Welche Beispiele zeigen die Bedeutung des Verfassungsrechts für den Alltag (vereinfacht)?",
+        options: [
+          "Das Wahlrecht zu Nationalrat und Landtag beruht auf verfassungsrechtlichen Regelungen.",
+          "Grundrechte sichern u.a. Meinungsfreiheit und Eigentumsschutz.",
+          "Der Führerschein wird ausschließlich durch Verfassungsrecht geregelt.",
+          "Die Organisation von Bundes- und Landesbehörden ist im Verfassungsrecht vorgezeichnet."
+        ],
+        correctIndices: [0, 1, 3],
+        explanationNote:
+          "Wahlrecht, Grundrechte und Staatsorganisation sind typische Inhalte des Verfassungsrechts. Detailfragen wie der Führerschein sind einfachgesetzlich geregelt (z.B. Führerscheingesetz)."
+      },
+      {
+        id: 136,
+        tag: "ÖR",
+        topic: "Fall Kranwagen – Öffentliches/Privatrecht",
+        text: "Ein 33-Tonnen-Kranwagen kommt auf einer abschüssigen Straße ins Rollen und beschädigt ein Wohnhaus; der Lenker wird verletzt. Welche Aussagen zur Einordnung in öffentliches und privates Recht sind zutreffend (vereinfacht)?",
+        options: [
+          "Baurechtliche Vorschriften über Aufstellung und Sicherung des Krans und allfällige Verwaltungsstrafen gehören zum öffentlichen Recht.",
+          "Schadenersatzansprüche der Hausbewohnerin gegen den Kranunternehmer gehören zum Privatrecht.",
+          "Die Entscheidung der Verwaltungsbehörde über eine Verwaltungsstrafe ist Privatrecht.",
+          "Die Beurteilung der richtigen Kranaufstellung ist ausschließlich öffentliches Recht und spielt im Zivilverfahren keine Rolle."
+        ],
+        correctIndices: [0, 1],
+        explanationNote:
+          "Verwaltungsrecht (Bau-, Arbeits- und Verkehrsvorschriften, Verwaltungsstrafen) ist öffentliches Recht; Schadenersatzansprüche sind zivilrechtlich. Zivilgerichte berücksichtigen bei der Verschuldensprüfung auch öffentlich-rechtliche Sicherheitsvorschriften."
+      },
+      {
+        id: 137,
+        tag: "ÖR",
+        topic: "Fall Kranwagen – Zuständigkeiten",
+        text: "Im Kranwagen-Fall: Welche Zuordnungen von Behörden und Gerichten sind realistisch (vereinfacht)?",
+        options: [
+          "Über Verwaltungsstrafen wegen Verstößen gegen Arbeitnehmerschutz- oder Straßenverkehrsvorschriften entscheidet eine Verwaltungsbehörde und ggf. ein Verwaltungsgericht.",
+          "Über Schadenersatzansprüche der Hausbewohnerin gegen den Kranunternehmer entscheidet ein Zivilgericht (ordentliche Gerichtsbarkeit).",
+          "Über eine allfällige fahrlässige Körperverletzung entscheidet ein Strafgericht (ordentliche Gerichtsbarkeit).",
+          "Über alle Fragen (Verwaltungsstrafe, Schadenersatz, Strafbarkeit) entscheidet ausschließlich das Verwaltungsgericht."
+        ],
+        correctIndices: [0, 1, 2],
+        explanationNote:
+          "Verwaltungsdelikte: Verwaltungsbehörde/Verwaltungsgericht; zivilrechtliche Schadenersatzklagen und strafrechtliche Verantwortung: ordentliche Gerichte. Eine Zuständigkeit nur des Verwaltungsgerichts für alles gibt es nicht."
+      },
+      {
+        id: 138,
+        tag: "EU",
+        topic: "Nationale Verordnung vs. EU-Verordnung",
+        text: "Welche Aussagen zum Unterschied zwischen nationalen Verordnungen und EU-Verordnungen sind richtig (vereinfacht)?",
+        options: [
+          "Nationale Verordnungen werden von Verwaltungsbehörden auf Grundlage eines Gesetzes erlassen.",
+          "EU-Verordnungen werden von Organen der Europäischen Union erlassen und gelten in den Mitgliedstaaten grundsätzlich unmittelbar.",
+          "Nationale Verordnungen gelten automatisch in allen EU-Mitgliedstaaten.",
+          "EU-Verordnungen müssen in Österreich immer erst in ein Bundesgesetz umgewandelt werden, bevor sie anwendbar sind."
+        ],
+        correctIndices: [0, 1],
+        explanationNote:
+          "Nationale Verordnungen konkretisieren Gesetze; EU-Verordnungen sind unmittelbar anwendbares Unionsrecht. Sie müssen nicht in nationales Recht „umgewandelt“ werden und gelten nicht automatisch als nationale Verordnungen in anderen Staaten."
+      },
+      {
+        id: 139,
+        tag: "ÖR",
+        topic: "Gewerbearten",
+        text: "Welche Aussagen zu Arten von Gewerben nach der GewO treffen zu (stark vereinfacht)?",
+        options: [
+          "Freie Gewerbe sind Gewerbe, die ohne besonderen Befähigungsnachweis ausgeübt werden können, aber eine Gewerbeanmeldung erfordern.",
+          "Reglementierte Gewerbe setzen in der Regel einen Befähigungsnachweis (z.B. Meisterprüfung) voraus.",
+          "Freie Gewerbe sind von der GewO überhaupt nicht erfasst.",
+          "Bestimmte Tätigkeiten sind ausdrücklich von der GewO ausgenommen und daher kein Gewerbe."
+        ],
+        correctIndices: [0, 1, 3],
+        explanationNote:
+          "Freie und reglementierte Gewerbe sind beide von der GewO erfasst; daneben gibt es Tätigkeiten, die ausdrücklich ausgenommen sind. Die Unterscheidung knüpft vor allem an den Befähigungsnachweis an."
+      },
+      {
+        id: 140,
+        tag: "ÖR",
+        topic: "Gewerbeberechtigung & gewerberechtlicher Geschäftsführer",
+        text: "Welche Aussagen zu allgemeinen Voraussetzungen der Gewerbeausübung sind richtig (vereinfacht)?",
+        options: [
+          "Der Gewerbetreibende muss handlungsfähig und verlässlich sein; bestimmte Vorstrafen können ein Hindernis darstellen.",
+          "Es dürfen keine Gewerbeausschlussgründe vorliegen.",
+          "Bei juristischen Personen ist häufig ein gewerberechtlicher Geschäftsführer zu bestellen, der die fachliche Qualifikation erfüllt.",
+          "Ein gewerberechtlicher Geschäftsführer haftet automatisch persönlich für sämtliche Schulden des Unternehmens."
+        ],
+        correctIndices: [0, 1, 2],
+        explanationNote:
+          "Verlässlichkeit und das Fehlen von Ausschlussgründen sind Grundvoraussetzungen. Juristische Personen benötigen einen gewerberechtlichen Geschäftsführer mit Befähigungsnachweis. Die persönliche Haftung für alle Schulden ergibt sich daraus aber nicht automatisch."
+      },
+      {
+        id: 141,
+        tag: "ÖR",
+        topic: "Betriebsanlagengenehmigung",
+        text: "Wann ist typischerweise eine Betriebsanlagengenehmigung nach der GewO erforderlich (stark vereinfacht)?",
+        options: [
+          "Wenn von der Anlage Gefährdungen, Belästigungen oder Belastungen (z.B. Lärm, Emissionen, Verkehr) für Nachbarn oder Umwelt ausgehen können.",
+          "Immer, sobald ein Gewerbetreibender mehr als einen Mitarbeiter beschäftigt.",
+          "Wenn Maschinen eingesetzt oder Produktions- bzw. Lagerräume genutzt werden, die über eine bloße Büronutzung hinausgehen.",
+          "Nur dann, wenn der Betrieb ausschließlich im Freien stattfindet."
+        ],
+        correctIndices: [0, 2],
+        explanationNote:
+          "Entscheidend ist das Gefährdungs- oder Belästigungspotenzial der Betriebsanlage, nicht bloß die Mitarbeiterzahl oder der Umstand, dass im Freien gearbeitet wird."
+      },
+      {
+        id: 142,
+        tag: "ÖR",
+        topic: "Baumeistergewerbe",
+        text: "Welche Aussagen zum Baumeistergewerbe sind richtig (vereinfacht)?",
+        options: [
+          "Baumeister dürfen im Rahmen ihrer Befugnis Bauwerke planen, berechnen und ausführen.",
+          "Für das Baumeistergewerbe ist ein Befähigungsnachweis (z.B. Baumeisterprüfung) erforderlich.",
+          "Baumeister unterliegen standesrechtlichen Pflichten (z.B. gewissenhafte Berufsausübung, Haftpflichtversicherung, Fortbildung).",
+          "Das Baumeistergewerbe ist ein freies Gewerbe ohne besondere Voraussetzungen."
+        ],
+        correctIndices: [0, 1, 2],
+        explanationNote:
+          "Das Baumeistergewerbe ist reglementiert, setzt eine besondere Qualifikation voraus und ist mit standesrechtlichen Pflichten verbunden."
+      },
+      {
+        id: 143,
+        tag: "ÖR",
+        topic: "ZiviltechnikerInnen (ZTG)",
+        text: "Welche Aussagen zu Ziviltechnikerinnen und Ziviltechnikern nach dem ZTG sind richtig (vereinfacht)?",
+        options: [
+          "Ziviltechniker sind selbständig tätige Sachverständige und Planer mit besonderer Qualifikation (z.B. Architekten, Ingenieurkonsulenten).",
+          "Sie werden von staatlichen Organen bestellt/beeidigt und führen ein amtliches Ziviltechnikersiegel.",
+          "Sie unterliegen eigenen Standesregeln (Unabhängigkeit, Objektivität, Verschwiegenheit).",
+          "Ziviltechniker dürfen nur für den Staat arbeiten und keine privaten Auftraggeber haben."
+        ],
+        correctIndices: [0, 1, 2],
+        explanationNote:
+          "Ziviltechniker sind freiberufliche Experten mit öffentlichem Vertrauen; sie werden vom Staat bestellt und unterliegen strengen Standesregeln. Sie arbeiten sowohl für öffentliche als auch für private Auftraggeber."
+      },
+      {
+        id: 144,
+        tag: "BO",
+        topic: "Baumschutzrecht",
+        text: "Welche Aussagen zum (kommunalen) Baumschutzrecht, etwa in Wien, sind zutreffend (vereinfacht)?",
+        options: [
+          "Es handelt sich um öffentliches Recht, das sich an Grundstückseigentümer und -nutzer richtet.",
+          "Für das Fällen größerer Bäume ist in der Regel eine behördliche Bewilligung erforderlich.",
+          "Oft sind Ersatzpflanzungen oder Ausgleichszahlungen vorgesehen, wenn ein Baum entfernt wird.",
+          "Das Baumschutzgesetz regelt ausschließlich privatrechtliche Ansprüche zwischen Nachbarn."
+        ],
+        correctIndices: [0, 1, 2],
+        explanationNote:
+          "Baumschutzvorschriften sind verwaltungsrechtliche Normen; sie verlangen oft eine Bewilligung und knüpfen daran Auflagen. Privatrechtliche Nachbarschaftsansprüche bleiben davon unberührt."
+      },
+      {
+        id: 145,
+        tag: "GB",
+        topic: "Grundbuchsauszug",
+        text: "Auf welche Weise können Sie in der Praxis zu einem aktuellen Grundbuchsauszug gelangen (vereinfacht)?",
+        options: [
+          "Durch Einsicht und Ausdruck beim zuständigen Bezirksgericht.",
+          "Über das elektronische Grundbuch, z.B. über Notare, Rechtsanwälte oder Online-Portale.",
+          "Automatisch durch Einsicht in das Firmenbuch.",
+          "Über Notare und Rechtsanwälte, die Zugriff auf das elektronische Grundbuch haben."
+        ],
+        correctIndices: [0, 1, 3],
+        explanationNote:
+          "Grundbuchsauszüge erhält man beim Gericht oder über das elektronische Grundbuch (meist über berufliche Nutzer wie Notare/Anwälte). Das Firmenbuch ist ein eigenes Register für Unternehmen."
+      },
+      {
+        id: 146,
+        tag: "GB",
+        topic: "Firmenbuch",
+        text: "Was trifft auf das Firmenbuch zu (vereinfacht)?",
+        options: [
+          "Es ist ein öffentliches Register über eingetragene Unternehmen (z.B. OG, KG, GmbH, AG).",
+          "Es wird von den Firmenbuchgerichten (Landes- bzw. Handelsgerichten) geführt.",
+          "Es enthält u.a. Firma, Sitz, Vertretungsbefugnisse und bestimmte Gesellschaftsverträge.",
+          "Es ist ein Verzeichnis aller in Österreich geltenden Gesetze."
+        ],
+        correctIndices: [0, 1, 2],
+        explanationNote:
+          "Das Firmenbuch dokumentiert wesentliche Daten über Unternehmen und wird von Gerichten geführt. Es ist kein Gesetzesverzeichnis."
+      },
+      {
+        id: 147,
+        tag: "PR",
+        topic: "MRG – Anwendungsbereich",
+        text: "Welche Aussagen zum Anwendungsbereich des Mietrechtsgesetzes (MRG) sind richtig (stark vereinfacht)?",
+        options: [
+          "Für viele Altbauwohnungen in Gründerzeithäusern gilt das MRG zur Gänze (Vollanwendung).",
+          "Für Ein- und Zweifamilienhäuser gilt das MRG in der Regel nicht (Vollausnahme).",
+          "Es gibt Konstellationen mit Teilanwendung des MRG, z.B. bei bestimmten Geschäftsräumen.",
+          "Das MRG gilt für alle Mietverhältnisse über Wohnungen und Geschäftsräume ausnahmslos."
+        ],
+        correctIndices: [0, 1, 2],
+        explanationNote:
+          "Das MRG kennt Vollanwendung, Teilanwendung und Vollausnahmen. Gerade Ein- und Zweifamilienhäuser sind oft ausgenommen; eine generelle Geltung für alle Mietverhältnisse besteht nicht."
+      },
+      {
+        id: 148,
+        tag: "PR",
+        topic: "MRG – Mietzinsarten",
+        text: "Welche Aussagen zu Mietzinsarten nach dem MRG sind zutreffend (vereinfacht)?",
+        options: [
+          "Der Richtwertmietzins basiert auf einem gesetzlich festgelegten Richtwert pro Quadratmeter.",
+          "Der angemessene Mietzins orientiert sich u.a. an Lage und Beschaffenheit des Objekts.",
+          "Der Kategoriemietzins knüpft an die Ausstattungskategorie der Wohnung (z.B. Kategorie A–D) an.",
+          "Im Vollanwendungsbereich des MRG sind Mietzinse völlig frei vereinbar, ohne gesetzliche Grenzen."
+        ],
+        correctIndices: [0, 1, 2],
+        explanationNote:
+          "Richtwert-, angemessener und Kategoriemietzins sind typische MRG-Konzepte. Gerade im Vollanwendungsbereich bestehen gesetzliche Mietzinsbeschränkungen."
+      },
+      {
+        id: 149,
+        tag: "PR",
+        topic: "Preisangabe im Schaufenster",
+        text: "Im Schaufenster eines Juweliers ist eine teure Uhr irrtümlich mit 99 € statt 990 € ausgezeichnet. Welche Aussagen treffen zu (vereinfacht)?",
+        options: [
+          "Die Preisauszeichnung im Schaufenster ist rechtlich meist nur eine Einladung an Kunden, ein Angebot zu legen (invitatio ad offerendum).",
+          "Der Verkäufer kann einen offensichtlichen Preisirrtum grundsätzlich anfechten und muss nicht in jedem Fall um 99 € verkaufen.",
+          "Falsche Preisangaben können zu verwaltungs- oder wettbewerbsrechtlichen Konsequenzen führen (z.B. unlautere Geschäftspraktiken).",
+          "Sobald der Kunde die Uhr zur Kassa bringt, ist der Kaufvertrag jedenfalls zu 99 € endgültig geschlossen und nicht mehr angreifbar."
+        ],
+        correctIndices: [0, 1, 2],
+        explanationNote:
+          "Die Schaufensterware ist in der Regel kein verbindliches Angebot. Ist der Irrtum evident, kann der Unternehmer anfechten; irreführende Preisangaben können aber öffentlich-rechtliche oder wettbewerbsrechtliche Folgen haben."
+      },
+      {
+        id: 150,
+        tag: "GB",
+        topic: "Doppelverkauf einer Wohnung",
+        text: "Müller verkauft seine Eigentumswohnung zuerst an Huber, später an Maier. Maier zahlt sofort, wird aber nicht eingetragen; Huber wird später im Grundbuch einverleibt. Welche Aussagen sind richtig (vereinfacht)?",
+        options: [
+          "Eigentümerin wird grundsätzlich die Person, die zuerst im Grundbuch einverleibt wird – hier Huber.",
+          "Maier erwirbt ohne Einverleibung kein Eigentum, hat aber schuldrechtliche Ansprüche gegen Müller.",
+          "Die Zahlung des Kaufpreises ersetzt die Grundbuchseintragung nicht.",
+          "Eigentümer bleibt jedenfalls Müller, weil zwei Verträge geschlossen wurden."
+        ],
+        correctIndices: [0, 1, 2],
+        explanationNote:
+          "Bei Liegenschaften gilt das Eintragungsprinzip: Eigentumserwerb setzt Einverleibung voraus. Wer nicht einverleibt ist, bleibt auf schuldrechtliche Ansprüche verwiesen."
+      },
+      {
+        id: 151,
+        tag: "PR",
+        topic: "Eigentumsvorbehalt – Baukran",
+        text: "Bauunternehmer Veit hat einen Baukran unter Eigentumsvorbehalt von Dagobert gekauft und den Kaufpreis noch nicht vollständig bezahlt. Er verkauft den Kran an Konkurrent Kurt, der vom Eigentumsvorbehalt nichts weiß. Welche Aussagen treffen zu (vereinfacht, Sonderfälle des gutgläubigen Erwerbs unbeachtet)?",
+        options: [
+          "Solange der Kaufpreis an Dagobert nicht vollständig bezahlt ist, bleibt Dagobert grundsätzlich Eigentümer.",
+          "Veit kann als Nicht-Eigentümer grundsätzlich kein Eigentum an Kurt übertragen.",
+          "Kurt erlangt in dieser Konstellation nur Besitz, aber kein Eigentum am Kran.",
+          "Der Eigentumsvorbehalt wirkt nur im Innenverhältnis zwischen Veit und Dagobert und schützt nicht gegenüber Dritten."
+        ],
+        correctIndices: [0, 1, 2],
+        explanationNote:
+          "Der Eigentumsvorbehalt sichert dem Verkäufer das Eigentum bis zur vollständigen Zahlung. Ohne Sondertatbestände des gutgläubigen Erwerbs erwirbt der Dritte vom Nicht-Eigentümer kein Eigentum."
+      },
+      {
+        id: 152,
+        tag: "PR",
+        topic: "Besitz beim Diebstahl",
+        text: "In der U-Bahn stiehlt eine Person einem Fahrgast die Geldbörse. Welche Aussagen zum Besitz sind richtig (vereinfacht)?",
+        options: [
+          "Der Dieb erlangt die tatsächliche Sachherrschaft und wird damit unmittelbarer Besitzer der Geldbörse.",
+          "Der Besitz des Diebes ist fehlerhaft und unredlich.",
+          "Rechtmäßiger Besitz setzt einen gültigen Rechtsgrund (Titel) voraus, der hier fehlt.",
+          "Weil der Dieb die Geldbörse in der Hand hat, wird er automatisch Eigentümer."
+        ],
+        correctIndices: [0, 1, 2],
+        explanationNote:
+          "Besitz ist zunächst nur tatsächliche Herrschaft. Der Dieb ist zwar Besitzer, aber fehlerhaft und unredlich; Eigentumserwerb tritt dadurch nicht ein."
+      },
+      {
+        id: 153,
+        tag: "GB",
+        topic: "Wegerecht – Servitut vs. obligatorisches Recht",
+        text: "A und B vereinbaren, dass A einen über B gehörenden Weg gegen jährliche Zahlung benutzen darf. Die Vereinbarung wird nicht im Grundbuch eingetragen. Später verkauft B an C, der A die Nutzung verbietet. Welche Aussagen sind richtig (vereinfacht)?",
+        options: [
+          "Ohne grundbücherlich eingetragene Dienstbarkeit ist C grundsätzlich nicht an die Vereinbarung zwischen A und B gebunden.",
+          "A hatte nur ein obligatorisches Benützungsrecht gegen B, aber kein dingliches Recht gegenüber jedermann.",
+          "A könnte sich absichern, indem er mit B eine Dienstbarkeit vereinbart und diese im Grundbuch einverleiben lässt.",
+          "C muss den Weg jedenfalls weiter dulden, weil alle privatrechtlichen Vereinbarungen automatisch auch gegenüber Rechtsnachfolgern wirken."
+        ],
+        correctIndices: [0, 1, 2],
+        explanationNote:
+          "Ohne Eintragung besteht nur eine schuldrechtliche Bindung zwischen A und B. Ein Rechtsnachfolger ist daran grundsätzlich nicht gebunden; ein dingliches Wegerecht erfordert die Eintragung im Grundbuch."
+      },
+      {
+        id: 154,
+        tag: "PR",
+        topic: "Lieferverzug – Küchenfall",
+        text: "Lieferant Leo hätte Gerda am 1.11. eine Küche liefern sollen. Am 15.11. ist noch nicht geliefert. Welche Aussagen sind richtig (vereinfacht)?",
+        options: [
+          "Handelt es sich um ein bloßes Termingeschäft, muss Gerda Leo zunächst eine angemessene Nachfrist setzen und kann bei weiterer Nichtlieferung zurücktreten.",
+          "Ist ausdrücklich ein absolutes Fixgeschäft vereinbart, kann der Vertrag bei Nichterfüllung zum Termin automatisch zerfallen.",
+          "Ohne jede Vereinbarung über Termine kann Gerda nie vom Vertrag zurücktreten.",
+          "Teilt Leo am 8.11. mit, dass der Hersteller insolvent ist und frühestens in 6 Monaten liefern kann, kann Gerda in der Regel auch ohne zusätzliche Nachfrist zurücktreten."
+        ],
+        correctIndices: [0, 1, 3],
+        explanationNote:
+          "Beim Termingeschäft braucht es grundsätzlich eine Nachfrist, beim absoluten Fixgeschäft nicht. Wenn klar ist, dass innerhalb angemessener Zeit nicht geliefert werden kann, ist ein sofortiger Rücktritt meist zulässig."
+      },
+      {
+        id: 155,
+        tag: "HAFT",
+        topic: "Bauunternehmer Bauschön – Gewährleistung & Schadenersatz",
+        text: "Arbeiter der Bauschön GmbH beschädigen beim Ausbau eines Mansardenzimmers Parkett und Wände im Vorraum; zudem ist das Dachfenster mangelhaft eingebaut und verursacht Feuchtigkeitsschäden. Welche Aussagen sind richtig (vereinfacht)?",
+        options: [
+          "Die mangelhafte Ausführung des Dachfensters begründet Gewährleistungsansprüche (Verbesserung, Austausch, Preisminderung, Wandlung).",
+          "Folgeschäden durch das undichte Dachfenster (z.B. beschädigter Parkett im Zimmer) können zusätzlich als Schadenersatz geltend gemacht werden.",
+          "Die beim Arbeiten unmittelbar beschädigten Bauteile können ausschließlich über Produkthaftung ersetzt werden.",
+          "Die Bauschön GmbH haftet nach § 1313a ABGB für das Verschulden ihrer Arbeiter als Erfüllungsgehilfen."
+        ],
+        correctIndices: [0, 1, 3],
+        explanationNote:
+          "Werkmängel lösen Gewährleistung aus; darüber hinaus können Mangelfolgeschäden bei Verschulden als Schadenersatz verlangt werden. Der Unternehmer haftet für seine Leute wie für eigenes Verschulden; Produkthaftung ist hier nicht der typische Ansatz."
+      },
+      {
+        id: 156,
+        tag: "HAFT",
+        topic: "Wintergarten-Fall – Ansprüche",
+        text: "A lässt von B einen Wintergarten errichten. Ein Sturm reißt das Dach ab; ein Sachverständiger stellt eine nicht fachgerechte Befestigung fest. Pflanzen gehen kaputt, und A trägt Gutachterkosten. Welche Ansprüche gegen B kommen in Betracht (vereinfacht)?",
+        options: [
+          "Gewährleistung wegen mangelhafter Werkleistung (unzureichende Dachbefestigung).",
+          "Schadenersatz für Folgeschäden wie zerstörte Pflanzen, sofern B oder seine Leute den Mangel verschuldet haben.",
+          "Ersatz der notwendigen Sachverständigenkosten als Schadenersatzposition.",
+          "Produkthaftung, obwohl nur eine Dienstleistung ohne Produkt vorliegt."
+        ],
+        correctIndices: [0, 1, 2],
+        explanationNote:
+          "Der mangelhafte Wintergarten begründet Gewährleistung; verschuldete Folgeschäden und notwendige Gutachterkosten können als Schadenersatz verlangt werden. Produkthaftung knüpft an fehlerhafte Produkte an, nicht an bloße Werkleistungen."
+      },
+      {
+        id: 157,
+        tag: "HAFT",
+        topic: "Gewährleistung, Schadenersatz, Produkthaftung – Vergleich",
+        text: "Welche Aussagen zum Verhältnis von Gewährleistung, Schadenersatz und Produkthaftung sind richtig (vereinfacht)?",
+        options: [
+          "Gewährleistung ist verschuldensunabhängig; es genügt, dass der Mangel bei Übergabe vorhanden war.",
+          "Schadenersatz setzt grundsätzlich ein Verschulden des Schädigers voraus (abgesehen von besonderen Gefährdungstatbeständen).",
+          "Produkthaftung erfasst typischerweise Personen- und bestimmte Sachschäden und ist ebenfalls verschuldensunabhängig.",
+          "Wer Gewährleistung geltend macht, kann nie zusätzlich Schadenersatz verlangen."
+        ],
+        correctIndices: [0, 1, 2],
+        explanationNote:
+          "Gewährleistung knüpft an den mangelhaften Zeitpunkt der Vertragserfüllung an; Schadenersatz verlangt grundsätzlich Verschulden; Produkthaftung ist eine spezielle verschuldensunabhängige Haftung für fehlerhafte Produkte. Gewährleistung und Schadenersatz können nebeneinander bestehen."
+      },
+      {
+        id: 158,
+        tag: "ÖR",
+        topic: "Gemeinden – Selbstverwaltung",
+        text: "Welche Aussagen zur Selbstverwaltung der Gemeinden sind richtig (vereinfacht)?",
+        options: [
+          "Gemeinden sind Gebietskörperschaften mit einem eigenen Wirkungsbereich.",
+          "Gemeinden können in ihrem eigenen Wirkungsbereich Verordnungen erlassen (z.B. Flächenwidmungsplan, Verordnungen über örtliche Angelegenheiten).",
+          "Gemeinden sind bloße Privatrechtsvereine ohne hoheitliche Befugnisse.",
+          "Im übertragenen Wirkungsbereich vollziehen Gemeinden Aufgaben des Bundes oder Landes."
+        ],
+        correctIndices: [0, 1, 3],
+        explanationNote:
+          "Gemeinden haben einen eigenen (autonomen) Wirkungsbereich, in dem sie selbständig handeln, und einen übertragenen Wirkungsbereich, in dem sie Aufgaben von Bund oder Land vollziehen. Sie sind öffentliche Körperschaften, keine bloßen Privatrechtsvereine."
+      }
+    ];
+
+    // Gesamte Fragenbasis: 130 + 28 = 158 Fragen
+    const QUESTIONS = [...BASE_QUESTIONS, ...EXTRA_QUESTIONS];
 
     // ===============================
     // State
@@ -1103,7 +1533,7 @@
         <div class="question-card" id="question-card">
           <div class="question-header">
             <div class="question-number">Frage ${currentOrderIndex + 1} von ${total}</div>
-            <div class="question-topic">${q.topic}</div>
+            <div class="question-topic">${q.topic || ""}</div>
           </div>
           <div class="question-text">${q.text}</div>
           <div class="question-note">
@@ -1115,7 +1545,7 @@
           <div class="explanation hidden" id="explanation"></div>
           <div class="message" id="message"></div>
         </div>
-      `;
+      ";
 
       attachOptionChangeHandlers(qIndex);
 
@@ -1418,7 +1848,7 @@
               <div class="solution-q-title">Frage ${idxInOrder + 1} – ${
           q.id
         }</div>
-              <div class="solution-q-topic">${q.topic}</div>
+              <div class="solution-q-topic">${q.topic || ""}</div>
             </div>
             <div>${q.text}</div>
             <div class="solution-q-score ${scoreClass}">
